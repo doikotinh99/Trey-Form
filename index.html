@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>HVAC Forms Template Set</title>
+    <style>
+        /* ===== Bootstrap-5-style utilities, pure CSS (no framework). Theme = CSS variables on :root ===== */
+        :root {
+            --brand: #0b2545;
+            --accent: #c8102e;
+            --bs-border: #dee2e6;
+            --bs-muted: #64748b;
+            --bs-body: #1e293b;
+            --bs-light: #f8fafc;
+            --r: .3rem;
+            --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font: 400 14.5px/1.45 var(--font);
+            color: var(--bs-body);
+            background: #e9ecef;
+        }
+
+        .container {
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0 .75rem;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -.4rem;
+        }
+
+        .row>* {
+            padding: 0 .4rem;
+            margin-bottom: .6rem;
+        }
+
+        .col {
+            flex: 1 0 0;
+        }
+
+        .col-4 {
+            width: 33.333%;
+        }
+
+        .col-6 {
+            width: 50%;
+        }
+
+        .col-12 {
+            width: 100%;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .align-center {
+            align-items: center;
+        }
+
+        .gap-2 {
+            gap: .5rem;
+        }
+
+        .mb-2 {
+            margin-bottom: .35rem;
+        }
+
+        .mb-3 {
+            margin-bottom: .6rem;
+        }
+
+        .mt-3 {
+            margin-top: .6rem;
+        }
+
+        .text-muted {
+            color: var(--bs-muted);
+        }
+
+        .text-end {
+            text-align: right;
+        }
+
+        .small {
+            font-size: .84rem;
+        }
+
+        .fw-bold {
+            font-weight: 700;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            margin: 0 0 .4rem;
+            font-weight: 700;
+            line-height: 1.25;
+            color: var(--brand);
+        }
+
+        h1 {
+            font-size: 1.85rem;
+        }
+
+        h2 {
+            font-size: 1.45rem;
+        }
+
+        h5 {
+            font-size: 1.12rem;
+            margin-top: .65rem;
+            margin-bottom: .35rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: .35rem .75rem;
+            font: inherit;
+            font-size: .85rem;
+            line-height: 1.45;
+            border: 1px solid transparent;
+            border-radius: var(--r);
+            background: none;
+            cursor: pointer;
+            transition: filter .15s;
+        }
+
+        .btn:hover {
+            filter: brightness(.92);
+        }
+
+        .btn:focus-visible,
+        .form-control:focus-visible,
+        .form-select:focus-visible {
+            outline: 2px solid color-mix(in srgb, var(--brand) 35%, transparent);
+            outline-offset: 1px;
+        }
+
+        .btn-primary {
+            background: var(--brand);
+            border-color: var(--brand);
+            color: #fff;
+        }
+
+        .btn-outline {
+            border-color: var(--bs-border);
+            color: var(--bs-body);
+            background: #fff;
+        }
+
+        .btn-sm {
+            padding: .25rem .55rem;
+            font-size: .82rem;
+        }
+
+        .form-control,
+        .form-select {
+            display: block;
+            width: 100%;
+            padding: .35rem .7rem;
+            font: inherit;
+            font-size: .85rem;
+            border: 1px solid #ced4da;
+            border-radius: var(--r);
+            background: #fff;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 2px;
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--bs-muted);
+        }
+
+        .card {
+            border: 1px solid var(--bs-border);
+            border-radius: var(--r);
+            background: #fff;
+            height: 100%;
+        }
+
+        .card-header {
+            padding: .45rem .8rem;
+            background: rgba(0, 0, 0, .02);
+            border-bottom: 1px solid var(--bs-border);
+            font-weight: 600;
+            font-size: .86rem;
+            border-radius: var(--r) var(--r) 0 0;
+        }
+
+        .card-body {
+            padding: .65rem .8rem;
+            font-size: .88rem;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .88rem;
+        }
+
+        .table th,
+        .table td {
+            padding: .45rem .65rem;
+            border: 1px solid var(--bs-border);
+            vertical-align: top;
+        }
+
+        .table thead th {
+            background: var(--brand);
+            color: #fff;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: .28em .6em;
+            font-size: .74em;
+            font-weight: 700;
+            border-radius: var(--r);
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .alert {
+            padding: .5rem .8rem;
+            border: 1px solid color-mix(in srgb, var(--brand) 30%, #fff);
+            border-radius: var(--r);
+            background: color-mix(in srgb, var(--brand) 7%, #fff);
+            font-size: .84rem;
+            line-height: 1.4;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: .35rem;
+            border-bottom: 1px solid var(--bs-border);
+            scrollbar-width: thin;
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .nav-tabs::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .nav-tabs button {
+            padding: .55rem .95rem;
+            font: inherit;
+            font-size: .88rem;
+            font-weight: 500;
+            white-space: nowrap;
+            border: 1px solid transparent;
+            border-bottom: 2px solid transparent;
+            border-radius: var(--r) var(--r) 0 0;
+            background: none;
+            cursor: pointer;
+            color: #475569;
+            transition: all .15s ease;
+            flex: none;
+        }
+
+        .nav-tabs button:hover {
+            color: var(--brand);
+            background: rgba(0, 0, 0, .02);
+        }
+
+        .nav-tabs button.active {
+            background: #fff;
+            border-color: var(--bs-border) var(--bs-border) #fff;
+            border-bottom: 2px solid var(--accent);
+            color: var(--brand);
+            font-weight: 600;
+            margin-bottom: -1px;
+        }
+
+        .form-check {
+            display: flex;
+            gap: .45rem;
+            align-items: flex-start;
+            margin-bottom: .35rem;
+            font-size: .86rem;
+        }
+
+        /* ===== app chrome (fullwidth, hidden on print) ===== */
+        .toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, .97);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--bs-border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+            padding: .6rem 0 0 0;
+        }
+
+        .toolbar-inner {
+            width: 100%;
+            padding: 0 1.5rem;
+            box-sizing: border-box;
+        }
+
+        .toolbar-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: .55rem;
+        }
+
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-brand {
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+            margin-right: .4rem;
+        }
+
+        .toolbar-badge {
+            background: var(--brand);
+            color: #fff;
+            font-size: .74rem;
+            font-weight: 700;
+            padding: .18rem .42rem;
+            border-radius: 4px;
+            letter-spacing: .5px;
+        }
+
+        .toolbar-title {
+            font-weight: 600;
+            font-size: .95rem;
+            color: #1e293b;
+        }
+
+        .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: .45rem;
+            flex-wrap: wrap;
+        }
+
+        /* ===== document sheet (A4 Standard Width: 210mm, Natural Flow Height) ===== */
+        .page-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .sheet {
+            background: #fff;
+            width: 210mm;
+            min-height: 297mm;
+            height: auto;
+            max-width: calc(100vw - 1.5rem);
+            margin: 1.25rem auto 3rem;
+            padding: 14mm 16mm;
+            box-sizing: border-box;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
+            display: none;
+            position: relative;
+        }
+
+        .sheet.show {
+            display: block;
+        }
+
+        .doc-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            padding-bottom: .6rem;
+            border-bottom: 3px solid var(--brand);
+            margin-bottom: .75rem;
+        }
+
+        .brand-name {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--brand);
+            line-height: 1.1;
+        }
+
+        .brand-tag {
+            color: var(--bs-muted);
+            font-size: .88rem;
+            margin-top: 3px;
+        }
+
+        .doc-title {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--brand);
+            margin: 0 0 .55rem;
+        }
+
+        .ed {
+            outline: none;
+            border-bottom: 1px dashed #adb5bd;
+            min-width: 2ch;
+            display: inline-block;
+            min-height: 1.35em;
+        }
+
+        .ed:focus {
+            background: #fff8dc;
+        }
+
+        div.ed,
+        td.ed {
+            display: block;
+        }
+
+        td .ed {
+            display: block;
+            border: 0;
+        }
+
+        .photo {
+            position: relative;
+            min-height: 165px;
+            height: 165px;
+            border: 1px dashed #adb5bd;
+            border-radius: var(--r);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bs-light);
+            overflow: hidden;
+            color: var(--bs-muted);
+            font-size: .88rem;
+            text-align: center;
+        }
+
+        .photo img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo button {
+            position: absolute;
+            bottom: .35rem;
+            right: .35rem;
+            z-index: 2;
+        }
+
+        .sig {
+            border-bottom: 2px solid #000;
+            height: 2.6rem;
+            margin-top: .5rem;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 2px;
+        }
+
+        .sig img {
+            position: absolute;
+            left: 0;
+            bottom: 2px;
+            max-height: 2.5rem;
+            width: auto;
+            height: auto;
+        }
+
+        .doc-foot {
+            margin-top: .75rem;
+            padding-top: .45rem;
+            border-top: 1px solid var(--bs-border);
+            font-size: .8rem;
+            color: var(--bs-muted);
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .totals {
+            margin-left: auto;
+            width: min(18rem, 100%);
+        }
+
+        .totals div {
+            display: flex;
+            justify-content: space-between;
+            padding: .25rem 0;
+            border-bottom: 1px solid var(--bs-border);
+            font-size: .86rem;
+        }
+
+        .totals .grand {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--brand);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        @media(max-width:640px) {
+            .col-4,
+            .col-6 {
+                width: 100%;
+            }
+
+            .sheet {
+                padding: .85rem;
+            }
+
+            .specs {
+                grid-template-columns: 1fr !important;
+                gap: .25rem !important;
+            }
+        }
+
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 12mm 14mm;
+            }
+
+            html,
+            body {
+                background: #fff !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                height: auto !important;
+                font-size: 14px !important;
+                line-height: 1.45 !important;
+                color: #0f172a !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .toolbar,
+            .noprint,
+            .btn,
+            .photo button {
+                display: none !important;
+            }
+
+            .page-wrapper {
+                padding: 0 !important;
+                margin: 0 !important;
+                display: block !important;
+                width: 100% !important;
+            }
+
+            .sheet,
+            .sheet.show {
+                display: block !important;
+                box-shadow: none !important;
+                border: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                height: auto !important;
+                overflow: visible !important;
+                page-break-after: always;
+                break-after: page;
+            }
+
+            body:not(.print-all) .sheet:not(.show) {
+                display: none !important;
+            }
+
+            .sheet + .sheet {
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+
+            .ed {
+                border-bottom: 1px solid transparent;
+            }
+
+            .table thead th,
+            .doc-head,
+            .badge,
+            .totals .grand,
+            .total-card,
+            .box.on::after {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* Natural Pagination - Prevent empty blank voids & prevent orphaned headings */
+            h1,
+            h2,
+            h3,
+            h4,
+            h5 {
+                break-after: avoid !important;
+                page-break-after: avoid !important;
+            }
+
+            .doc-head,
+            .doc-foot,
+            .eqrow,
+            .total-card,
+            .sig,
+            .table tr,
+            .photo,
+            .alert {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .eq {
+                break-inside: auto !important;
+                page-break-inside: auto !important;
+                margin-bottom: .6rem !important;
+            }
+
+            .eq-details {
+                border-top: 1px solid #cbd5e1 !important;
+                padding: .4rem .8rem .5rem !important;
+                margin: 0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                background: none !important;
+            }
+
+            details,
+            details[open],
+            details > :not(summary) {
+                display: block !important;
+            }
+
+            details summary {
+                display: block !important;
+                list-style: none !important;
+            }
+
+            details summary::-webkit-details-marker,
+            details summary::marker {
+                display: none !important;
+            }
+
+            .specs {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 2.5px 24px !important;
+                width: 100% !important;
+            }
+
+            .specs .sp {
+                display: flex !important;
+                justify-content: space-between !important;
+                border-bottom: 1px solid #eef2f6 !important;
+                font-size: 13px !important;
+            }
+        }
+
+        .bind {
+            display: inline;
+        }
+
+        .ph .bind {
+            font-family: ui-monospace, Menlo, Consolas, monospace;
+            font-size: .82em;
+            color: #6c757d;
+        }
+
+        .hl .bind,
+        .hl [data-bind-src],
+        .hl .box {
+            background: #fff3cd;
+            outline: 1px dashed #d39e00;
+            outline-offset: 1px;
+            border-radius: 3px;
+        }
+
+        .legend {
+            display: flex;
+            gap: .75rem;
+            align-items: center;
+            font-size: .82rem;
+        }
+
+        .legend i {
+            display: inline-block;
+            width: .95rem;
+            height: .75rem;
+            border: 1px dashed #d39e00;
+            background: #fff3cd;
+            border-radius: 3px;
+            vertical-align: -1px;
+        }
+
+        .img,
+        .photo,
+        .sig {
+            position: relative;
+        }
+
+        .img {
+            width: 160px;
+            height: 125px;
+            min-height: 125px;
+            max-height: 125px;
+            flex: 0 0 160px;
+            align-self: flex-start;
+            border: 1px dashed #adb5bd;
+            border-radius: var(--r);
+            background: var(--bs-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bs-muted);
+            font-size: .85rem;
+            overflow: hidden;
+        }
+
+        .img img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #f8fafc;
+        }
+
+        .has span {
+            display: none;
+        }
+
+        .eqlist {
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+        }
+
+        .eq {
+            height: auto;
+        }
+
+        .eqrow {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: .75rem .9rem;
+        }
+
+        .eqbody {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .eqbody h5 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .kspecs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 10px;
+            margin: 4px 0;
+        }
+
+        .kspecs > div {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+            padding: 2px 7px;
+            font-size: .82rem;
+            font-weight: 600;
+        }
+
+        .kspecs .form-label {
+            margin: 0;
+            font-size: .7rem;
+        }
+
+        .ok {
+            color: #198754;
+        }
+
+        .eq-details {
+            border-top: 1px solid var(--bs-border);
+            padding: .5rem .9rem .65rem;
+            margin: 0;
+            width: 100%;
+            box-sizing: border-box;
+            background: #fafbfc;
+            border-radius: 0 0 var(--r) var(--r);
+        }
+
+        .eq-details summary {
+            cursor: pointer;
+            color: var(--brand);
+            font-size: .88rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            user-select: none;
+            outline: none;
+            transition: color .15s ease;
+        }
+
+        .eq-details summary:hover {
+            color: var(--accent);
+        }
+
+        .specs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3px 24px;
+            width: 100%;
+        }
+
+        .specs .sp {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            padding: 2.5px 0;
+            border-bottom: 1px solid #eef2f6;
+            font-size: .84rem;
+        }
+
+        .total-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .65rem 1.1rem;
+            background: var(--brand);
+            color: #fff;
+            border-radius: var(--r);
+            border-bottom: 3px solid var(--accent);
+            font-size: .95rem;
+        }
+
+        .big {
+            font-size: 1.85rem;
+            font-weight: 800;
+        }
+
+        .big2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--brand);
+        }
+
+        .big2 small {
+            font-size: .72rem;
+            font-weight: 400;
+            color: var(--bs-muted);
+        }
+
+        .fin {
+            display: contents;
+        }
+
+        .box {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid var(--bs-body);
+            border-radius: 3px;
+            flex: none;
+            margin-top: .12rem;
+            position: relative;
+        }
+
+        .box.on::after {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 0;
+            width: 4px;
+            height: 9px;
+            border: solid var(--bs-body);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .sheet .doc-title {
+            margin-bottom: .5rem;
+        }
+
+        .fin > * {
+            margin-bottom: .5rem;
+        }
+</style>
+</head>
+
+<body>
+    <header class="toolbar noprint">
+        <div class="toolbar-inner">
+            <div class="toolbar-bar">
+                <div class="toolbar-left">
+                    <div class="toolbar-brand">
+                        <span class="toolbar-badge">HVAC</span>
+                        <span class="toolbar-title">Form Suite</span>
+                    </div>
+                    <select id="co" class="form-select" style="width:auto" aria-label="Company theme"></select>
+                    <select id="mode" class="form-select" style="width:auto" aria-label="Preview mode">
+                        <option value="sample">Preview with sample data</option>
+                        <option value="ph">Show placeholders only</option>
+                    </select>
+                    <label class="legend"><input type="checkbox" id="hl" checked> <i></i> Database field <span
+                            class="text-muted">(unmarked = static)</span></label>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn btn-outline btn-sm" id="cp">Copy sample JSON</button>
+                    <button class="btn btn-outline btn-sm" id="pOne" title="Lưu ý khi in: Trong hộp thoại in (Ctrl+P) chọn Scale: 100% (Default)">Print this form</button>
+                    <button class="btn btn-primary btn-sm" id="pAll" title="Lưu ý khi in: Trong hộp thoại in (Ctrl+P) chọn Scale: 100% (Default)">Print all 10</button>
+                </div>
+            </div>
+            <div class="nav-tabs" id="tabs" role="tablist"></div>
+        </div>
+    </header>
+    <main class="page-wrapper" id="docs"></main>
+    <script>
+        /* ============================================================================
+         HVAC FORMS — DATA-DRIVEN TEMPLATE SET (pure CSS, Bootstrap-5 look)
+         Nothing is typed into these forms. Every database value is a marked field:
+           data-bind="path"        text from data   (inside data-repeat, path is relative to the row)
+           data-bind-src="path"    image URL from data (photos, signatures, product images)
+           data-check="path" data-value="v"   checkbox ticked when data[path] equals / includes v
+           data-repeat="array"     <template> inside is cloned once per array item
+         Everything without these attributes is static layout/wording.
+         API:  HVAC.render(sectionElement, data)  ·  HVAC.fields(formKey)  ·  HVAC.forms
+        ============================================================================ */
+        const THEMES = {
+            jerrys: { label: "Jerry's Heating & Cooling", brand: "#0b2545", accent: "#c8102e", font: 'system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif' },
+            sample: { label: "Sample Company HVAC", brand: "#14532d", accent: "#d97706", font: 'Georgia,"Times New Roman",serif' }
+        };
+        const FORMS = [["estimate", "Estimate"], ["install-agreement", "Installation Agreement"], ["install-receipt", "Installation Receipt"], ["inspection", "Inspection Report"], ["approval", "Estimate Approval"], ["service-receipt", "Service Receipt"], ["buyer-seller", "Buyer / Seller Report"], ["right-to-repair", "Right to Repair"], ["decline", "Decline to Service"], ["warranty", "Warranties & Guidelines"]];
+        const B = (p, c = "") => `<span class="bind ${c}" data-bind="${p}">{{${p}}}</span>`;
+        const IMG = (p, c = "img", t = "Image") => `<div class="${c}" data-bind-src="${p}"><span>${t}</span></div>`;
+        const REP = (k, tag, inner, at = "") => `<${tag} data-repeat="${k}" ${at}><template>${inner}</template></${tag}>`;
+        const card = (h, b) => `<div class="card"><div class="card-header">${h}</div><div class="card-body">${b}</div></div>`;
+        const lab = (l, v) => `<div class="mb-2"><div class="form-label">${l}</div>${v}</div>`;
+        const head = t => `<div class="doc-head"><div><div class="brand-name">${B("company.name")}</div><div class="brand-tag">${B("company.tagline")}</div></div><div class="text-end small"><span class="badge">${t}</span><div class="mt-3">No. ${B("doc.number")}<br>Date ${B("doc.date")}</div></div></div><h2 class="doc-title">${t}</h2>`;
+        const foot = () => `<div class="doc-foot"><span>${B("company.phone")} &middot; ${B("company.email")}</span><span>${B("company.web")} &middot; ${B("company.license")}</span></div>`;
+        const parties = (a = "Bill to", b = "Service address") => `<div class="row"><div class="col-6">${card(a, lab("Name", B("customer.name")) + lab("Phone", B("customer.phone")) + lab("Email", B("customer.email")))}</div><div class="col-6">${card(b, lab("Street", B("customer.street")) + lab("City, state, ZIP", B("customer.city_state_zip")))}</div></div>`;
+        const COLS = [["Qty", "qty"], ["Item name", "name"], ["SKU / model", "sku"], ["Type", "type"], ["Description", "description"], ["Unit price", "unit_price"], ["Line total", "line_total"]];
+        const table = (cols = COLS, key = "items", tot = true) => `<table class="table"><thead><tr>${cols.map(c => `<th>${c[0]}</th>`).join("")}</tr></thead>${REP(key, "tbody", `<tr>${cols.map(c => `<td>${B(c[1])}</td>`).join("")}</tr>`)}</table>` + (tot ? `<div class="totals"><div><span>Subtotal</span>${B("totals.subtotal")}</div><div><span>Tax</span>${B("totals.tax")}</div><div class="grand"><span>Total</span>${B("totals.total")}</div></div>` : "");
+        const photos = () => REP("photos", "div", `<div class="col-4">${IMG("url", "photo", "Photo / video")}<div class="mt-3 small">Title: ${B("title")}</div></div>`, 'class="row"');
+        const sigs = (a = "Customer signature") => `<div class="row mt-3"><div class="col-6">${IMG("signature.customer_image", "sig", "")}<div class="small text-muted">${a}</div></div><div class="col-6"><div class="sig">${B("signature.date")}</div><div class="small text-muted">Date</div></div></div>`;
+        const chk = (p, l) => l.map(([v, t]) => `<div class="form-check"><span class="box" data-check="${p}" data-value="${v}"></span><span>${t}</span></div>`).join("");
+        const tech = () => `<div class="small text-muted mt-3">Prepared by ${B("tech.name")} &middot; ${B("tech.phone")} &middot; ${B("tech.email")}</div>`;
+        const TERMS = `<div class="alert small mb-3"><b>Must maintain:</b> annual service appointments and records are required for each piece of equipment during the warranty term.<br><b>Not covered by the manufacturer warranty:</b> power surge; direct or indirect physical damage; water damage; negligent service or repairs; and claims after lengthy periods without proper service or maintenance.<br><b>Protect your equipment:</b> keep the area free of airflow blockage, dirt, dust, standing water and high traffic. Where applicable, place 36" of gravel or stone around outdoor units.</div>`;
+        const BODY = {
+            estimate: () => parties("Prepared for", "Service address") + tech() + `<h5 class="mt-3">Your new comfort system</h5>` + REP("equipment", "div", `<div class="card eq"><div class="eqrow">${IMG("image")}<div class="eqbody"><h5>${B("name")}</h5><div class="small text-muted">Part # ${B("part")}</div>${REP("key_specs", "div", `<div><div class="form-label">${B("label")}</div>${B("value")}</div>`, 'class="kspecs"')}<div class="small"><b class="ok">Warranty</b> ${B("warranty")}</div></div></div><details class="eq-details"><summary>Full specifications</summary>${REP("specs", "div", `<div class="sp"><span>${B("label")}</span><span>${B("value")}</span></div>`, 'class="specs"')}</details></div>`, 'class="eqlist"') +
+                `<h5 class="mt-3">Your investment</h5><div class="total-card"><span>Estimate total</span><span class="big">${B("totals.total")}</span></div><div class="row mt-3"><div class="col-4"><div class="card"><div class="card-body"><div class="form-label">Deposit to schedule</div><div class="big2">${B("totals.deposit")}</div></div></div></div>` + REP("financing", "div", `<div class="col-4"><div class="card"><div class="card-body"><div class="form-label">${B("plan")} &middot; ${B("term")}</div><div class="big2">${B("monthly")}<small> / month</small></div></div></div></div>`, 'class="fin"') + `</div><div class="alert small">${B("company.financing_note")}</div>` +
+                `<h5 class="mt-3">Our warranty</h5><div class="alert mb-3"><b>${B("company.warranty_text")}</b></div>${TERMS}<h5>Acceptance</h5>${sigs()}<div class="alert mt-3 small">Thank you for the opportunity to be your service provider. Questions? Contact ${B("tech.name")} at ${B("tech.phone")}.</div>`,
+            "install-agreement": () => parties("Customer", "Installation address") + `<h5 class="mt-3">Scope of work</h5><div class="card mb-3"><div class="card-body">${B("agreement.scope")}</div></div><h5>Terms</h5><div class="card mb-3"><div class="card-body small">${B("agreement.terms")}</div></div><div class="alert small"><b>Warranty:</b> ${B("company.warranty_text")}</div>${sigs()}${sigs("Company representative")}`,
+            "install-receipt": () => parties() + `<h5 class="mt-3">Items installed</h5>` + table() + `<h5 class="mt-3">Installed units</h5>` + REP("units", "div", `<div class="col-12">${card("Unit", `<div class="row"><div class="col-6">${lab("Brand", B("brand"))}</div><div class="col-6">${lab("Equipment type", B("type"))}</div><div class="col-6">${lab("Model number", B("model"))}</div><div class="col-6">${lab("Serial number", B("serial"))}</div><div class="col-12">${lab("Warranty registration URL", B("registration_url"))}</div></div>`)}</div>`, 'class="row"') + `<div class="alert small"><b>${B("company.warranty_text")}</b></div>`,
+            inspection: () => parties("Customer", "Service address") + `<div class="row mt-3"><div class="col-6">${lab("Technician", B("report.technician"))}</div><div class="col-6">${lab("Equipment inspected", B("report.equipment"))}</div></div><h5>Photos &amp; video</h5>${photos()}<h5 class="mt-3">Findings &amp; recommendation</h5><div class="card"><div class="card-body">${B("report.summary")}</div></div>`,
+            approval: () => parties("Customer", "Service address") + `<h5 class="mt-3">Recommended repair</h5>` + table() + `<h5 class="mt-3">Customer decision</h5>${chk("approval.decision", [["approve", "I approve the work above at the total shown."], ["decline", "I decline the work above."]])}${sigs()}`,
+            "service-receipt": () => parties() + `<h5 class="mt-3">Service performed</h5>` + table() + `<div class="row mt-3"><div class="col-4">${lab("Payment method", B("totals.payment_method"))}</div><div class="col-4">${lab("Paid", B("totals.paid"))}</div><div class="col-4">${lab("Balance due", B("totals.balance"))}</div></div>`,
+            "buyer-seller": () => parties("Buyer / client", "Property address") + `<div class="row mt-3"><div class="col-6">${lab("Seller / agent", B("report.seller"))}</div><div class="col-6">${lab("Inspection date", B("report.inspection_date"))}</div></div><h5>Photos &amp; video</h5>${photos()}<h5 class="mt-3">Report summary</h5><div class="card"><div class="card-body">${B("report.summary")}</div></div>`,
+            "right-to-repair": () => parties("Customer", "Service address") + `<div class="card mt-3"><div class="card-body">${B("right_to_repair.text")}</div></div>${sigs()}`,
+            decline: () => parties("Customer", "Service address") + `<h5 class="mt-3">Reason for declining</h5>${chk("decline.reasons", [["diagnostic", "Customer declined diagnostic"], ["quote", "Customer declined repair quote"], ["unsafe", "Unsafe or impractical to repair"], ["other", "Other"]])}<h5 class="mt-3">Notes</h5><div class="card"><div class="card-body">${B("decline.notes")}</div></div>${sigs()}`,
+            warranty: () => `<div class="alert mb-3"><b>${B("company.warranty_text")}</b></div><h5>Equipment covered</h5>` + table([["Equipment", "equipment"], ["Model", "model"], ["Serial", "serial"], ["Warranty term", "term"], ["Register by", "register_by"], ["Notes", "notes"]], "warranty_items", false) + `<h5 class="mt-3">Guidelines</h5>${TERMS}`
+        };
+        /* ---------- renderer: fills a rendered form from a JSON object ---------- */
+        const get = (o, p) => p.split(".").reduce((a, k) => a == null ? a : a[k], o);
+        function bind(root, data, pre, ph) {
+            root.querySelectorAll("[data-repeat]").forEach(r => {
+                const t = r.querySelector(":scope > template"), k = r.dataset.repeat; if (!t) return;
+                [...r.children].forEach(n => { if (n !== t) n.remove() }); (ph ? [{}] : get(data, k) || []).forEach(it => { const f = t.content.cloneNode(true); bind(f, it, pre + k + "[].", ph); r.appendChild(f) })
+            });
+            root.querySelectorAll("[data-bind],[data-bind-src],[data-check]").forEach(e => {
+                if (e.closest("[data-repeat]")) return;
+                const p = e.dataset.bind || e.dataset.bindSrc || e.dataset.check, v = get(data, p); e.title = pre + p;
+                if (e.dataset.bind !== undefined) e.textContent = ph ? `{{${pre}${p}}}` : (v ?? "");
+                else if (e.dataset.bindSrc !== undefined) { const i = e.querySelector("img"); if (i) i.remove(); if (!ph && v) { const m = document.createElement("img"); m.src = v; m.alt = ""; e.appendChild(m); e.classList.add("has") } else e.classList.remove("has") }
+                else e.classList.toggle("on", !ph && (Array.isArray(v) ? v.includes(e.dataset.value) : v === e.dataset.value))
+            })
+        }
+        function collect(root, pre, out) {
+            root.querySelectorAll("[data-repeat]").forEach(r => { if (r.parentElement && r.parentElement.closest("[data-repeat]") && root.nodeType === 1 && false) return; const t = r.querySelector(":scope > template"); if (!t) return; out.add(pre + r.dataset.repeat + "[]"); collect(t.content, pre + r.dataset.repeat + "[].", out) });
+            root.querySelectorAll("[data-bind],[data-bind-src],[data-check]").forEach(e => { if (e.closest("template")) return; if (root.nodeType === 1 && e.closest("[data-repeat]")) return; out.add(pre + (e.dataset.bind || e.dataset.bindSrc || e.dataset.check)) })
+        }
+        function fieldsOf(key) {
+            const d = document.createElement("div"); d.innerHTML = head("x") + BODY[key]() + foot(); const o = new Set(); collect(d, "", o);
+            const tpl = (n, pre) => { n.querySelectorAll("template").forEach(t => { }); };
+            // also collect binds inside templates (relative)
+            const walk = (root, pre) => { root.querySelectorAll("[data-repeat]").forEach(r => { const t = r.querySelector(":scope > template"); if (!t) return; const p = pre + r.dataset.repeat + "[]."; t.content.querySelectorAll("[data-bind],[data-bind-src],[data-check]").forEach(e => { if (e.closest("[data-repeat]")) return; o.add(p + (e.dataset.bind || e.dataset.bindSrc || e.dataset.check)) }); walk(t.content, p) }) };
+            walk(d, ""); d.querySelectorAll("template").forEach(() => { }); return [...o].sort()
+        }
+        window.HVAC = { render: (el, data, ph) => bind(el, data, "", ph), fields: fieldsOf, forms: FORMS };
+        /* ---------- sample payloads (stand-in for the backend response) ---------- */
+        const sampleFor = k => ({
+            company: k === "jerrys" ? { name: "Jerry's Heating & Cooling", tagline: "Residential comfort specialists · Serving Chicagoland", phone: "815-791-7447", email: "Trey.D@JerrysHeatingCooling.com", web: "www.JerrysHeatingCooling.com", license: "License # ________", warranty_text: "Heating and cooling residential equipment installed by Jerry's is covered by a 10-year parts and labor warranty. Registration with the manufacturer is mandatory within 30 days of installation.", financing_note: "Apply for financing at FTLFinance.com, available 24 hours a day. No early repayment penalty." } : { name: "Sample Company HVAC", tagline: "Heating, cooling & boilers", phone: "(000) 000-0000", email: "office@example.com", web: "www.example.com", license: "License # ________", warranty_text: "Sample warranty wording supplied by the database.", financing_note: "Sample financing note supplied by the database." },
+            doc: { number: "EST-0001", date: "October 13, 2026" }, customer: { name: "Marc Grasley", phone: "815-483-1448", email: "MarcGrasley@iCloud.com", street: "1104 Kingfisher Ct.", city_state_zip: "Joliet, IL 60431" }, tech: { name: "Trey Durden", phone: "630-361-7434", email: "Trey.D@JerrysHeatingCooling.com" },
+            equipment: [{ image: "assets/images/furnace.jpg", name: "Rheem 100,000 BTU Single-Stage Furnace", part: "R801T1005A21DZSNAS", warranty: "10-year parts warranty when registered with manufacturer", key_specs: [{ label: "Brand", value: "Rheem" }, { label: "Capacity", value: "100,000 BTU" }, { label: "Width", value: '21"' }, { label: "Stages", value: "Single stage" }], specs: [{ label: "Efficiency", value: "80% AFUE" }, { label: "Blower motor", value: "¾ HP, 5-speed constant-torque ECM, up to 1,840 CFM" }, { label: "Dimensions (L x H x W)", value: '29.6" x 34" x 21"' }, { label: "Weight", value: "140 lbs" }, { label: "Fuel", value: "Natural gas" }, { label: "Voltage", value: "120V" }, { label: "Ignition", value: "Spark" }, { label: "Heat exchanger", value: "Aluminized steel (removable), 20-year warranty" }, { label: "AHRI number", value: "TBD" }] },
+            { image: "assets/images/ac-unit.jpg", name: "Rheem 3.5-Ton Single-Stage Air Conditioner", part: "RA13NY42AJ1NA", warranty: "10-year parts warranty when registered with manufacturer", key_specs: [{ label: "Capacity", value: "3.5 ton (42,000 BTU)" }, { label: "Voltage", value: "208/230V" }, { label: "Stages", value: "Single stage" }], specs: [{ label: "Brand", value: "Rheem" }, { label: "Width", value: '21"' }] }],
+            totals: { total: "$13,800.00", deposit: "$6,900.00", subtotal: "$13,800.00", tax: "$0.00", payment_method: "Card", paid: "$6,900.00", balance: "$6,900.00" },
+            financing: [{ plan: "Plan L1510", term: "120 months", monthly: "$231.05" }, { plan: "Plan LR0084", term: "84 months", monthly: "$281.88" }],
+            items: [{ qty: "1", name: "Rheem furnace", sku: "R801T1005A21DZSNAS", type: "Furnace", description: "100,000 BTU single stage", unit_price: "$0.00", line_total: "$0.00" }, { qty: "1", name: "Rheem air conditioner", sku: "RA13NY42AJ1NA", type: "AC", description: "3.5 ton single stage", unit_price: "$0.00", line_total: "$0.00" }],
+            units: [{ brand: "Rheem", type: "Furnace", model: "R801T1005A21DZSNAS", serial: "20260801J1", registration_url: "www.example.com/register" }],
+            photos: [{ url: "assets/images/inspection-furnace.jpg", title: "Furnace" }, { url: "assets/images/inspection-ac.jpg", title: "Outdoor unit" }, { url: "assets/images/inspection-thermostat.jpg", title: "Thermostat" }],
+            report: { technician: "Trey Durden", equipment: "Furnace and air conditioner", summary: "Summary written by the technician and stored in the database.", seller: "Sample Seller", inspection_date: "10/13/2026" },
+            agreement: { scope: "Remove existing equipment and install the system listed on estimate EST-0001.", terms: "Payment schedule, access, permits and cancellation terms from the database." },
+            approval: { decision: "approve" }, decline: { reasons: ["quote"], notes: "Customer wants a second opinion." }, right_to_repair: { text: "Thank you for allowing us to be your service provider. If a mistake was made by a previous technician, we can send the same or a different technician from our company to correct it." },
+            warranty_items: [{ equipment: "Rheem furnace", model: "R801T1005A21DZSNAS", serial: "20260801J1", term: "10 years parts", register_by: "30 days after install", notes: "20-year heat exchanger" }],
+            signature: { customer_image: "assets/images/signature.png", date: "10/13/2026" }
+        });
+        const $ = s => document.querySelector(s); let cur = "estimate", co = "jerrys", ph = false;
+        function render() {
+            const th = THEMES[co], r = document.documentElement.style; r.setProperty("--brand", th.brand); r.setProperty("--accent", th.accent); r.setProperty("--font", th.font);
+            document.body.classList.toggle("ph", ph); $("#docs").innerHTML = FORMS.map(([k, t]) => `<section class="sheet" id="s-${k}">${head(t)}${BODY[k]()}${foot()}</section>`).join("");
+            const data = sampleFor(co); document.querySelectorAll(".sheet").forEach(s => HVAC.render(s, data, ph));
+            $("#tabs").innerHTML = FORMS.map(([k, t]) => `<button role="tab" data-k="${k}">${t}</button>`).join(""); show(cur)
+        }
+        function show(k) {
+            cur = k; document.querySelectorAll(".sheet").forEach(s => s.classList.toggle("show", s.id === "s-" + k)); document.querySelectorAll("#tabs button").forEach(b => b.classList.toggle("active", b.dataset.k === k));
+        }
+        document.addEventListener("click", e => { if (e.target.dataset.k) show(e.target.dataset.k) });
+        $("#hl").onchange = e => document.body.classList.toggle("hl", e.target.checked); document.body.classList.add("hl");
+        $("#mode").onchange = e => { ph = e.target.value === "ph"; render() }; $("#co").onchange = e => { co = e.target.value; render() };
+        $("#co").innerHTML = Object.entries(THEMES).map(([k, t]) => `<option value="${k}">${t.label}</option>`).join("");
+        function doPrint(setup) {
+            const hlState = document.body.classList.contains("hl");
+            document.body.classList.remove("hl");
+            const detailsMap = [];
+            document.querySelectorAll("details").forEach(d => {
+                detailsMap.push({ d, wasOpen: d.open });
+                d.open = true;
+                d.setAttribute("open", "");
+            });
+            if (setup) setup();
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    window.print();
+                    if (hlState) document.body.classList.add("hl");
+                    detailsMap.forEach(item => {
+                        if (!item.wasOpen) {
+                            item.d.open = false;
+                            item.d.removeAttribute("open");
+                        }
+                    });
+                    document.body.classList.remove("print-all");
+                    show(cur);
+                }, 40);
+            });
+        }
+        $("#pOne").onclick = () => doPrint(() => document.body.classList.remove("print-all"));
+        $("#pAll").onclick = () => doPrint(() => {
+            document.body.classList.add("print-all");
+            document.querySelectorAll(".sheet").forEach(s => s.classList.add("show"));
+        });
+        $("#cp").onclick = async () => { const t = JSON.stringify(sampleFor(co), null, 2); try { await navigator.clipboard.writeText(t); $("#cp").textContent = "Copied" } catch (x) { prompt("Copy sample JSON:", t) } setTimeout(() => $("#cp").textContent = "Copy sample JSON", 1500) };
+        let hlWas, savedDetails = [];
+        addEventListener("beforeprint", () => {
+            hlWas = document.body.classList.contains("hl");
+            document.body.classList.remove("hl");
+            savedDetails = [];
+            document.querySelectorAll("details").forEach(d => {
+                savedDetails.push({ d, wasOpen: d.open });
+                d.open = true;
+                d.setAttribute("open", "");
+            });
+        });
+        addEventListener("afterprint", () => {
+            if (hlWas) document.body.classList.add("hl");
+            savedDetails.forEach(item => {
+                if (!item.wasOpen) {
+                    item.d.open = false;
+                    item.d.removeAttribute("open");
+                }
+            });
+            savedDetails = [];
+            document.body.classList.remove("print-all");
+            show(cur);
+        });
+        render();
+    </script>
+</body>
+
+</html>
