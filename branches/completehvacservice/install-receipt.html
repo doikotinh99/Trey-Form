@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Installation Receipt - Complete Heating and Cooling of Bolingbrook</title>
+    <!-- Standalone Form Stylesheet (modular layout & theme) -->
+    <link rel="stylesheet" href="css/install-receipt.css">
+    <!-- Shared Form UI Controller (No JS data population) -->
+    <script defer src="../../js/form.js"></script>
+</head>
+
+<body>
+    <!-- App Toolbar (Full-width, hidden on print) -->
+    <header class="toolbar noprint">
+        <div class="toolbar-inner">
+            <div class="toolbar-bar">
+                <div class="toolbar-left">
+                    <div class="toolbar-brand">
+                        <span class="toolbar-badge">HVAC</span>
+                        <span class="toolbar-title">Form Suite</span>
+                    </div>
+                    <select id="co" class="form-select" style="width:auto" aria-label="Company theme"></select>
+                    <label class="legend" style="cursor:pointer"><input type="checkbox" id="viewMode"> Print / PDF View</label>
+                    <label class="legend">
+                        <input type="checkbox" id="hl" checked> <i></i> Database field <span class="text-muted">(unmarked = static)</span>
+                    </label>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn btn-outline btn-sm" id="cp">Copy sample JSON</button>
+                    <button class="btn btn-outline btn-sm" id="pOne" title="Lưu ý khi in: Trong hộp thoại in (Ctrl+P) chọn Scale: 100% (Default)">Print this form</button>
+                </div>
+            </div>
+            <div class="nav-tabs" id="tabs" role="tablist">
+                <a href="estimate.html" role="tab">Estimate Form</a>
+                <a href="install-agreement.html" role="tab">New Installation Agreement</a>
+                <a href="install-receipt.html" role="tab" class="active">New Installation Receipt</a>
+                <a href="inspection.html" role="tab">Field Service/Inspection Report</a>
+                <a href="approval.html" role="tab">Field Service Estimate Approval</a>
+                <a href="service-receipt.html" role="tab">Field Service Receipt</a>
+                <a href="buyer-seller.html" role="tab">Buyer/Seller Report Form</a>
+                <a href="right-to-repair.html" role="tab">Right to Repair and Correct</a>
+                <a href="decline.html" role="tab">Decline to Service/Repair Report</a>
+                <a href="warranty.html" role="tab">Manufactures Warranties and Guidelines Documentation</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Sheet Container -->
+    <main class="page-wrapper">
+        <section class="sheet sheet-modular" id="s-install-receipt">
+            
+            <!-- Modular Engineering Header -->
+            <div class="doc-head doc-head-modular">
+                <div class="modular-head-left">
+                    <div class="modular-tag">[MODULAR COMFORT SYSTEM ARCHITECTURE]</div>
+                    <div class="brand-title-wrap">
+                        <img src="../../assets/images/logos/completehvacservice.svg" alt="Logo" class="brand-logo" data-bind-src="company.logo">
+                        <div class="brand-name"><span class="bind" data-bind="company.name">Complete Heating and Cooling of Bolingbrook</span></div>
+                    </div>
+                    <div class="brand-tag"><span class="bind" data-bind="company.tagline">Complete Home Comfort Solutions · Bolingbrook & Surrounding</span></div>
+                </div>
+                <div class="modular-head-right">
+                    <span class="badge modular-badge">New Installation Receipt</span>
+                    <div class="modular-meta">SPEC: <span class="bind" data-bind="doc.number">BB-2026-118</span></div>
+                    <div class="modular-meta">REV: <span class="bind" data-bind="doc.date">October 14, 2026</span></div>
+                </div>
+            </div>
+            <h2 class="doc-title">New Installation Receipt</h2>
+
+            <!-- Form Body (Static HTML data, no JS injection) -->
+            <div class="row">
+                <div class="col-6">
+                    <div class="card"><div class="card-header">Bill to</div><div class="card-body"><div class="mb-2"><div class="form-label">Name</div><span class="bind" data-bind="customer.name">Brandon & Lisa Taylor</span></div><div class="mb-2"><div class="form-label">Phone</div><span class="bind" data-bind="customer.phone">(630) 759-6632</span></div><div class="mb-2"><div class="form-label">Email</div><span class="bind" data-bind="customer.email">btaylor.bolingbrook@yahoo.com</span></div></div></div>
+                </div>
+                <div class="col-6">
+                    <div class="card"><div class="card-header">Service address</div><div class="card-body"><div class="mb-2"><div class="form-label">Street</div><span class="bind" data-bind="customer.street">612 Falconridge Way</span></div><div class="mb-2"><div class="form-label">City, state, ZIP</div><span class="bind" data-bind="customer.city_state_zip">Bolingbrook, IL 60440</span></div></div></div>
+                </div>
+            </div>
+            <h5 class="mt-3">Items installed</h5>
+            <table class="table"><thead><tr><th>Qty</th><th>Item name</th><th>SKU / model</th><th>Type</th><th>Description</th><th>Unit price</th><th>Line total</th></tr></thead><tbody><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Trane S9V2 97% Gas Furnace</span></td><td><span class="bind" data-bind="sku">S9V2B080U3VSAA</span></td><td><span class="bind" data-bind="type">Gas Furnace</span></td><td><span class="bind" data-bind="description">97% AFUE Two-Stage Variable Speed</span></td><td><span class="bind" data-bind="unit_price">$6,900.00</span></td><td><span class="bind" data-bind="line_total">$6,900.00</span></td></tr><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Trane XR14 Central AC</span></td><td><span class="bind" data-bind="sku">4TTR4036L1000A</span></td><td><span class="bind" data-bind="type">Air Conditioner</span></td><td><span class="bind" data-bind="description">3 Ton 14.8 SEER2 Spine Fin AC</span></td><td><span class="bind" data-bind="unit_price">$5,400.00</span></td><td><span class="bind" data-bind="line_total">$5,400.00</span></td></tr><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Trane CleanEffects Air Cleaner</span></td><td><span class="bind" data-bind="sku">TFD175CLFR000B</span></td><td><span class="bind" data-bind="type">Air Cleaner</span></td><td><span class="bind" data-bind="description">Whole-Home 99.98% Airborne Particle Filter</span></td><td><span class="bind" data-bind="unit_price">$1,900.00</span></td><td><span class="bind" data-bind="line_total">$1,900.00</span></td></tr></tbody></table><div class="totals">
+            <div><span>Subtotal</span><span class="bind" data-bind="totals.subtotal">$14,200.00</span></div>
+            <div><span>Tax</span><span class="bind" data-bind="totals.tax">$0.00</span></div>
+            <div class="grand"><span>Total</span><span class="bind" data-bind="totals.total">$14,200.00</span></div>
+        </div>
+            <h5 class="mt-3">Installed units</h5>
+            <div class="row" data-repeat="units">
+                <div class="col-12">
+                    <div class="card"><div class="card-header">Unit</div><div class="card-body">
+                        <div class="row">
+                            <div class="col-6"><div class="mb-2"><div class="form-label">Brand</div><span class="bind" data-bind="brand">Trane</span></div></div>
+                            <div class="col-6"><div class="mb-2"><div class="form-label">Equipment type</div><span class="bind" data-bind="type">S9V2 Furnace</span></div></div>
+                            <div class="col-6"><div class="mb-2"><div class="form-label">Model number</div><span class="bind" data-bind="model">S9V2B080U3VSAA</span></div></div>
+                            <div class="col-6"><div class="mb-2"><div class="form-label">Serial number</div><span class="bind" data-bind="serial">TRN-2026-9042</span></div></div>
+                            <div class="col-12"><div class="mb-2"><div class="form-label">Warranty registration URL</div><span class="bind" data-bind="registration_url">www.trane.com/register</span></div></div>
+                        </div>
+                    </div></div>
+                </div>
+            </div>
+            <div class="alert small mt-3"><b><span class="bind" data-bind="company.warranty_text">Complete warranty package on heating, cooling, ductwork and whole-home air filtration systems for Bolingbrook homeowners.</span></b></div>
+
+            <!-- Sheet Footer -->
+            <div class="doc-foot">
+                <span><span class="bind" data-bind="company.phone">630-555-0155</span> &middot; <span class="bind" data-bind="company.email">service@completehvacservice.com</span></span>
+                <span><span class="bind" data-bind="company.web">www.completehvacservice.com</span> &middot; <span class="bind" data-bind="company.license">License # IL-BOLING-3390</span></span>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60">
+  <defs>
+    <linearGradient id="dp-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="40%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#996515"/>
+    </linearGradient>
+    <linearGradient id="dp-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="56" height="56" rx="12" fill="url(#dp-bg)" stroke="url(#dp-gold)" stroke-width="1.5"/>
+  <rect x="5.5" y="5.5" width="49" height="49" rx="9" fill="none" stroke="url(#dp-gold)" stroke-width="0.8" stroke-dasharray="3 1.5"/>
+  <!-- Crown / Star Atelier Emblem -->
+  <path d="M18 36 L21 24 L27 30 L30 18 L33 30 L39 24 L42 36 Z" fill="url(#dp-gold)" stroke="url(#dp-gold)" stroke-width="1" stroke-linejoin="round"/>
+  <circle cx="21" cy="22" r="1.8" fill="#fef08a"/>
+  <circle cx="30" cy="16" r="2.2" fill="#fef08a"/>
+  <circle cx="39" cy="22" r="1.8" fill="#fef08a"/>
+  <!-- Bottom Ribbon Arch -->
+  <path d="M16 41 Q30 45 44 41" fill="none" stroke="url(#dp-gold)" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="30" cy="43" r="1.5" fill="#fef08a"/>
+</svg>

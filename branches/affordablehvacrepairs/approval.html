@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Field Service Estimate Approval - Affordable Heating & Cooling of Plainfield</title>
+    <!-- Standalone Form Stylesheet (value layout & theme) -->
+    <link rel="stylesheet" href="css/approval.css">
+    <!-- Shared Form UI Controller (No JS data population) -->
+    <script defer src="../../js/form.js"></script>
+</head>
+
+<body>
+    <!-- App Toolbar (Full-width, hidden on print) -->
+    <header class="toolbar noprint">
+        <div class="toolbar-inner">
+            <div class="toolbar-bar">
+                <div class="toolbar-left">
+                    <div class="toolbar-brand">
+                        <span class="toolbar-badge">HVAC</span>
+                        <span class="toolbar-title">Form Suite</span>
+                    </div>
+                    <select id="co" class="form-select" style="width:auto" aria-label="Company theme"></select>
+                    <label class="legend" style="cursor:pointer"><input type="checkbox" id="viewMode"> Print / PDF View</label>
+                    <label class="legend">
+                        <input type="checkbox" id="hl" checked> <i></i> Database field <span class="text-muted">(unmarked = static)</span>
+                    </label>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn btn-outline btn-sm" id="cp">Copy sample JSON</button>
+                    <button class="btn btn-outline btn-sm" id="pOne" title="Lưu ý khi in: Trong hộp thoại in (Ctrl+P) chọn Scale: 100% (Default)">Print this form</button>
+                </div>
+            </div>
+            <div class="nav-tabs" id="tabs" role="tablist">
+                <a href="estimate.html" role="tab">Estimate Form</a>
+                <a href="install-agreement.html" role="tab">New Installation Agreement</a>
+                <a href="install-receipt.html" role="tab">New Installation Receipt</a>
+                <a href="inspection.html" role="tab">Field Service/Inspection Report</a>
+                <a href="approval.html" role="tab" class="active">Field Service Estimate Approval</a>
+                <a href="service-receipt.html" role="tab">Field Service Receipt</a>
+                <a href="buyer-seller.html" role="tab">Buyer/Seller Report Form</a>
+                <a href="right-to-repair.html" role="tab">Right to Repair and Correct</a>
+                <a href="decline.html" role="tab">Decline to Service/Repair Report</a>
+                <a href="warranty.html" role="tab">Manufactures Warranties and Guidelines Documentation</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Sheet Container -->
+    <main class="page-wrapper">
+        <section class="sheet sheet-value" id="s-approval">
+            
+            <!-- Value-Transparent Community Header -->
+            <div class="doc-head doc-head-value">
+                <div class="value-head-left">
+                    <div class="brand-title-wrap">
+                        <img src="../../assets/images/logos/affordablehvacrepairs.svg" alt="Logo" class="brand-logo" data-bind-src="company.logo">
+                        <div class="brand-name"><span class="bind" data-bind="company.name">Affordable Heating & Cooling of Plainfield</span></div>
+                    </div>
+                    <div class="brand-tag"><span class="bind" data-bind="company.tagline">Quality, Honest & Affordable HVAC · Plainfield, IL</span></div>
+                </div>
+                <div class="value-head-right">
+                    <div class="value-stamp">★ BEST PRICE GUARANTEE ★</div>
+                    <span class="badge value-badge">Field Service Estimate Approval</span>
+                    <div class="mt-2">No. <b><span class="bind" data-bind="doc.number">AFF-2026-102</span></b> &bull; <span class="bind" data-bind="doc.date">October 14, 2026</span></div>
+                </div>
+            </div>
+            <h2 class="doc-title">Field Service Estimate Approval</h2>
+
+            <!-- Form Body (Static HTML data, no JS injection) -->
+            
+            <!-- Value Community Customer Cards -->
+            <div class="row">
+                <div class="col-6">
+                    <div class="card value-card">
+                        <div class="card-header value-card-hdr">Customer</div>
+                        <div class="card-body">
+                            <div class="mb-2"><div class="form-label">Customer Name</div><span class="bind" data-bind="customer.name">Carlos & Maria Gomez</span></div>
+                            <div class="mb-2"><div class="form-label">Phone</div><span class="bind" data-bind="customer.phone">(815) 254-8841</span></div>
+                            <div class="mb-2"><div class="form-label">Email</div><span class="bind" data-bind="customer.email">cgomez.plainfield@att.net</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card value-card">
+                        <div class="card-header value-card-hdr">Service address</div>
+                        <div class="card-body">
+                            <div class="mb-2"><div class="form-label">Service Address</div><span class="bind" data-bind="customer.street">318 Eastern Ave</span></div>
+                            <div class="mb-2"><div class="form-label">City, State, ZIP</div><span class="bind" data-bind="customer.city_state_zip">Plainfield, IL 60544</span></div>
+                            <div class="value-verified-tag">✔ Plainfield Community Savings Qualified</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h5 class="mt-3">Recommended repair / service scope</h5>
+            <table class="table"><thead><tr><th>Qty</th><th>Item name</th><th>SKU / model</th><th>Type</th><th>Description</th><th>Unit price</th><th>Line total</th></tr></thead><tbody><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Goodman GMVC96 Gas Furnace</span></td><td><span class="bind" data-bind="sku">GMVC960803BN</span></td><td><span class="bind" data-bind="type">Gas Furnace</span></td><td><span class="bind" data-bind="description">96% Two-Stage ECM High Efficiency</span></td><td><span class="bind" data-bind="unit_price">$4,650.00</span></td><td><span class="bind" data-bind="line_total">$4,650.00</span></td></tr><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Goodman GSX14 Central AC</span></td><td><span class="bind" data-bind="sku">GSX140361</span></td><td><span class="bind" data-bind="type">Air Conditioner</span></td><td><span class="bind" data-bind="description">3 Ton 14.5 SEER2 Copeland Scroll</span></td><td><span class="bind" data-bind="unit_price">$3,600.00</span></td><td><span class="bind" data-bind="line_total">$3,600.00</span></td></tr><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Honeywell Home Pro Thermostat</span></td><td><span class="bind" data-bind="sku">TH6220U2000</span></td><td><span class="bind" data-bind="type">Thermostat</span></td><td><span class="bind" data-bind="description">T6 Pro 7-Day Programmable Control</span></td><td><span class="bind" data-bind="unit_price">$400.00</span></td><td><span class="bind" data-bind="line_total">$400.00</span></td></tr></tbody></table><div class="totals">
+            <div><span>Subtotal</span><span class="bind" data-bind="totals.subtotal">$8,650.00</span></div>
+            <div><span>Tax</span><span class="bind" data-bind="totals.tax">$0.00</span></div>
+            <div class="grand"><span>Total</span><span class="bind" data-bind="totals.total">$8,650.00</span></div>
+        </div>
+            <h5 class="mt-3">Customer decision</h5>
+            <div class="form-check">
+                <span class="box on" data-check="approval.decision" data-value="approve"></span>
+                <span>I approve the work above at the total shown (<span class="bind" data-bind="totals.total">$8,650.00</span>).</span>
+            </div>
+            <div class="form-check">
+                <span class="box" data-check="approval.decision" data-value="decline"></span>
+                <span>I decline the work above.</span>
+            </div>
+            <div class="row mt-3">
+        <div class="col-6">
+            <div class="sig" data-bind-src="signature.customer_image">
+                <img src="../../assets/images/signature.png" alt="Signature">
+            </div>
+            <div class="small text-muted">Customer signature</div>
+        </div>
+        <div class="col-6">
+            <div class="sig"><span class="bind" data-bind="signature.date">10/14/2026</span></div>
+            <div class="small text-muted">Date</div>
+        </div>
+    </div>
+
+            <!-- Sheet Footer -->
+            <div class="doc-foot">
+                <span><span class="bind" data-bind="company.phone">815-555-0185</span> &middot; <span class="bind" data-bind="company.email">contact@affordablehvacrepairs.com</span></span>
+                <span><span class="bind" data-bind="company.web">www.affordablehvacrepairs.com</span> &middot; <span class="bind" data-bind="company.license">License # IL-AFFORD-5520</span></span>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

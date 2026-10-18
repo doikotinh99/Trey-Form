@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Installation Receipt - Best Comfort HVAC New Lenox</title>
+    <!-- Standalone Form Stylesheet (heritage layout & theme) -->
+    <link rel="stylesheet" href="css/install-receipt.css">
+    <!-- Shared Form UI Controller (No JS data population) -->
+    <script defer src="../../js/form.js"></script>
+</head>
+
+<body>
+    <!-- App Toolbar (Full-width, hidden on print) -->
+    <header class="toolbar noprint">
+        <div class="toolbar-inner">
+            <div class="toolbar-bar">
+                <div class="toolbar-left">
+                    <div class="toolbar-brand">
+                        <span class="toolbar-badge">HVAC</span>
+                        <span class="toolbar-title">Form Suite</span>
+                    </div>
+                    <select id="co" class="form-select" style="width:auto" aria-label="Company theme"></select>
+                    <label class="legend" style="cursor:pointer"><input type="checkbox" id="viewMode"> Print / PDF View</label>
+                    <label class="legend">
+                        <input type="checkbox" id="hl" checked> <i></i> Database field <span class="text-muted">(unmarked = static)</span>
+                    </label>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn btn-outline btn-sm" id="cp">Copy sample JSON</button>
+                    <button class="btn btn-outline btn-sm" id="pOne" title="Lưu ý khi in: Trong hộp thoại in (Ctrl+P) chọn Scale: 100% (Default)">Print this form</button>
+                </div>
+            </div>
+            <div class="nav-tabs" id="tabs" role="tablist">
+                <a href="estimate.html" role="tab">Estimate Form</a>
+                <a href="install-agreement.html" role="tab">New Installation Agreement</a>
+                <a href="install-receipt.html" role="tab" class="active">New Installation Receipt</a>
+                <a href="inspection.html" role="tab">Field Service/Inspection Report</a>
+                <a href="approval.html" role="tab">Field Service Estimate Approval</a>
+                <a href="service-receipt.html" role="tab">Field Service Receipt</a>
+                <a href="buyer-seller.html" role="tab">Buyer/Seller Report Form</a>
+                <a href="right-to-repair.html" role="tab">Right to Repair and Correct</a>
+                <a href="decline.html" role="tab">Decline to Service/Repair Report</a>
+                <a href="warranty.html" role="tab">Manufactures Warranties and Guidelines Documentation</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Sheet Container -->
+    <main class="page-wrapper">
+        <section class="sheet sheet-heritage" id="s-install-receipt">
+            
+            <div class="doc-head">
+                <div>
+                    <div class="brand-title-wrap">
+                        <img src="../../assets/images/logos/bestcomforthvacrepair.svg" alt="Logo" class="brand-logo" data-bind-src="company.logo">
+                        <div class="brand-name"><span class="bind" data-bind="company.name">Best Comfort HVAC New Lenox</span></div>
+                    </div>
+                    <div class="brand-tag"><span class="bind" data-bind="company.tagline">Trusted Local Heating & Air Conditioning · New Lenox & Will County</span></div>
+                </div>
+                <div class="text-end small">
+                    <span class="badge">New Installation Receipt</span>
+                    <div class="mt-3">No. <span class="bind" data-bind="doc.number">NL-2026-440</span><br>Date <span class="bind" data-bind="doc.date">October 14, 2026</span></div>
+                </div>
+            </div>
+            <h2 class="doc-title">New Installation Receipt</h2>
+
+            <!-- Form Body (Static HTML data, no JS injection) -->
+            <div class="row">
+                <div class="col-6">
+                    <div class="card"><div class="card-header">Bill to</div><div class="card-body"><div class="mb-2"><div class="form-label">Name</div><span class="bind" data-bind="customer.name">Thomas & Karen Anderson</span></div><div class="mb-2"><div class="form-label">Phone</div><span class="bind" data-bind="customer.phone">(815) 462-8820</span></div><div class="mb-2"><div class="form-label">Email</div><span class="bind" data-bind="customer.email">tanderson@newlenoxlaw.com</span></div></div></div>
+                </div>
+                <div class="col-6">
+                    <div class="card"><div class="card-header">Service address</div><div class="card-body"><div class="mb-2"><div class="form-label">Street</div><span class="bind" data-bind="customer.street">1420 Nelson Rd</span></div><div class="mb-2"><div class="form-label">City, state, ZIP</div><span class="bind" data-bind="customer.city_state_zip">New Lenox, IL 60451</span></div></div></div>
+                </div>
+            </div>
+            <h5 class="mt-3">Items installed</h5>
+            <table class="table"><thead><tr><th>Qty</th><th>Item name</th><th>SKU / model</th><th>Type</th><th>Description</th><th>Unit price</th><th>Line total</th></tr></thead><tbody><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Bryant Evolution 98M Furnace</span></td><td><span class="bind" data-bind="sku">987MA48080V21</span></td><td><span class="bind" data-bind="type">Gas Furnace</span></td><td><span class="bind" data-bind="description">98.3% AFUE Modulating Variable Speed</span></td><td><span class="bind" data-bind="unit_price">$8,200.00</span></td><td><span class="bind" data-bind="line_total">$8,200.00</span></td></tr><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Bryant Evolution 18 AC Unit</span></td><td><span class="bind" data-bind="sku">186CNV036000</span></td><td><span class="bind" data-bind="type">Air Conditioner</span></td><td><span class="bind" data-bind="description">18 SEER2 5-Stage Inverter 3 Ton</span></td><td><span class="bind" data-bind="unit_price">$5,800.00</span></td><td><span class="bind" data-bind="line_total">$5,800.00</span></td></tr><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Bryant Connex Wi-Fi Smart Control</span></td><td><span class="bind" data-bind="sku">SYSTXBBECC01-B</span></td><td><span class="bind" data-bind="type">Smart Control</span></td><td><span class="bind" data-bind="description">Touchscreen Communicating Wall Control</span></td><td><span class="bind" data-bind="unit_price">$900.00</span></td><td><span class="bind" data-bind="line_total">$900.00</span></td></tr></tbody></table><div class="totals">
+            <div><span>Subtotal</span><span class="bind" data-bind="totals.subtotal">$14,900.00</span></div>
+            <div><span>Tax</span><span class="bind" data-bind="totals.tax">$0.00</span></div>
+            <div class="grand"><span>Total</span><span class="bind" data-bind="totals.total">$14,900.00</span></div>
+        </div>
+            <h5 class="mt-3">Installed units</h5>
+            <div class="row" data-repeat="units">
+                <div class="col-12">
+                    <div class="card"><div class="card-header">Unit</div><div class="card-body">
+                        <div class="row">
+                            <div class="col-6"><div class="mb-2"><div class="form-label">Brand</div><span class="bind" data-bind="brand">Bryant</span></div></div>
+                            <div class="col-6"><div class="mb-2"><div class="form-label">Equipment type</div><span class="bind" data-bind="type">Evolution Furnace</span></div></div>
+                            <div class="col-6"><div class="mb-2"><div class="form-label">Model number</div><span class="bind" data-bind="model">987MA48080V21</span></div></div>
+                            <div class="col-6"><div class="mb-2"><div class="form-label">Serial number</div><span class="bind" data-bind="serial">BRY-2026-7841</span></div></div>
+                            <div class="col-12"><div class="mb-2"><div class="form-label">Warranty registration URL</div><span class="bind" data-bind="registration_url">www.bryant.com/register</span></div></div>
+                        </div>
+                    </div></div>
+                </div>
+            </div>
+            <div class="alert small mt-3"><b><span class="bind" data-bind="company.warranty_text">Best Comfort HVAC New Lenox provides full 10-year parts and labor coverage on all qualifying new Bryant installations.</span></b></div>
+
+            <!-- Sheet Footer -->
+            <div class="doc-foot">
+                <span><span class="bind" data-bind="company.phone">815-462-8820</span> &middot; <span class="bind" data-bind="company.email">service@bestcomforthvacrepair.com</span></span>
+                <span><span class="bind" data-bind="company.web">www.bestcomforthvacrepair.com</span> &middot; <span class="bind" data-bind="company.license">License # IL-NEWLENOX-7712</span></span>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

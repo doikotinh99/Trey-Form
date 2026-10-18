@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Field Service Estimate Approval - Water Heaters & Boiler HVAC Service</title>
+    <!-- Standalone Form Stylesheet (aquathermal layout & theme) -->
+    <link rel="stylesheet" href="css/approval.css">
+    <!-- Shared Form UI Controller (No JS data population) -->
+    <script defer src="../../js/form.js"></script>
+</head>
+
+<body>
+    <!-- App Toolbar (Full-width, hidden on print) -->
+    <header class="toolbar noprint">
+        <div class="toolbar-inner">
+            <div class="toolbar-bar">
+                <div class="toolbar-left">
+                    <div class="toolbar-brand">
+                        <span class="toolbar-badge">HVAC</span>
+                        <span class="toolbar-title">Form Suite</span>
+                    </div>
+                    <select id="co" class="form-select" style="width:auto" aria-label="Company theme"></select>
+                    <label class="legend" style="cursor:pointer"><input type="checkbox" id="viewMode"> Print / PDF View</label>
+                    <label class="legend">
+                        <input type="checkbox" id="hl" checked> <i></i> Database field <span class="text-muted">(unmarked = static)</span>
+                    </label>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn btn-outline btn-sm" id="cp">Copy sample JSON</button>
+                    <button class="btn btn-outline btn-sm" id="pOne" title="Lưu ý khi in: Trong hộp thoại in (Ctrl+P) chọn Scale: 100% (Default)">Print this form</button>
+                </div>
+            </div>
+            <div class="nav-tabs" id="tabs" role="tablist">
+                <a href="estimate.html" role="tab">Estimate Form</a>
+                <a href="install-agreement.html" role="tab">New Installation Agreement</a>
+                <a href="install-receipt.html" role="tab">New Installation Receipt</a>
+                <a href="inspection.html" role="tab">Field Service/Inspection Report</a>
+                <a href="approval.html" role="tab" class="active">Field Service Estimate Approval</a>
+                <a href="service-receipt.html" role="tab">Field Service Receipt</a>
+                <a href="buyer-seller.html" role="tab">Buyer/Seller Report Form</a>
+                <a href="right-to-repair.html" role="tab">Right to Repair and Correct</a>
+                <a href="decline.html" role="tab">Decline to Service/Repair Report</a>
+                <a href="warranty.html" role="tab">Manufactures Warranties and Guidelines Documentation</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Sheet Container -->
+    <main class="page-wrapper">
+        <section class="sheet sheet-aquathermal" id="s-approval">
+            
+            <!-- Fluid Aqua-Thermal Header -->
+            <div class="doc-head doc-head-aqua">
+                <div class="aqua-head-left">
+                    <img src="../../assets/images/logos/watershotagain.svg" alt="Logo" class="brand-logo" data-bind-src="company.logo">
+                    <div>
+                        <div class="brand-name"><span class="bind" data-bind="company.name">Water Heaters & Boiler HVAC Service</span></div>
+                        <div class="brand-tag"><span class="bind" data-bind="company.tagline">Hot Water Solutions, Steam Boilers & Complete HVAC Comfort</span></div>
+                    </div>
+                </div>
+                <div class="aqua-head-right">
+                    <span class="badge aqua-badge">Field Service Estimate Approval</span>
+                    <div class="aqua-doc-meta">Ref: <b><span class="bind" data-bind="doc.number">WTR-2026-554</span></b> &bull; <span class="bind" data-bind="doc.date">October 14, 2026</span></div>
+                    <div class="aqua-license">State Certified Hydronics &amp; Water Heaters</div>
+                </div>
+            </div>
+            <h2 class="doc-title">Field Service Estimate Approval</h2>
+
+            <!-- Form Body (Static HTML data, no JS injection) -->
+            
+            <!-- Fluid Aqua-Thermal Split Ribbon -->
+            <div class="aqua-parties-banner">
+                <div class="aqua-party-block">
+                    <div class="aqua-avatar">💧</div>
+                    <div class="aqua-party-info">
+                        <div class="aqua-party-label">Customer</div>
+                        <div class="aqua-party-name"><span class="bind" data-bind="customer.name">David Henderson</span></div>
+                        <div class="aqua-party-sub"><span class="bind" data-bind="customer.phone">(815) 436-1299</span> &bull; <span class="bind" data-bind="customer.email">dhenderson@prologistics.net</span></div>
+                    </div>
+                </div>
+                <div class="aqua-party-block">
+                    <div class="aqua-avatar">📍</div>
+                    <div class="aqua-party-info">
+                        <div class="aqua-party-label">Service address</div>
+                        <div class="aqua-party-name"><span class="bind" data-bind="customer.street">428 Cedar Ridge Dr</span></div>
+                        <div class="aqua-party-sub"><span class="bind" data-bind="customer.city_state_zip">Plainfield, IL 60544</span></div>
+                    </div>
+                </div>
+            </div>
+            <h5 class="mt-3">Recommended repair / service scope</h5>
+            <table class="table"><thead><tr><th>Qty</th><th>Item name</th><th>SKU / model</th><th>Type</th><th>Description</th><th>Unit price</th><th>Line total</th></tr></thead><tbody><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Rinnai SENSEI RX199iN Tankless</span></td><td><span class="bind" data-bind="sku">RX199iN</span></td><td><span class="bind" data-bind="type">Tankless</span></td><td><span class="bind" data-bind="description">199,000 BTU 11.1 GPM Condensing Unit</span></td><td><span class="bind" data-bind="unit_price">$6,850.00</span></td><td><span class="bind" data-bind="line_total">$6,850.00</span></td></tr><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">ScaleCutter Water Filtration System</span></td><td><span class="bind" data-bind="sku">103000038</span></td><td><span class="bind" data-bind="type">Filtration</span></td><td><span class="bind" data-bind="description">Anti-Scale Pre-Filter for Tankless</span></td><td><span class="bind" data-bind="unit_price">$1,200.00</span></td><td><span class="bind" data-bind="line_total">$1,200.00</span></td></tr><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Concentric Vent & Gas Line Upgrade</span></td><td><span class="bind" data-bind="sku">VENT-GAS-UP</span></td><td><span class="bind" data-bind="type">Installation</span></td><td><span class="bind" data-bind="description">3" Polypropylene Vent & 3/4" Gas Line Extension</span></td><td><span class="bind" data-bind="unit_price">$1,800.00</span></td><td><span class="bind" data-bind="line_total">$1,800.00</span></td></tr></tbody></table><div class="totals">
+            <div><span>Subtotal</span><span class="bind" data-bind="totals.subtotal">$9,850.00</span></div>
+            <div><span>Tax</span><span class="bind" data-bind="totals.tax">$0.00</span></div>
+            <div class="grand"><span>Total</span><span class="bind" data-bind="totals.total">$9,850.00</span></div>
+        </div>
+            <h5 class="mt-3">Customer decision</h5>
+            <div class="form-check">
+                <span class="box on" data-check="approval.decision" data-value="approve"></span>
+                <span>I approve the work above at the total shown (<span class="bind" data-bind="totals.total">$9,850.00</span>).</span>
+            </div>
+            <div class="form-check">
+                <span class="box" data-check="approval.decision" data-value="decline"></span>
+                <span>I decline the work above.</span>
+            </div>
+            <div class="row mt-3">
+        <div class="col-6">
+            <div class="sig" data-bind-src="signature.customer_image">
+                <img src="../../assets/images/signature.png" alt="Signature">
+            </div>
+            <div class="small text-muted">Customer signature</div>
+        </div>
+        <div class="col-6">
+            <div class="sig"><span class="bind" data-bind="signature.date">10/14/2026</span></div>
+            <div class="small text-muted">Date</div>
+        </div>
+    </div>
+
+            <!-- Sheet Footer -->
+            <div class="doc-foot">
+                <span><span class="bind" data-bind="company.phone">815-555-0133</span> &middot; <span class="bind" data-bind="company.email">office@watershotagain.com</span></span>
+                <span><span class="bind" data-bind="company.web">www.watershotagain.com</span> &middot; <span class="bind" data-bind="company.license">License # IL-PLUMB-HVAC-3310</span></span>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

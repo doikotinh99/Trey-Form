@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60">
+  <defs>
+    <linearGradient id="j-flame" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+    <linearGradient id="j-frost" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="j-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="56" height="56" rx="14" fill="url(#j-bg)" stroke="#334155" stroke-width="1.5"/>
+  <!-- Left Flame -->
+  <path d="M26 12 C26 12, 16 20, 16 32 C16 41, 23 46, 28 46 C24 43, 23 37, 26 33 C28 30, 31 27, 30 22 C29 18, 27 15, 26 12 Z" fill="url(#j-flame)"/>
+  <!-- Right Snowflake half -->
+  <g stroke="url(#j-frost)" stroke-width="2.5" stroke-linecap="round">
+    <line x1="30" y1="14" x2="30" y2="46"/>
+    <line x1="30" y1="22" x2="44" y2="30"/>
+    <line x1="30" y1="38" x2="44" y2="30"/>
+    <path d="M37 18 L43 20" fill="none"/>
+    <path d="M37 26 L42 24" fill="none"/>
+    <path d="M38 34 L43 32" fill="none"/>
+    <path d="M38 42 L43 40" fill="none"/>
+  </g>
+  <circle cx="30" cy="30" r="3.5" fill="#ffffff"/>
+</svg>

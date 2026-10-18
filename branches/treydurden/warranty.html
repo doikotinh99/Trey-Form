@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manufactures Warranties and Guidelines Documentation - Trey Durden Heating and Cooling</title>
+    <!-- Standalone Form Stylesheet (luxury layout & theme) -->
+    <link rel="stylesheet" href="css/warranty.css">
+    <!-- Shared Form UI Controller (No JS data population) -->
+    <script defer src="../../js/form.js"></script>
+</head>
+
+<body>
+    <!-- App Toolbar (Full-width, hidden on print) -->
+    <header class="toolbar noprint">
+        <div class="toolbar-inner">
+            <div class="toolbar-bar">
+                <div class="toolbar-left">
+                    <div class="toolbar-brand">
+                        <span class="toolbar-badge">HVAC</span>
+                        <span class="toolbar-title">Form Suite</span>
+                    </div>
+                    <select id="co" class="form-select" style="width:auto" aria-label="Company theme"></select>
+                    <label class="legend" style="cursor:pointer"><input type="checkbox" id="viewMode"> Print / PDF View</label>
+                    <label class="legend">
+                        <input type="checkbox" id="hl" checked> <i></i> Database field <span class="text-muted">(unmarked = static)</span>
+                    </label>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn btn-outline btn-sm" id="cp">Copy sample JSON</button>
+                    <button class="btn btn-outline btn-sm" id="pOne" title="Lưu ý khi in: Trong hộp thoại in (Ctrl+P) chọn Scale: 100% (Default)">Print this form</button>
+                </div>
+            </div>
+            <div class="nav-tabs" id="tabs" role="tablist">
+                <a href="estimate.html" role="tab">Estimate Form</a>
+                <a href="install-agreement.html" role="tab">New Installation Agreement</a>
+                <a href="install-receipt.html" role="tab">New Installation Receipt</a>
+                <a href="inspection.html" role="tab">Field Service/Inspection Report</a>
+                <a href="approval.html" role="tab">Field Service Estimate Approval</a>
+                <a href="service-receipt.html" role="tab">Field Service Receipt</a>
+                <a href="buyer-seller.html" role="tab">Buyer/Seller Report Form</a>
+                <a href="right-to-repair.html" role="tab">Right to Repair and Correct</a>
+                <a href="decline.html" role="tab">Decline to Service/Repair Report</a>
+                <a href="warranty.html" role="tab" class="active">Manufactures Warranties and Guidelines Documentation</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Sheet Container -->
+    <main class="page-wrapper">
+        <section class="sheet sheet-luxury" id="s-warranty">
+            
+            <!-- Luxury Mastercraft Atelier Header -->
+            <div class="doc-head doc-head-luxury">
+                <div class="luxury-crest">⚜ MASTER CRAFTSMAN ATELIER ⚜</div>
+                <div class="brand-title-wrap">
+                        <img src="../../assets/images/logos/treydurden.svg" alt="Logo" class="brand-logo" data-bind-src="company.logo">
+                        <div class="brand-name"><span class="bind" data-bind="company.name">Trey Durden Heating and Cooling</span></div>
+                    </div>
+                <div class="luxury-divider">✦ <span>HIGH-PERFORMANCE ARCHITECTURAL COMFORT</span> ✦</div>
+                <div class="brand-tag"><span class="bind" data-bind="company.tagline">Master Technician Service & Installations</span></div>
+                <div class="luxury-meta-strip">
+                    <span>COMMISSION NO. <b><span class="bind" data-bind="doc.number">TD-2026-701</span></b></span>
+                    <span>&bull;</span>
+                    <span>ISSUED: <b><span class="bind" data-bind="doc.date">October 14, 2026</span></b></span>
+                    <span>&bull;</span>
+                    <span class="luxury-doc-name">Manufactures Warranties and Guidelines Documentation</span>
+                </div>
+            </div>
+            <h2 class="doc-title">Manufactures Warranties and Guidelines Documentation</h2>
+
+            <!-- Form Body (Static HTML data, no JS injection) -->
+            <div class="alert mb-3"><b><span class="bind" data-bind="company.warranty_text">All heating and cooling installations personally supervised and guaranteed by Trey Durden with full 10-year parts & labor warranty coverage.</span></b></div>
+            <h5>Equipment covered</h5>
+            <table class="table"><thead><tr><th>Equipment</th><th>Model</th><th>Serial</th><th>Warranty term</th><th>Register by</th><th>Notes</th></tr></thead><tbody><tr><td><span class="bind" data-bind="equipment">Lennox SLP99V Furnace</span></td><td><span class="bind" data-bind="model">SLP99UH090XV48C</span></td><td><span class="bind" data-bind="serial">LEN-2026-9011A</span></td><td><span class="bind" data-bind="term">Lifetime heat exchanger / 10 yrs parts</span></td><td><span class="bind" data-bind="register_by">30 days post-install</span></td><td><span class="bind" data-bind="notes">Annual master tune-up included</span></td></tr></tbody></table>
+            <h5 class="mt-3">Guidelines & Manufacturer Compliance</h5>
+            <div class="alert small mb-3"><b>Must maintain:</b> annual service appointments and records are required for each piece of equipment during the warranty term.<br><b>Not covered by the manufacturer warranty:</b> power surge; direct or indirect physical damage; water damage; negligent service or repairs; and claims after lengthy periods without proper service or maintenance.<br><b>Protect your equipment:</b> keep the area free of airflow blockage, dirt, dust, standing water and high traffic. Where applicable, place 36" of gravel or stone around outdoor units.</div>
+
+            <!-- Sheet Footer -->
+            <div class="doc-foot">
+                <span><span class="bind" data-bind="company.phone">630-361-7434</span> &middot; <span class="bind" data-bind="company.email">Trey.D@treydurden.com</span></span>
+                <span><span class="bind" data-bind="company.web">www.treydurden.com</span> &middot; <span class="bind" data-bind="company.license">License # IL-MASTER-0824</span></span>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

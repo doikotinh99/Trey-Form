@@ -1,0 +1,977 @@
+/**
+ * @file treydurden form styling
+ * @description Standalone self-contained stylesheet with Trey Durden Heating and Cooling theme variables,
+ * grid layout, component styles, Link View & Print/PDF View, and print rules.
+ */
+
+:root {
+    --brand: #0f172a;
+    --accent: #38bdf8;
+    --bs-border: #dee2e6;
+    --bs-muted: #64748b;
+    --bs-body: #1e293b;
+    --bs-light: #f8fafc;
+    --r: .3rem;
+    --font: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font: 400 14.5px/1.45 var(--font-body);
+    color: var(--bs-body);
+}
+
+.d-flex { display: flex; }
+.justify-between { justify-content: space-between; }
+.align-center { align-items: center; }
+.gap-2 { gap: .5rem; }
+.mb-2 { margin-bottom: .35rem; }
+.mb-3 { margin-bottom: 1.15rem; }
+.mt-2 { margin-top: .35rem; }
+.mt-3 { margin-top: 1.15rem; }
+.text-muted { color: var(--bs-muted); }
+.text-end { text-align: right; }
+.text-success { color: #16a34a; }
+.small { font-size: .84rem; }
+.fw-bold { font-weight: 700; }
+
+h1, h2, h3, h4, h5 {
+    margin: 0 0 .4rem;
+    color: var(--brand);
+}
+
+h1 { font-size: 1.85rem; }
+h2 { font-size: 1.45rem; }
+h5 { font-size: 1.15rem; margin-top: 1.35rem; margin-bottom: .65rem; }
+
+/* ===== Grid & Containers ===== */
+.container {
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0 .75rem;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -.4rem;
+}
+
+.row > * {
+    padding: 0 .4rem;
+    margin-bottom: .6rem;
+}
+
+.col { flex: 1 0 0; }
+.col-4 { width: 33.333%; }
+.col-6 { width: 50%; }
+.col-12 { width: 100%; }
+
+@media (max-width: 640px) {
+    .col-4, .col-6 { width: 100%; }
+}
+
+/* ===== Toolbar Chrome ===== */
+.toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, .97);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--bs-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+    padding: .6rem 0 0 0;
+}
+
+.toolbar-inner {
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+}
+
+.toolbar-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: .55rem;
+}
+
+.toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    flex-wrap: wrap;
+}
+
+.toolbar-brand {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin-right: .4rem;
+    text-decoration: none;
+}
+
+.toolbar-badge {
+    background: var(--brand);
+    color: #fff;
+    font-size: .74rem;
+    font-weight: 700;
+    padding: .18rem .42rem;
+    border-radius: 4px;
+    letter-spacing: .5px;
+}
+
+.toolbar-title {
+    font-weight: 600;
+    font-size: .95rem;
+    color: #1e293b;
+}
+
+.toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    flex-wrap: wrap;
+}
+
+.page-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+/* ===== Components ===== */
+.btn {
+    display: inline-block;
+    padding: .35rem .75rem;
+    font: inherit;
+    font-size: .85rem;
+    line-height: 1.45;
+    border: 1px solid transparent;
+    border-radius: var(--r);
+    background: none;
+    cursor: pointer;
+    transition: filter .15s;
+    text-decoration: none;
+}
+
+.btn:hover { filter: brightness(.92); }
+
+.btn-primary {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: #fff;
+}
+
+.btn-outline {
+    border-color: var(--bs-border);
+    color: var(--bs-body);
+    background: #fff;
+}
+
+.btn-sm { padding: .25rem .55rem; font-size: .82rem; }
+
+.form-control, .form-select {
+    display: block;
+    width: 100%;
+    padding: .35rem .7rem;
+    font: inherit;
+    font-size: .85rem;
+    border: 1px solid #ced4da;
+    border-radius: var(--r);
+    background: #fff;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 2px;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--bs-muted);
+}
+
+.card {
+    border: 1px solid var(--bs-border);
+    border-radius: var(--r);
+    background: #fff;
+    height: 100%;
+}
+
+.card-header {
+    padding: .45rem .8rem;
+    background: rgba(0, 0, 0, .02);
+    border-bottom: 1px solid var(--bs-border);
+    font-weight: 600;
+    font-size: .86rem;
+    border-radius: var(--r) var(--r) 0 0;
+}
+
+.card-body {
+    padding: .65rem .8rem;
+    font-size: .88rem;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .88rem;
+}
+
+.table th, .table td {
+    padding: .45rem .65rem;
+    border: 1px solid var(--bs-border);
+    vertical-align: top;
+}
+
+.table thead th {
+    background: var(--brand);
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+}
+
+.badge {
+    display: inline-block;
+    padding: .28em .6em;
+    font-size: .74em;
+    font-weight: 700;
+    border-radius: var(--r);
+    background: var(--accent);
+    color: #fff;
+}
+
+.alert {
+    padding: .5rem .8rem;
+    border: 1px solid color-mix(in srgb, var(--brand) 30%, #fff);
+    background: color-mix(in srgb, var(--brand) 6%, #fff);
+    border-radius: var(--r);
+    margin-bottom: .6rem;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .45rem;
+    font-size: .88rem;
+    cursor: pointer;
+}
+
+.box {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--bs-muted);
+    border-radius: 3px;
+    position: relative;
+    background: #fff;
+    flex-shrink: 0;
+}
+
+.box.on::after {
+    content: "✓";
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    font-size: 13px;
+    color: var(--brand);
+    font-weight: 700;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: .25rem;
+    border-bottom: 1px solid var(--bs-border);
+    margin-top: .4rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+.nav-tabs::-webkit-scrollbar {
+    height: 4px;
+}
+
+.nav-tabs::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.nav-tabs a,
+.nav-tabs button {
+    padding: .55rem .95rem;
+    font: inherit;
+    font-size: .88rem;
+    font-weight: 500;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-radius: var(--r) var(--r) 0 0;
+    background: none;
+    cursor: pointer;
+    color: #475569;
+    text-decoration: none;
+    transition: all .15s ease;
+    flex: none;
+}
+
+.nav-tabs a:hover,
+.nav-tabs button:hover {
+    color: var(--brand);
+    background: rgba(0, 0, 0, .02);
+}
+
+.nav-tabs a.active,
+.nav-tabs button.active {
+    background: #fff;
+    border-color: var(--bs-border) var(--bs-border) #fff;
+    border-bottom: 2px solid var(--accent);
+    color: var(--brand);
+    font-weight: 600;
+    margin-bottom: -1px;
+}
+
+.ph .bind {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: .82em;
+    color: #6c757d;
+}
+
+/* ===== Sheet Document Layout ===== */
+.sheet {
+    background: #fff;
+    width: 210mm;
+    min-height: 297mm;
+    height: auto;
+    max-width: calc(100vw - 1.5rem);
+    margin: 1.25rem auto 3rem;
+    padding: 14mm 16mm;
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+}
+
+/* Standard Fallback Header Banner */
+.doc-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    color: #ffffff;
+    margin: -14mm -16mm 1.25rem -16mm;
+    padding: 14mm 16mm 1rem;
+}
+
+.doc-head .brand-name {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+}
+
+.doc-head .brand-tag {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: .88rem;
+    margin-top: 4px;
+}
+
+.doc-head .text-end {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.doc-foot {
+    margin-top: .75rem;
+    padding-top: .45rem;
+    border-top: 1px solid var(--bs-border);
+    font-size: .8rem;
+    color: var(--bs-muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.totals {
+    margin-left: auto;
+    width: min(18rem, 100%);
+}
+
+.totals div {
+    display: flex;
+    justify-content: space-between;
+    padding: .25rem 0;
+    border-bottom: 1px solid var(--bs-border);
+    font-size: .86rem;
+}
+
+.totals .grand {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--brand);
+    border-bottom: 2px solid var(--accent);
+}
+
+/* ===== Database Field Highlighting ===== */
+.bind { display: inline; }
+.hl .bind, .hl [data-bind-src], .hl .box {
+    background: #fff3cd;
+    outline: 1px dashed #d39e00;
+    outline-offset: 1px;
+    border-radius: 3px;
+}
+
+.hl:not(.view-print) .doc-head .bind,
+.hl:not(.view-print) .doc-head [data-bind-src] {
+    color: #0b2545;
+}
+
+.legend {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+    font-size: .82rem;
+}
+
+.legend i {
+    display: inline-block;
+    width: .95rem;
+    height: .75rem;
+    border: 1px dashed #d39e00;
+    background: #fff3cd;
+    border-radius: 3px;
+    vertical-align: -1px;
+}
+
+/* ===== Equipment, Media & Signature Styles ===== */
+.img, .photo, .sig { position: relative; }
+
+.photo {
+    min-height: 165px;
+    height: 165px;
+    border: 1px dashed #adb5bd;
+    border-radius: var(--r);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bs-light);
+    overflow: hidden;
+    color: var(--bs-muted);
+    font-size: .88rem;
+    text-align: center;
+}
+
+.photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sig {
+    border-bottom: 2px solid #000;
+    height: 2.6rem;
+    margin-top: .5rem;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2px;
+}
+
+.sig img {
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    max-height: 2.5rem;
+    width: auto;
+    height: auto;
+}
+
+.img {
+    width: 160px;
+    height: 125px;
+    min-height: 125px;
+    max-height: 125px;
+    flex: 0 0 160px;
+    align-self: flex-start;
+    border: 1px dashed #adb5bd;
+    border-radius: var(--r);
+    background: var(--bs-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bs-muted);
+    font-size: .85rem;
+    overflow: hidden;
+}
+
+.img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #f8fafc;
+}
+
+.eqlist {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.eq { height: auto; }
+
+.eqrow {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.1rem;
+    padding: .85rem 1rem;
+}
+
+.eqbody {
+    flex: 1;
+    min-width: 0;
+}
+
+.eqbody h5 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.kspecs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 10px;
+    margin: 6px 0;
+}
+
+.kspecs > div {
+    border-radius: 3px;
+    padding: 3px 8px;
+    font-size: .82rem;
+    font-weight: 600;
+}
+
+.kspecs .form-label { margin: 0; font-size: .7rem; }
+.ok { color: #198754; }
+
+.eq-details {
+    border-top: 1px solid var(--bs-border);
+    padding: .5rem .9rem .65rem;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fafbfc;
+}
+
+.eq-details summary {
+    cursor: pointer;
+    color: var(--brand);
+    font-size: .88rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    user-select: none;
+    outline: none;
+    transition: color .15s ease;
+}
+
+.eq-details summary:hover { color: var(--accent); }
+
+.specs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px 24px;
+    width: 100%;
+}
+
+.specs .sp {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 2.5px 0;
+    border-bottom: 1px solid #eef2f6;
+    font-size: .84rem;
+}
+
+.total-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .75rem 1.25rem;
+    color: #fff;
+    font-size: .95rem;
+}
+
+.big { font-size: 1.85rem; font-weight: 800; }
+.big2 { font-size: 1.35rem; font-weight: 800; color: var(--brand); }
+.big2 small { font-size: .72rem; font-weight: 400; color: var(--bs-muted); }
+
+/* Custom Archetype Specific Style Injections */
+
+            /* ===== Luxury Mastercraft Atelier Archetype ===== */
+            body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; }
+            h1, h2, h3, h4, h5 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; letter-spacing: 0.5px; }
+            .sheet { border-radius: 6px !important; border: 1px solid #d4af37; box-shadow: 0 15px 45px rgba(15, 23, 42, 0.08); padding: 18mm 20mm; }
+            
+            .doc-head-luxury {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+                text-align: center;
+                background: #0f172a !important;
+                border: 1px solid #d4af37 !important;
+                outline: 2px double #d4af37 !important;
+                outline-offset: -4px;
+                padding: 0.65rem 1.25rem !important;
+                color: #fff;
+                margin: 0 0 0.85rem 0 !important;
+                border-radius: 4px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .luxury-crest {
+                color: #d4af37;
+                font-family: 'Cinzel', serif;
+                font-size: 0.68rem;
+                letter-spacing: 2px;
+                margin-bottom: 2px;
+                font-weight: 700;
+            }
+            .doc-head-luxury .brand-name {
+                font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+                font-size: 1.4rem;
+                color: #ffffff;
+                letter-spacing: 0.5px;
+                margin-bottom: 2px;
+                line-height: 1.2;
+            }
+            .luxury-divider {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                color: #d4af37;
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+                margin: 2px 0;
+            }
+            .luxury-divider span { font-size: 0.65rem; }
+            .doc-head-luxury .brand-tag {
+                font-size: 0.78rem;
+                color: #cbd5e1;
+                font-style: italic;
+                margin-bottom: 4px;
+                line-height: 1.2;
+            }
+            .luxury-meta-strip {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                margin-top: 5px;
+                padding-top: 5px;
+                border-top: 1px solid rgba(212, 175, 55, 0.3);
+                font-size: 0.75rem;
+                color: #d4af37;
+                width: 100%;
+                flex-wrap: wrap;
+            }
+            .luxury-doc-name { color: #fff; font-weight: 700; }
+            
+            .sheet-luxury .doc-title {
+                display: none;
+            }
+
+            /* Luxury Client Dossier */
+            .luxury-dossier {
+                border: 1px solid #d4af37;
+                box-shadow: 0 4px 20px rgba(212, 175, 55, 0.12);
+                padding: 1rem 1.4rem;
+                margin-bottom: 1rem;
+                background: #ffffff;
+            }
+            .luxury-dossier-inner {
+                display: flex; justify-content: space-between; align-items: center;
+                border-bottom: 1px solid #f1e6b8; padding-bottom: 10px; margin-bottom: 8px;
+            }
+            .luxury-dossier-col { flex: 1; }
+            .luxury-dossier-label {
+                font-family: 'Cinzel', serif; font-size: 0.7rem; color: #d4af37; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 3px;
+            }
+            .luxury-dossier-val { font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem; font-weight: 700; color: #0f172a; }
+            .luxury-dossier-sub { font-size: 0.82rem; color: #64748b; }
+            .luxury-dossier-seal { padding: 0 1.5rem; color: #d4af37; font-size: 1.3rem; }
+            .luxury-dossier-footer { font-size: 0.78rem; color: #64748b; text-align: center; }
+            
+            /* Luxury Equipment Card */
+            .luxury-eq-card {
+                border-radius: 4px !important;
+                border: 1px solid #e2e8f0 !important;
+                border-top: 3px solid #d4af37 !important;
+                box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+                background: #fff;
+                margin-bottom: 1rem;
+            }
+            .luxury-eq-top {
+                background: #f8fafc;
+                padding: 0.6rem 1.1rem;
+                display: flex; justify-content: space-between; align-items: center;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            .luxury-spec-num { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 1.5px; color: #0f172a; font-weight: 700; }
+            .luxury-badge { background: #d4af37 !important; color: #0f172a !important; font-weight: 800; font-size: 0.72rem; padding: 3px 8px; }
+            .luxury-eq-grid { display: flex; gap: 1.4rem; padding: 1.1rem; }
+            .luxury-img-frame {
+                width: 170px; height: 135px; flex: 0 0 170px;
+                border: 1px solid #d4af37; padding: 3px; background: #fff; position: relative;
+            }
+            .luxury-img-frame img { width: 100%; height: 100%; object-fit: contain; }
+            .luxury-eq-narrative { flex: 1; min-width: 0; }
+            .luxury-eq-narrative h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.25rem; margin: 0 0 3px; color: #0f172a; }
+            .luxury-part-tag { font-size: 0.74rem; color: #d4af37; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; }
+            .luxury-prose { font-size: 0.82rem; font-style: italic; color: #475569; margin: 0 0 8px; line-height: 1.4; }
+            .luxury-specs-list { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; margin-bottom: 8px; }
+            .luxury-spec-item { font-size: 0.8rem; color: #1e293b; }
+            .diamond { color: #d4af37; margin-right: 4px; font-size: 0.7rem; }
+            .luxury-warranty-strip {
+                background: #fdfbf7; border: 1px solid #f1e6b8; padding: 5px 10px; font-size: 0.8rem; color: #92400e;
+            }
+            
+            /* Luxury Investment Ledger */
+            .luxury-investment-ledger {
+                background: #0f172a;
+                color: #fff;
+                border: 1px solid #d4af37;
+                padding: 1.2rem 1.6rem;
+                margin-top: 0.75rem;
+            }
+            .luxury-ledger-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+            .luxury-ledger-tag { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #d4af37; letter-spacing: 1.5px; }
+            .luxury-concierge-pill { font-size: 0.72rem; color: #cbd5e1; }
+            .luxury-ledger-main { display: flex; justify-content: space-between; align-items: baseline; margin: 8px 0; }
+            .luxury-ledger-label { font-size: 1.05rem; font-family: 'Playfair Display', Georgia, serif; }
+            .luxury-ledger-val { font-size: 2.2rem; font-weight: 800; color: #d4af37; font-family: 'Playfair Display', Georgia, serif; }
+            .luxury-ledger-split {
+                border-top: 1px solid rgba(212, 175, 55, 0.3); padding-top: 6px;
+                display: flex; justify-content: center; gap: 14px; font-size: 0.78rem; color: #cbd5e1;
+            }
+            .card { border-radius: 4px; border: 1px solid #e2e8f0; border-top: 3px solid #d4af37; }
+            .card-header { background: #f8fafc; font-family: 'Playfair Display', Georgia, serif; color: #0f172a; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
+            
+
+/* ===== Print & Print-View Screen Adaptations ===== */
+body.view-print .doc-head,
+body.view-print .doc-head-industrial,
+body.view-print .doc-head-aqua,
+body.view-print .doc-head-eco,
+body.view-print .doc-head-luxury,
+body.view-print .doc-head-urban,
+body.view-print .doc-head-value,
+body.view-print .doc-head-hightech,
+body.view-print .doc-head-modular {
+    background: none !important;
+    color: var(--bs-body) !important;
+    margin: 0 0 .75rem 0 !important;
+    padding: 0 0 .6rem 0 !important;
+    border-radius: 0 !important;
+    border-bottom: 3px solid var(--brand) !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+body.view-print .doc-head::before,
+body.view-print .doc-head-industrial::before { display: none !important; }
+body.view-print .brand-name { color: var(--brand) !important; }
+body.view-print .brand-tag { color: var(--bs-muted) !important; }
+body.view-print .text-end { color: var(--bs-body) !important; }
+
+body.view-print .industrial-total-box,
+body.view-print .aqua-total-box,
+body.view-print .eco-investment-card,
+body.view-print .luxury-investment-ledger,
+body.view-print .urban-total-monolith,
+body.view-print .value-savings-card {
+    background: none !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+    box-shadow: none !important;
+}
+
+body.view-print .industrial-total-price,
+body.view-print .aqua-price-val,
+body.view-print .eco-net-total,
+body.view-print .luxury-ledger-val,
+body.view-print .urban-monolith-sum,
+body.view-print .v-total-amount {
+    color: #000 !important;
+}
+
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 12mm 14mm;
+    }
+
+    html, body {
+        background: #fff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        font-size: 14px !important;
+        line-height: 1.45 !important;
+        color: #0f172a !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .toolbar, .noprint, .btn {
+        display: none !important;
+    }
+
+    .page-wrapper {
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .sheet {
+        display: block !important;
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .table thead th, .badge, .totals .grand, .total-card, .box.on::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .doc-head, .doc-head-industrial, .doc-head-aqua, .doc-head-eco, .doc-head-luxury, .doc-head-urban, .doc-head-value, .doc-head-hightech, .doc-head-modular {
+        background: none !important;
+        color: #0f172a !important;
+        margin: 0 0 .75rem 0 !important;
+        padding: 0 0 .6rem 0 !important;
+        border-radius: 0 !important;
+        border-bottom: 2px solid var(--brand) !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+
+    .doc-head::before, .doc-head-industrial::before { display: none !important; }
+    .brand-name { color: var(--brand) !important; }
+    .brand-tag { color: #64748b !important; }
+    .text-end { color: #0f172a !important; }
+
+    .industrial-total-box, .aqua-total-box, .eco-investment-card, .luxury-investment-ledger, .urban-total-monolith, .value-savings-card {
+        background: none !important;
+        color: #000 !important;
+        border: 2px solid #000 !important;
+        box-shadow: none !important;
+    }
+
+    .industrial-total-price, .aqua-price-val, .eco-net-total, .luxury-ledger-val, .urban-monolith-sum, .v-total-amount {
+        color: #000 !important;
+    }
+
+    h1, h2, h3, h4, h5 {
+        break-after: avoid !important;
+        page-break-after: avoid !important;
+    }
+
+    .doc-head, .doc-foot, .eqrow, .total-card, .sig, .table tr, .photo, .alert,
+    .industrial-dispatch-ticket, .aqua-parties-banner, .eco-parties-card, .luxury-dossier, .urban-meta-grid,
+    .industrial-eq-card, .aqua-eq-card, .eco-eq-card, .luxury-eq-card, .urban-eq-card, .value-eq-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .eq, .industrial-eq-card, .aqua-eq-card, .eco-eq-card, .luxury-eq-card, .urban-eq-card, .value-eq-card {
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+        margin-bottom: .6rem !important;
+    }
+
+    .eq-details {
+        border-top: 1px solid #cbd5e1 !important;
+        padding: .4rem .8rem .5rem !important;
+        margin: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        background: none !important;
+    }
+
+    details, details[open], details > :not(summary) {
+        display: block !important;
+    }
+
+    details summary {
+        display: block !important;
+        list-style: none !important;
+    }
+
+    details summary::-webkit-details-marker, details summary::marker {
+        display: none !important;
+    }
+
+    .specs {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2.5px 24px !important;
+        width: 100% !important;
+    }
+
+    .specs .sp {
+        display: flex !important;
+        justify-content: space-between !important;
+        border-bottom: 1px solid #eef2f6 !important;
+        font-size: 13px !important;
+    }
+}
+
+/* ===== Brand Logo Styles ===== */
+.brand-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.doc-head-luxury .brand-title-wrap {
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 2px;
+}
+
+.doc-head-luxury .brand-logo {
+    width: 36px;
+    height: 36px;
+}

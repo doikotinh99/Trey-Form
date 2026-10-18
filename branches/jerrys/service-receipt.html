@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Field Service Receipt - Jerry's Heating & Cooling</title>
+    <!-- Standalone Form Stylesheet (classic layout & theme) -->
+    <link rel="stylesheet" href="css/service-receipt.css">
+    <!-- Shared Form UI Controller (No JS data population) -->
+    <script defer src="../../js/form.js"></script>
+</head>
+
+<body>
+    <!-- App Toolbar (Full-width, hidden on print) -->
+    <header class="toolbar noprint">
+        <div class="toolbar-inner">
+            <div class="toolbar-bar">
+                <div class="toolbar-left">
+                    <div class="toolbar-brand">
+                        <span class="toolbar-badge">HVAC</span>
+                        <span class="toolbar-title">Form Suite</span>
+                    </div>
+                    <select id="co" class="form-select" style="width:auto" aria-label="Company theme"></select>
+                    <label class="legend" style="cursor:pointer"><input type="checkbox" id="viewMode"> Print / PDF View</label>
+                    <label class="legend">
+                        <input type="checkbox" id="hl" checked> <i></i> Database field <span class="text-muted">(unmarked = static)</span>
+                    </label>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn btn-outline btn-sm" id="cp">Copy sample JSON</button>
+                    <button class="btn btn-outline btn-sm" id="pOne" title="Lưu ý khi in: Trong hộp thoại in (Ctrl+P) chọn Scale: 100% (Default)">Print this form</button>
+                </div>
+            </div>
+            <div class="nav-tabs" id="tabs" role="tablist">
+                <a href="estimate.html" role="tab">Estimate Form</a>
+                <a href="install-agreement.html" role="tab">New Installation Agreement</a>
+                <a href="install-receipt.html" role="tab">New Installation Receipt</a>
+                <a href="inspection.html" role="tab">Field Service/Inspection Report</a>
+                <a href="approval.html" role="tab">Field Service Estimate Approval</a>
+                <a href="service-receipt.html" role="tab" class="active">Field Service Receipt</a>
+                <a href="buyer-seller.html" role="tab">Buyer/Seller Report Form</a>
+                <a href="right-to-repair.html" role="tab">Right to Repair and Correct</a>
+                <a href="decline.html" role="tab">Decline to Service/Repair Report</a>
+                <a href="warranty.html" role="tab">Manufactures Warranties and Guidelines Documentation</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Sheet Container -->
+    <main class="page-wrapper">
+        <section class="sheet sheet-classic" id="s-service-receipt">
+            
+            <div class="doc-head">
+                <div>
+                    <div class="brand-title-wrap">
+                        <img src="../../assets/images/logos/jerrys.svg" alt="Logo" class="brand-logo" data-bind-src="company.logo">
+                        <div class="brand-name"><span class="bind" data-bind="company.name">Jerry's Heating & Cooling</span></div>
+                    </div>
+                    <div class="brand-tag"><span class="bind" data-bind="company.tagline">Residential comfort specialists · Serving Chicagoland</span></div>
+                </div>
+                <div class="text-end small">
+                    <span class="badge">Field Service Receipt</span>
+                    <div class="mt-3">No. <span class="bind" data-bind="doc.number">EST-0001</span><br>Date <span class="bind" data-bind="doc.date">October 13, 2026</span></div>
+                </div>
+            </div>
+            <h2 class="doc-title">Field Service Receipt</h2>
+
+            <!-- Form Body (Static HTML data, no JS injection) -->
+            <div class="row">
+                <div class="col-6">
+                    <div class="card"><div class="card-header">Bill to</div><div class="card-body"><div class="mb-2"><div class="form-label">Name</div><span class="bind" data-bind="customer.name">Marc Grasley</span></div><div class="mb-2"><div class="form-label">Phone</div><span class="bind" data-bind="customer.phone">815-483-1448</span></div><div class="mb-2"><div class="form-label">Email</div><span class="bind" data-bind="customer.email">MarcGrasley@iCloud.com</span></div></div></div>
+                </div>
+                <div class="col-6">
+                    <div class="card"><div class="card-header">Service address</div><div class="card-body"><div class="mb-2"><div class="form-label">Street</div><span class="bind" data-bind="customer.street">1104 Kingfisher Ct.</span></div><div class="mb-2"><div class="form-label">City, state, ZIP</div><span class="bind" data-bind="customer.city_state_zip">Joliet, IL 60431</span></div></div></div>
+                </div>
+            </div>
+            <h5 class="mt-3">Service performed</h5>
+            <table class="table"><thead><tr><th>Qty</th><th>Item name</th><th>SKU / model</th><th>Type</th><th>Description</th><th>Unit price</th><th>Line total</th></tr></thead><tbody><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Rheem furnace</span></td><td><span class="bind" data-bind="sku">R801T1005A21DZSNAS</span></td><td><span class="bind" data-bind="type">Furnace</span></td><td><span class="bind" data-bind="description">100,000 BTU single stage</span></td><td><span class="bind" data-bind="unit_price">$7,200.00</span></td><td><span class="bind" data-bind="line_total">$7,200.00</span></td></tr><tr><td><span class="bind" data-bind="qty">1</span></td><td><span class="bind" data-bind="name">Rheem air conditioner</span></td><td><span class="bind" data-bind="sku">RA13NY42AJ1NA</span></td><td><span class="bind" data-bind="type">AC</span></td><td><span class="bind" data-bind="description">3.5 ton single stage</span></td><td><span class="bind" data-bind="unit_price">$6,600.00</span></td><td><span class="bind" data-bind="line_total">$6,600.00</span></td></tr></tbody></table><div class="totals">
+            <div><span>Subtotal</span><span class="bind" data-bind="totals.subtotal">$13,800.00</span></div>
+            <div><span>Tax</span><span class="bind" data-bind="totals.tax">$0.00</span></div>
+            <div class="grand"><span>Total</span><span class="bind" data-bind="totals.total">$13,800.00</span></div>
+        </div>
+            <div class="row mt-3">
+                <div class="col-4"><div class="mb-2"><div class="form-label">Payment method</div><span class="bind" data-bind="totals.payment_method">Credit Card</span></div></div>
+                <div class="col-4"><div class="mb-2"><div class="form-label">Paid</div><span class="bind" data-bind="totals.paid">$6,900.00</span></div></div>
+                <div class="col-4"><div class="mb-2"><div class="form-label">Balance due</div><span class="bind" data-bind="totals.balance">$6,900.00</span></div></div>
+            </div>
+
+            <!-- Sheet Footer -->
+            <div class="doc-foot">
+                <span><span class="bind" data-bind="company.phone">815-791-7447</span> &middot; <span class="bind" data-bind="company.email">Trey.D@JerrysHeatingCooling.com</span></span>
+                <span><span class="bind" data-bind="company.web">www.jerrysheatingcooling.com</span> &middot; <span class="bind" data-bind="company.license">License # IL-HVAC-1988</span></span>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

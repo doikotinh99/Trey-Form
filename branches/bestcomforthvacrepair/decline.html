@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Decline to Service/Repair Report - Best Comfort HVAC New Lenox</title>
+    <!-- Standalone Form Stylesheet (heritage layout & theme) -->
+    <link rel="stylesheet" href="css/decline.css">
+    <!-- Shared Form UI Controller (No JS data population) -->
+    <script defer src="../../js/form.js"></script>
+</head>
+
+<body>
+    <!-- App Toolbar (Full-width, hidden on print) -->
+    <header class="toolbar noprint">
+        <div class="toolbar-inner">
+            <div class="toolbar-bar">
+                <div class="toolbar-left">
+                    <div class="toolbar-brand">
+                        <span class="toolbar-badge">HVAC</span>
+                        <span class="toolbar-title">Form Suite</span>
+                    </div>
+                    <select id="co" class="form-select" style="width:auto" aria-label="Company theme"></select>
+                    <label class="legend" style="cursor:pointer"><input type="checkbox" id="viewMode"> Print / PDF View</label>
+                    <label class="legend">
+                        <input type="checkbox" id="hl" checked> <i></i> Database field <span class="text-muted">(unmarked = static)</span>
+                    </label>
+                </div>
+                <div class="toolbar-right">
+                    <button class="btn btn-outline btn-sm" id="cp">Copy sample JSON</button>
+                    <button class="btn btn-outline btn-sm" id="pOne" title="Lưu ý khi in: Trong hộp thoại in (Ctrl+P) chọn Scale: 100% (Default)">Print this form</button>
+                </div>
+            </div>
+            <div class="nav-tabs" id="tabs" role="tablist">
+                <a href="estimate.html" role="tab">Estimate Form</a>
+                <a href="install-agreement.html" role="tab">New Installation Agreement</a>
+                <a href="install-receipt.html" role="tab">New Installation Receipt</a>
+                <a href="inspection.html" role="tab">Field Service/Inspection Report</a>
+                <a href="approval.html" role="tab">Field Service Estimate Approval</a>
+                <a href="service-receipt.html" role="tab">Field Service Receipt</a>
+                <a href="buyer-seller.html" role="tab">Buyer/Seller Report Form</a>
+                <a href="right-to-repair.html" role="tab">Right to Repair and Correct</a>
+                <a href="decline.html" role="tab" class="active">Decline to Service/Repair Report</a>
+                <a href="warranty.html" role="tab">Manufactures Warranties and Guidelines Documentation</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Sheet Container -->
+    <main class="page-wrapper">
+        <section class="sheet sheet-heritage" id="s-decline">
+            
+            <div class="doc-head">
+                <div>
+                    <div class="brand-title-wrap">
+                        <img src="../../assets/images/logos/bestcomforthvacrepair.svg" alt="Logo" class="brand-logo" data-bind-src="company.logo">
+                        <div class="brand-name"><span class="bind" data-bind="company.name">Best Comfort HVAC New Lenox</span></div>
+                    </div>
+                    <div class="brand-tag"><span class="bind" data-bind="company.tagline">Trusted Local Heating & Air Conditioning · New Lenox & Will County</span></div>
+                </div>
+                <div class="text-end small">
+                    <span class="badge">Decline to Service/Repair Report</span>
+                    <div class="mt-3">No. <span class="bind" data-bind="doc.number">NL-2026-440</span><br>Date <span class="bind" data-bind="doc.date">October 14, 2026</span></div>
+                </div>
+            </div>
+            <h2 class="doc-title">Decline to Service/Repair Report</h2>
+
+            <!-- Form Body (Static HTML data, no JS injection) -->
+            <div class="row">
+                <div class="col-6">
+                    <div class="card"><div class="card-header">Customer</div><div class="card-body"><div class="mb-2"><div class="form-label">Name</div><span class="bind" data-bind="customer.name">Thomas & Karen Anderson</span></div><div class="mb-2"><div class="form-label">Phone</div><span class="bind" data-bind="customer.phone">(815) 462-8820</span></div><div class="mb-2"><div class="form-label">Email</div><span class="bind" data-bind="customer.email">tanderson@newlenoxlaw.com</span></div></div></div>
+                </div>
+                <div class="col-6">
+                    <div class="card"><div class="card-header">Service address</div><div class="card-body"><div class="mb-2"><div class="form-label">Street</div><span class="bind" data-bind="customer.street">1420 Nelson Rd</span></div><div class="mb-2"><div class="form-label">City, state, ZIP</div><span class="bind" data-bind="customer.city_state_zip">New Lenox, IL 60451</span></div></div></div>
+                </div>
+            </div>
+            <h5 class="mt-3">Reason for declining</h5>
+            <div class="form-check"><span class="box" data-check="decline.reasons" data-value="diagnostic"></span><span>Customer declined diagnostic test</span></div>
+            <div class="form-check"><span class="box on" data-check="decline.reasons" data-value="quote"></span><span>Customer declined repair quote</span></div>
+            <div class="form-check"><span class="box" data-check="decline.reasons" data-value="unsafe"></span><span>Unsafe or impractical to repair (requires equipment replacement)</span></div>
+            <div class="form-check"><span class="box" data-check="decline.reasons" data-value="other"></span><span>Other</span></div>
+            <h5 class="mt-3">Notes</h5>
+            <div class="card">
+                <div class="card-body"><span class="bind" data-bind="decline.notes">Customer opted to evaluate complete high-efficiency replacement with Best Comfort HVAC New Lenox rather than investing in temporary repairs on obsolete equipment.</span></div>
+            </div>
+            <div class="row mt-3">
+        <div class="col-6">
+            <div class="sig" data-bind-src="signature.customer_image">
+                <img src="../../assets/images/signature.png" alt="Signature">
+            </div>
+            <div class="small text-muted">Customer signature</div>
+        </div>
+        <div class="col-6">
+            <div class="sig"><span class="bind" data-bind="signature.date">10/14/2026</span></div>
+            <div class="small text-muted">Date</div>
+        </div>
+    </div>
+
+            <!-- Sheet Footer -->
+            <div class="doc-foot">
+                <span><span class="bind" data-bind="company.phone">815-462-8820</span> &middot; <span class="bind" data-bind="company.email">service@bestcomforthvacrepair.com</span></span>
+                <span><span class="bind" data-bind="company.web">www.bestcomforthvacrepair.com</span> &middot; <span class="bind" data-bind="company.license">License # IL-NEWLENOX-7712</span></span>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
