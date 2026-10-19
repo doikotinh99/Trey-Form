@@ -1,0 +1,14 @@
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+
+# Storage directory for sent email copies & temporary pdfs
+storage/sent_emails/
+storage/temp/
+*.pdf
+
+# Node & Editor artifacts
+node_modules/
+.vscode/
+.idea/

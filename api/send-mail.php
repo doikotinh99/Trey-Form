@@ -30,20 +30,17 @@ if (!$data) {
     exit;
 }
 
-$to = filter_var(trim($data['to'] ?? ''), FILTER_SANITIZE_EMAIL);
+$defaultTo = $config['DEFAULT_TO'] ?? 'treydurden@gmail.com';
+$rawTo = trim($data['to'] ?? '');
+$to = !empty($rawTo) ? filter_var($rawTo, FILTER_SANITIZE_EMAIL) : $defaultTo;
+if (empty($to) || !filter_var($to, FILTER_VALIDATE_EMAIL)) {
+    $to = $defaultTo;
+}
+
 $subject = trim($data['subject'] ?? 'HVAC Document');
 $htmlContent = trim($data['html_content'] ?? '');
 $companyName = trim($data['company_name'] ?? ($config['FROM_NAME'] ?? 'HVAC Comfort Services'));
 $docNumber = trim($data['doc_number'] ?? '');
-
-// Kiểm tra tính hợp lệ
-if (empty($to) || !filter_var($to, FILTER_VALIDATE_EMAIL)) {
-    echo json_encode([
-        'success' => false,
-        'error' => 'Địa chỉ email người nhận (To) không hợp lệ: ' . htmlspecialchars($to)
-    ]);
-    exit;
-}
 
 if (empty($htmlContent)) {
     echo json_encode([
@@ -101,29 +98,47 @@ if (!$hasSmtpCreds) {
     exit;
 }
 
+// Kiểm tra file PDF đính kèm (nếu có)
+$pdfBase64 = $data['pdf_base64'] ?? '';
+$pdfName = trim($data['pdf_name'] ?? 'HVAC_Document.pdf');
+$pdfData = null;
+if (!empty($pdfBase64)) {
+    if (strpos($pdfBase64, 'base64,') !== false) {
+        $pdfBase64 = explode('base64,', $pdfBase64)[1];
+    }
+    $pdfData = base64_decode($pdfBase64);
+    if ($pdfData) {
+        $cleanPdfName = preg_replace('/[^a-zA-Z0-9_\-\.]/', '_', $pdfName);
+        file_put_contents($storageDir . "/{$timestamp}_{$cleanPdfName}", $pdfData);
+    }
+}
+
 // Nếu đã có thông tin SMTP, tiến hành gửi qua SMTP Socket
 try {
+    $cleanPassword = str_replace(' ', '', $smtp['PASSWORD']);
     $mailer = new SimpleSMTPClient(
         $smtp['HOST'] ?? 'smtp.gmail.com',
         intval($smtp['PORT'] ?? 587),
         $smtp['SECURE'] ?? 'tls',
-        $smtp['USERNAME'],
-        $smtp['PASSWORD'],
+        trim($smtp['USERNAME']),
+        $cleanPassword,
         intval($smtp['TIMEOUT'] ?? 15)
     );
 
     $fromEmail = !empty($config['FROM_EMAIL']) ? $config['FROM_EMAIL'] : $smtp['USERNAME'];
     $fromName = !empty($companyName) ? $companyName : ($config['FROM_NAME'] ?? 'HVAC Service');
 
-    $sent = $mailer->send($fromEmail, $fromName, $to, $subject, $emailWrapper);
+    $sent = $mailer->send($fromEmail, $fromName, $to, $subject, $emailWrapper, $pdfData, $pdfName);
 
     if ($sent) {
+        $attachMsg = $pdfData ? " kèm tệp PDF đính kèm ({$pdfName})" : "";
         echo json_encode([
             'success' => true,
             'mode' => 'smtp',
-            'message' => "Đã gửi email thành công đến {$to} qua SMTP!",
+            'message' => "Đã gửi email thành công đến {$to}{$attachMsg} qua SMTP!",
             'file' => $fileName,
             'preview_url' => $previewUrl,
+            'has_attachment' => !empty($pdfData),
             'to' => $to,
             'subject' => $subject
         ]);
@@ -184,7 +199,7 @@ class SimpleSMTPClient {
         return $resp;
     }
 
-    public function send($fromEmail, $fromName, $toEmail, $subject, $htmlBody) {
+    public function send($fromEmail, $fromName, $toEmail, $subject, $htmlBody, $attachmentData = null, $attachmentName = 'document.pdf') {
         $proto = ($this->secure === 'ssl') ? 'ssl://' : '';
         $this->socket = @stream_socket_client(
             $proto . $this->host . ':' . $this->port,
@@ -217,7 +232,9 @@ class SimpleSMTPClient {
         $this->sendCommand(base64_encode($this->password), 235);
 
         // MAIL FROM & RCPT TO
-        $this->sendCommand("MAIL FROM:<{$fromEmail}>", 250);
+        // Với Gmail SMTP: MAIL FROM bắt buộc phải là email tài khoản xác thực để không bị lỗi 553
+        $envelopeSender = !empty($this->username) ? $this->username : $fromEmail;
+        $this->sendCommand("MAIL FROM:<{$envelopeSender}>", 250);
         $this->sendCommand("RCPT TO:<{$toEmail}>", 250);
 
         // DATA
@@ -226,18 +243,54 @@ class SimpleSMTPClient {
         $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
         $encodedFromName = '=?UTF-8?B?' . base64_encode($fromName) . '?=';
 
-        $headers = [
-            "Date: " . date('r'),
-            "From: {$encodedFromName} <{$fromEmail}>",
-            "To: <{$toEmail}>",
-            "Subject: {$encodedSubject}",
-            "MIME-Version: 1.0",
-            "Content-Type: text/html; charset=UTF-8",
-            "Content-Transfer-Encoding: base64",
-            "X-Mailer: HVAC-Form-Suite-Mailer"
-        ];
+        if (!empty($attachmentData)) {
+            // Chuẩn MIME multipart/mixed khi có tệp đính kèm PDF
+            $boundary = "----=_NextPart_" . md5(uniqid(time()));
+            $headers = [
+                "Date: " . date('r'),
+                "From: {$encodedFromName} <{$envelopeSender}>",
+                "Reply-To: {$fromEmail}",
+                "To: <{$toEmail}>",
+                "Subject: {$encodedSubject}",
+                "MIME-Version: 1.0",
+                "Content-Type: multipart/mixed; boundary=\"{$boundary}\"",
+                "X-Mailer: HVAC-Form-Suite-Mailer"
+            ];
 
-        $payload = implode("\r\n", $headers) . "\r\n\r\n" . chunk_split(base64_encode($htmlBody));
+            $safeAttachName = preg_replace('/[^a-zA-Z0-9_\-\.]/', '_', $attachmentName);
+            if (empty($safeAttachName) || strtolower(substr($safeAttachName, -4)) !== '.pdf') {
+                $safeAttachName = (empty($safeAttachName) ? 'HVAC_Document' : $safeAttachName) . '.pdf';
+            }
+
+            $body = "--{$boundary}\r\n";
+            $body .= "Content-Type: text/html; charset=UTF-8\r\n";
+            $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
+            $body .= chunk_split(base64_encode($htmlBody)) . "\r\n";
+
+            $body .= "--{$boundary}\r\n";
+            $body .= "Content-Type: application/pdf; name=\"{$safeAttachName}\"\r\n";
+            $body .= "Content-Disposition: attachment; filename=\"{$safeAttachName}\"\r\n";
+            $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
+            $body .= chunk_split(base64_encode($attachmentData)) . "\r\n";
+            $body .= "--{$boundary}--\r\n";
+
+            $payload = implode("\r\n", $headers) . "\r\n\r\n" . $body;
+        } else {
+            // Định dạng HTML đơn giản khi không có đính kèm
+            $headers = [
+                "Date: " . date('r'),
+                "From: {$encodedFromName} <{$envelopeSender}>",
+                "Reply-To: {$fromEmail}",
+                "To: <{$toEmail}>",
+                "Subject: {$encodedSubject}",
+                "MIME-Version: 1.0",
+                "Content-Type: text/html; charset=UTF-8",
+                "Content-Transfer-Encoding: base64",
+                "X-Mailer: HVAC-Form-Suite-Mailer"
+            ];
+            $payload = implode("\r\n", $headers) . "\r\n\r\n" . chunk_split(base64_encode($htmlBody));
+        }
+
         fwrite($this->socket, $payload . "\r\n.\r\n");
         $dataResp = $this->readResponse();
         if (substr($dataResp, 0, 3) != 250) {

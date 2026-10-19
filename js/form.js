@@ -103,9 +103,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // 1. Database field highlight toggle (pure CSS class toggle, no data change)
     const hlCheckbox = document.getElementById("hl");
     if (hlCheckbox) {
-        document.body.classList.add("hl");
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get("hl") === "0") {
+        if (urlParams.get("hl") === "1" || urlParams.get("hl") === "true") {
+            hlCheckbox.checked = true;
+            document.body.classList.add("hl");
+        } else {
             hlCheckbox.checked = false;
             document.body.classList.remove("hl");
         }
@@ -243,439 +245,275 @@ function initEmailCopyFeature() {
 }
 
 /**
- * Chuyển đổi DOM của một .sheet thành Email-Safe Table HTML chuẩn 100% không bao giờ vỡ layout trên Gmail / Outlook
+ * Generates an executive summary HTML email (100% Pure English)
+ * Standard 600px email table layout, lightweight (~5 KB), 100% responsive across Gmail, Outlook, Apple Mail.
+ * Full official document is sent as a real attached PDF file.
  */
-function buildEmailSafeTableHtml(sheetEl) {
+function buildConciseEmailHtml(sheetEl) {
     if (!sheetEl) return "";
 
-    // 1. Đọc màu sắc thương hiệu thực tế từ CSS Variables
+    // 1. Brand identity from active theme CSS variables
     const computedSheet = window.getComputedStyle(sheetEl);
-    const brandColor = computedSheet.getPropertyValue("--brand").trim() || "#0b2545";
+    const brandColor = computedSheet.getPropertyValue("--brand").trim() || "#0f2d4a";
     const accentColor = computedSheet.getPropertyValue("--accent").trim() || "#c8102e";
     const bodyColor = "#1e293b";
     const mutedColor = "#64748b";
     const borderColor = "#e2e8f0";
     const lightBg = "#f8fafc";
 
-    // 2. Tạm thời mở toàn bộ details trên sheet gốc để đọc đầy đủ nội dung
-    const originalDetails = sheetEl.querySelectorAll("details");
-    const originalDetailsStates = [];
-    originalDetails.forEach(d => {
-        originalDetailsStates.push(d.open);
-        d.open = true;
-    });
+    // 2. Company Information
+    const companyName = sheetEl.querySelector('[data-bind="company.name"]')?.textContent.trim() || "HVAC Heating & Cooling Services";
+    const companyTagline = sheetEl.querySelector('[data-bind="company.tagline"]')?.textContent.trim() || "Premium Indoor Comfort & Water Heating Solutions";
+    const companyPhone = sheetEl.querySelector('[data-bind="company.phone"]')?.textContent.trim() || "";
+    const companyEmail = sheetEl.querySelector('[data-bind="company.email"]')?.textContent.trim() || "";
+    const companyWeb = sheetEl.querySelector('[data-bind="company.web"]')?.textContent.trim() || "";
+    const companyLicense = sheetEl.querySelector('[data-bind="company.license"]')?.textContent.trim() || "";
 
-    // 3. Clone toàn bộ .sheet
-    const clone = sheetEl.cloneNode(true);
+    // 3. Document Details
+    const docTitle = sheetEl.querySelector('.doc-title')?.textContent.trim() || sheetEl.querySelector('.badge')?.textContent.trim() || "HVAC Proposal & Estimate";
+    const docNumber = sheetEl.querySelector('[data-bind="doc.number"]')?.textContent.trim() || "REF-2026";
+    const docDate = sheetEl.querySelector('[data-bind="doc.date"]')?.textContent.trim() || new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
-    // Phục hồi lại trạng thái ban đầu cho giao diện chính
-    originalDetails.forEach((d, i) => {
-        d.open = originalDetailsStates[i];
-    });
+    // 4. Customer Information
+    const custName = sheetEl.querySelector('[data-bind="customer.name"]')?.textContent.trim() || "Valued Customer";
+    const custPhone = sheetEl.querySelector('[data-bind="customer.phone"]')?.textContent.trim() || "";
+    const custEmail = sheetEl.querySelector('[data-bind="customer.email"]')?.textContent.trim() || "";
+    const custStreet = sheetEl.querySelector('[data-bind="customer.street"]')?.textContent.trim() || sheetEl.querySelector('[data-bind="customer.address"]')?.textContent.trim() || "";
+    const custCityState = sheetEl.querySelector('[data-bind="customer.city_state_zip"]')?.textContent.trim() || "";
+    const custAddress = [custStreet, custCityState].filter(Boolean).join(", ");
 
-    // Loại bỏ các nút in hoặc phần tử UI chrome
-    clone.querySelectorAll(".noprint, #btnEmailPreview, .nav-tabs, script, style, select, button").forEach(el => el.remove());
+    // 5. Specialist / Technician
+    const techName = sheetEl.querySelector('[data-bind="tech.name"]')?.textContent.trim() || sheetEl.querySelector('[data-bind="lead_tech"]')?.textContent.trim() || sheetEl.querySelector('[data-bind="tech"]')?.textContent.trim() || "";
+    const techPhone = sheetEl.querySelector('[data-bind="tech.phone"]')?.textContent.trim() || companyPhone;
 
-    // 4. Rasterize hình ảnh sang Base64 PNG để Gmail hiển thị chuẩn xác cả khi gửi từ local
-    const origImgs = sheetEl.querySelectorAll("img");
-    const cloneImgs = clone.querySelectorAll("img");
-    for (let i = 0; i < origImgs.length; i++) {
-        const oImg = origImgs[i];
-        const cImg = cloneImgs[i];
-        if (!oImg || !cImg) continue;
-        try {
-            const w = oImg.naturalWidth || oImg.offsetWidth || 150;
-            const h = oImg.naturalHeight || oImg.offsetHeight || 50;
-            if (w > 0 && h > 0) {
-                const cv = document.createElement("canvas");
-                cv.width = w * 2;
-                cv.height = h * 2;
-                const ctx = cv.getContext("2d");
-                ctx.drawImage(oImg, 0, 0, cv.width, cv.height);
-                cImg.src = cv.toDataURL("image/png");
+    // 6. Proposed Equipment & Line Items (Deduplicated)
+    const items = [];
+    const seenItems = new Set();
+    
+    // Priority 1: Service / equipment table
+    const tableRows = sheetEl.querySelectorAll("table.table tbody tr");
+    if (tableRows.length > 0) {
+        tableRows.forEach(row => {
+            const name = row.querySelector('[data-bind="name"]')?.textContent.trim() || row.querySelector('[data-bind="equipment"]')?.textContent.trim() || row.children[1]?.textContent.trim();
+            const sku = row.querySelector('[data-bind="sku"]')?.textContent.trim() || row.querySelector('[data-bind="model"]')?.textContent.trim() || "";
+            const qty = row.querySelector('[data-bind="qty"]')?.textContent.trim() || "1";
+            const price = row.querySelector('[data-bind="line_total"]')?.textContent.trim() || row.querySelector('[data-bind="unit_price"]')?.textContent.trim() || "";
+            const key = (name + '|' + sku).toLowerCase();
+            if (name && !seenItems.has(key)) {
+                seenItems.add(key);
+                items.push({ name, sku, qty, price });
             }
-        } catch (e) {
-            cImg.src = oImg.src;
-        }
+        });
     }
 
-    // 5. Chuyển đổi checkbox sang biểu tượng Unicode [✓] / [ ] an toàn tuyệt đối cho mail
-    clone.querySelectorAll('input[type="checkbox"]').forEach(chk => {
-        const span = document.createElement("span");
-        if (chk.checked) {
-            span.innerHTML = "&#10003;";
-            span.setAttribute("style", `display:inline-block;width:15px;height:15px;line-height:15px;text-align:center;background-color:${brandColor};color:#ffffff;font-size:11px;font-weight:bold;border-radius:3px;margin-right:6px;vertical-align:middle;`);
-        } else {
-            span.setAttribute("style", `display:inline-block;width:15px;height:15px;border:1px solid #cbd5e1;background-color:#ffffff;border-radius:3px;margin-right:6px;vertical-align:middle;`);
-        }
-        chk.replaceWith(span);
-    });
-
-    // 6. Chuyển đổi toàn bộ <details> thành khối bảng mở sẵn (Gmail chặn tương tác thẻ details)
-    clone.querySelectorAll("details").forEach(det => {
-        const summary = det.querySelector("summary");
-        const title = summary ? summary.textContent.trim() : "Specifications";
-        if (summary) summary.remove();
-
-        const box = document.createElement("div");
-        box.setAttribute("style", `margin-top:10px;padding:10px 12px;background-color:${lightBg};border:1px solid ${borderColor};border-radius:4px;font-size:12px;`);
-        box.innerHTML = `<div style="font-weight:bold;color:${brandColor};margin-bottom:6px;text-transform:uppercase;font-size:11px;letter-spacing:0.3px;">${title}</div>` + det.innerHTML;
-        det.replaceWith(box);
-    });
-
-    // 7. Xử lý Header (.doc-head) thành Table 2 cột
-    const headEl = clone.querySelector(".doc-head");
-    let headHtml = "";
-    if (headEl) {
-        const leftPart = headEl.children[0] ? headEl.children[0].innerHTML : "";
-        const rightPart = headEl.children[1] ? headEl.children[1].innerHTML : "";
-        headHtml = `
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:${brandColor};color:#ffffff;border-radius:6px 6px 0 0;border-collapse:collapse;">
-            <tr>
-                <td width="60%" valign="top" style="padding:20px 24px;">
-                    ${leftPart}
-                </td>
-                <td width="40%" valign="top" align="right" style="padding:20px 24px;text-align:right;">
-                    ${rightPart}
-                </td>
-            </tr>
-        </table>`;
-        headEl.remove();
-    }
-
-    // 8. Xử lý Tiêu đề chứng từ (.doc-title)
-    const titleEl = clone.querySelector(".doc-title");
-    let docTitleHtml = "";
-    if (titleEl) {
-        docTitleHtml = `
-        <div style="padding:16px 24px 8px 24px;">
-            <h2 style="margin:0;font-size:20px;font-weight:bold;color:${brandColor};border-bottom:2px solid ${borderColor};padding-bottom:8px;">${titleEl.textContent.trim()}</h2>
-        </div>`;
-        titleEl.remove();
-    }
-
-    // 9. Xử lý Footer (.doc-foot) thành Table Chân trang
-    const footEl = clone.querySelector(".doc-foot");
-    let footHtml = "";
-    if (footEl) {
-        footHtml = `
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top:20px;border-top:1px solid ${borderColor};background-color:${lightBg};border-radius:0 0 6px 6px;border-collapse:collapse;">
-            <tr>
-                <td style="padding:14px 24px;font-size:11.5px;color:${mutedColor};text-align:center;line-height:1.6;">
-                    ${footEl.innerHTML}
-                </td>
-            </tr>
-        </table>`;
-        footEl.remove();
-    }
-
-    // 10. Chuyển đổi mọi .row thành Table tương ứng (chống tụt hàng trên Gmail)
-    clone.querySelectorAll(".row").forEach(row => {
-        const cols = Array.from(row.children).filter(c => c.nodeType === 1);
-        if (cols.length === 0) return;
-
-        const table = document.createElement("table");
-        table.setAttribute("role", "presentation");
-        table.setAttribute("border", "0");
-        table.setAttribute("cellpadding", "0");
-        table.setAttribute("cellspacing", "0");
-        table.setAttribute("width", "100%");
-        table.setAttribute("style", "margin-top:10px;margin-bottom:10px;border-collapse:collapse;width:100%;");
-
-        const tr = document.createElement("tr");
-
-        if (cols.length === 2) {
-            // 2 Cột song song: 48% - 4% khoảng cách - 48%
-            const td1 = document.createElement("td");
-            td1.setAttribute("width", "48%");
-            td1.setAttribute("valign", "top");
-            td1.setAttribute("style", "width:48%;vertical-align:top;");
-            td1.appendChild(cols[0]);
-
-            const tdSpacer = document.createElement("td");
-            tdSpacer.setAttribute("width", "4%");
-            tdSpacer.innerHTML = "&nbsp;";
-
-            const td2 = document.createElement("td");
-            td2.setAttribute("width", "48%");
-            td2.setAttribute("valign", "top");
-            td2.setAttribute("style", "width:48%;vertical-align:top;");
-            td2.appendChild(cols[1]);
-
-            tr.appendChild(td1);
-            tr.appendChild(tdSpacer);
-            tr.appendChild(td2);
-        } else if (cols.length === 3) {
-            // 3 Cột song song: 31% - 3.5% - 31% - 3.5% - 31%
-            for (let c = 0; c < 3; c++) {
-                const td = document.createElement("td");
-                td.setAttribute("width", "31%");
-                td.setAttribute("valign", "top");
-                td.setAttribute("style", "width:31%;vertical-align:top;");
-                td.appendChild(cols[c]);
-                tr.appendChild(td);
-
-                if (c < 2) {
-                    const sp = document.createElement("td");
-                    sp.setAttribute("width", "3.5%");
-                    sp.innerHTML = "&nbsp;";
-                    tr.appendChild(sp);
-                }
+    // Priority 2: Equipment cards / Aqua cards / EqRows (Direct cards only, avoiding duplicate child rows)
+    if (items.length === 0) {
+        const eqCards = sheetEl.querySelectorAll(".eqlist > .card, .eqlist > .eq, .eqlist > .aqua-eq-card, .aqua-eq-card, .luxury-eq-card, .value-eq-card, .eco-eq-card, .urban-eq-card, .industrial-eq-card");
+        const cardsToProcess = eqCards.length > 0 ? eqCards : sheetEl.querySelectorAll(".eqlist .card, .eqrow");
+        cardsToProcess.forEach(c => {
+            const name = c.querySelector("h3, h4, h5, [data-bind='name']")?.textContent.trim();
+            const part = c.querySelector('[data-bind="part"]')?.textContent.trim() || c.querySelector('[data-bind="model"]')?.textContent.trim() || c.querySelector(".aqua-part-no")?.textContent.trim().replace(/^Factory SKU:\s*/i, "") || "";
+            const warranty = c.querySelector('[data-bind="warranty"]')?.textContent.trim() || "";
+            const key = (name + '|' + part).toLowerCase();
+            if (name && !seenItems.has(key)) {
+                seenItems.add(key);
+                items.push({ name, sku: part, qty: "1", price: warranty ? "Warranty Covered" : "" });
             }
-        } else {
-            // 1 cột hoặc nhiều hơn 3 cột
-            const colWidth = Math.floor(100 / cols.length) + "%";
-            cols.forEach(c => {
-                const td = document.createElement("td");
-                td.setAttribute("width", colWidth);
-                td.setAttribute("valign", "top");
-                td.setAttribute("style", `width:${colWidth};vertical-align:top;`);
-                td.appendChild(c);
-                tr.appendChild(td);
-            });
-        }
+        });
+    }
 
-        table.appendChild(tr);
-        row.replaceWith(table);
-    });
+    // 7. Investment Totals & Financing
+    const grandTotal = sheetEl.querySelector('[data-bind="totals.total"]')?.textContent.trim() 
+        || sheetEl.querySelector('[data-bind="totals.grand"]')?.textContent.trim()
+        || sheetEl.querySelector('.total-card .amount')?.textContent.trim()
+        || sheetEl.querySelector('.totals .grand span:last-child')?.textContent.trim()
+        || "";
 
-    // 11. Chuyển đổi mọi .card thành Card Table chuẩn Email
-    clone.querySelectorAll(".card").forEach(card => {
-        card.setAttribute("style", `background-color:#ffffff;border:1px solid ${borderColor};border-radius:6px;overflow:hidden;margin-bottom:12px;font-size:13px;color:${bodyColor};`);
+    const deposit = sheetEl.querySelector('[data-bind="totals.deposit"]')?.textContent.trim()
+        || sheetEl.querySelector('[data-bind="totals.paid"]')?.textContent.trim()
+        || "";
 
-        const header = card.querySelector(".card-header");
-        if (header) {
-            header.setAttribute("style", `background-color:${lightBg};border-bottom:1px solid ${borderColor};padding:8px 14px;font-weight:bold;font-size:12.5px;color:${brandColor};text-transform:uppercase;letter-spacing:0.3px;`);
-        }
+    const balance = sheetEl.querySelector('[data-bind="totals.balance"]')?.textContent.trim() || "";
 
-        const body = card.querySelector(".card-body");
-        if (body) {
-            body.setAttribute("style", `padding:12px 14px;line-height:1.5;font-size:13px;`);
-        }
-    });
+    const monthlyFinance = sheetEl.querySelector('[data-bind="financing[].monthly"]')?.textContent.trim() || "";
+    const financePlan = sheetEl.querySelector('[data-bind="financing[].plan"]')?.textContent.trim() || "";
+    const financeTerm = sheetEl.querySelector('[data-bind="financing[].term"]')?.textContent.trim() || "";
 
-    // 12. Chuyển đổi .eqrow (Equipment Row) thành Table 2 cột: Ảnh bên trái, Chi tiết bên phải
-    clone.querySelectorAll(".eqrow").forEach(eqrow => {
-        const imgDiv = eqrow.querySelector(".img");
-        const bodyDiv = eqrow.querySelector(".eqbody");
-        if (imgDiv && bodyDiv) {
-            const table = document.createElement("table");
-            table.setAttribute("role", "presentation");
-            table.setAttribute("border", "0");
-            table.setAttribute("cellpadding", "0");
-            table.setAttribute("cellspacing", "0");
-            table.setAttribute("width", "100%");
-            table.setAttribute("style", "border-collapse:collapse;width:100%;");
-
-            const tr = document.createElement("tr");
-
-            const tdImg = document.createElement("td");
-            tdImg.setAttribute("width", "120");
-            tdImg.setAttribute("valign", "top");
-            tdImg.setAttribute("align", "center");
-            tdImg.setAttribute("style", "width:120px;padding-right:14px;vertical-align:top;text-align:center;");
-
-            const img = imgDiv.querySelector("img");
-            if (img) {
-                img.setAttribute("style", "display:block;width:110px;max-width:110px;height:auto;border-radius:4px;border:1px solid #e2e8f0;");
-                tdImg.appendChild(img);
-            }
-
-            const tdBody = document.createElement("td");
-            tdBody.setAttribute("valign", "top");
-            tdBody.setAttribute("style", "vertical-align:top;font-size:13px;line-height:1.5;");
-            tdBody.appendChild(bodyDiv);
-
-            tr.appendChild(tdImg);
-            tr.appendChild(tdBody);
-            table.appendChild(tr);
-            eqrow.replaceWith(table);
-        }
-    });
-
-    // 13. Chuyển đổi .kspecs thành Table thông số 4 ô cân đối
-    clone.querySelectorAll(".kspecs").forEach(kspecs => {
-        const items = Array.from(kspecs.children);
-        if (items.length > 0) {
-            const table = document.createElement("table");
-            table.setAttribute("role", "presentation");
-            table.setAttribute("border", "0");
-            table.setAttribute("cellpadding", "6");
-            table.setAttribute("cellspacing", "0");
-            table.setAttribute("width", "100%");
-            table.setAttribute("style", `background-color:${lightBg};border:1px solid ${borderColor};border-radius:4px;margin:8px 0;font-size:12px;border-collapse:collapse;width:100%;`);
-
-            const tr = document.createElement("tr");
-            const w = Math.floor(100 / items.length) + "%";
-            items.forEach((it, idx) => {
-                const td = document.createElement("td");
-                td.setAttribute("width", w);
-                td.setAttribute("valign", "top");
-                td.setAttribute("style", `vertical-align:top;padding:6px 8px;${idx < items.length - 1 ? 'border-right:1px solid #e2e8f0;' : ''}`);
-                td.innerHTML = it.innerHTML;
-                tr.appendChild(td);
-            });
-            table.appendChild(tr);
-            kspecs.replaceWith(table);
-        }
-    });
-
-    // 14. Chuyển đổi .specs (Spec pairs) thành Table thông số kỹ thuật chi tiết
-    clone.querySelectorAll(".specs").forEach(specs => {
-        const spItems = Array.from(specs.querySelectorAll(".sp"));
-        if (spItems.length > 0) {
-            const table = document.createElement("table");
-            table.setAttribute("role", "presentation");
-            table.setAttribute("border", "0");
-            table.setAttribute("cellpadding", "4");
-            table.setAttribute("cellspacing", "0");
-            table.setAttribute("width", "100%");
-            table.setAttribute("style", "font-size:12px;margin-top:6px;border-collapse:collapse;width:100%;");
-
-            spItems.forEach(sp => {
-                const spans = sp.querySelectorAll("span");
-                const tr = document.createElement("tr");
-                tr.setAttribute("style", "border-bottom:1px solid #f1f5f9;");
-
-                const td1 = document.createElement("td");
-                td1.setAttribute("width", "35%");
-                td1.setAttribute("style", `color:${mutedColor};padding:4px 6px;font-weight:600;`);
-                td1.innerHTML = spans[0] ? spans[0].innerHTML : "";
-
-                const td2 = document.createElement("td");
-                td2.setAttribute("width", "65%");
-                td2.setAttribute("style", "color:#0f172a;padding:4px 6px;");
-                td2.innerHTML = spans[1] ? spans[1].innerHTML : "";
-
-                tr.appendChild(td1);
-                tr.appendChild(td2);
-                table.appendChild(tr);
-            });
-            specs.replaceWith(table);
-        }
-    });
-
-    // 15. Chuyển đổi .total-card (Khối tổng thanh toán)
-    clone.querySelectorAll(".total-card").forEach(tc => {
-        const spans = tc.querySelectorAll("span");
-        const lbl = spans[0] ? spans[0].textContent.trim() : "Total";
-        const val = spans[1] ? spans[1].textContent.trim() : "";
-
-        const table = document.createElement("table");
-        table.setAttribute("role", "presentation");
-        table.setAttribute("border", "0");
-        table.setAttribute("cellpadding", "0");
-        table.setAttribute("cellspacing", "0");
-        table.setAttribute("width", "100%");
-        table.setAttribute("style", `background-color:${lightBg};border:2px solid ${brandColor};border-radius:6px;margin:14px 0;border-collapse:collapse;width:100%;`);
-        table.innerHTML = `
-        <tr>
-            <td style="padding:14px 20px;font-size:15px;font-weight:bold;color:${brandColor};">
-                ${lbl}
-            </td>
-            <td align="right" style="padding:14px 20px;font-size:24px;font-weight:bold;color:${accentColor};text-align:right;">
-                ${val}
-            </td>
-        </tr>`;
-        tc.replaceWith(table);
-    });
-
-    // 16. Chuyển đổi .sig (Khung chữ ký)
-    clone.querySelectorAll(".sig").forEach(sig => {
-        sig.setAttribute("style", `border-bottom:2px solid #cbd5e1;padding:8px 0;margin-bottom:4px;min-height:36px;`);
-        const img = sig.querySelector("img");
-        if (img) {
-            img.setAttribute("style", "max-height:48px;width:auto;display:block;");
-        }
-    });
-
-    // 17. Chuyển đổi Table dữ liệu (table.table)
-    clone.querySelectorAll("table.table").forEach(tbl => {
-        tbl.setAttribute("width", "100%");
-        tbl.setAttribute("cellpadding", "8");
-        tbl.setAttribute("cellspacing", "0");
-        tbl.setAttribute("border", "0");
-        tbl.setAttribute("style", `width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px;border:1px solid ${borderColor};`);
-
-        tbl.querySelectorAll("th").forEach(th => {
-            th.setAttribute("style", `background-color:${brandColor};color:#ffffff;font-weight:bold;text-align:left;padding:8px 10px;font-size:12px;border:1px solid ${brandColor};`);
+    // 8. Build Equipment Table HTML (Concise 2-Column Responsive Layout)
+    let itemsTableHtml = "";
+    if (items.length > 0) {
+        let rowsHtml = "";
+        items.forEach((it, idx) => {
+            rowsHtml += `
+            <tr style="border-bottom:1px solid #f1f5f9; background-color:${idx % 2 === 0 ? '#ffffff' : '#f8fafc'};">
+                <td style="padding:9px 12px; font-size:13px; color:#0f172a; font-weight:600; line-height:1.35;">
+                    ${it.name}
+                    ${it.sku ? `<div style="font-size:11.5px; color:#64748b; font-weight:normal; margin-top:2px;">Model: <b>${it.sku}</b> ${it.qty && it.qty !== '1' ? `&bull; Qty: <b>${it.qty}</b>` : ''}</div>` : ''}
+                </td>
+                <td align="right" style="padding:9px 12px; font-size:12.5px; color:#0f172a; font-weight:600; text-align:right; white-space:nowrap; vertical-align:top;">
+                    ${it.price || (it.warranty ? 'Warranty Covered' : '')}
+                </td>
+            </tr>`;
         });
 
-        tbl.querySelectorAll("td").forEach(td => {
-            td.setAttribute("style", `padding:8px 10px;border:1px solid ${borderColor};color:${bodyColor};font-size:12px;`);
-        });
-    });
+        itemsTableHtml = `
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse; margin:10px 0 14px 0; border:1px solid ${borderColor}; border-radius:6px; overflow:hidden;">
+            <thead>
+                <tr style="background-color:${lightBg}; border-bottom:1.5px solid ${borderColor};">
+                    <th align="left" style="padding:8px 12px; font-size:11px; font-weight:bold; color:${brandColor}; text-transform:uppercase; letter-spacing:0.5px;">Proposed System &amp; Equipment</th>
+                    <th align="right" style="padding:8px 12px; font-size:11px; font-weight:bold; color:${brandColor}; text-transform:uppercase; text-align:right; white-space:nowrap;">Coverage / Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${rowsHtml}
+            </tbody>
+        </table>`;
+    }
 
-    // 18. Áp inline style cho Alert, Badge, Form-label, Headers
-    clone.querySelectorAll(".alert").forEach(al => {
-        al.setAttribute("style", `background-color:${lightBg};border:1px solid ${borderColor};border-left:4px solid ${brandColor};border-radius:4px;padding:10px 14px;font-size:12px;line-height:1.5;color:${bodyColor};margin:10px 0;`);
-    });
+    // Investment summary block (100% English)
+    let totalBlockHtml = "";
+    if (grandTotal) {
+        totalBlockHtml = `
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#ffffff; border:2px solid ${brandColor}; border-radius:8px; margin:14px 0; border-collapse:collapse;">
+            <tr>
+                <td style="padding:12px 16px; vertical-align:middle;">
+                    <div style="font-size:11px; font-weight:bold; color:${mutedColor}; text-transform:uppercase; letter-spacing:0.5px;">Total Proposal Investment</div>
+                    <div style="font-size:24px; font-weight:bold; color:${brandColor}; line-height:1.2; margin-top:2px;">${grandTotal}</div>
+                    ${deposit ? `<div style="font-size:12px; color:#475569; margin-top:3px;">Deposit to Schedule: <b style="color:#0f172a;">${deposit}</b> ${balance ? `&bull; Balance: <b style="color:#0f172a;">${balance}</b>` : ''}</div>` : ''}
+                </td>
+                ${monthlyFinance ? `
+                <td align="right" style="padding:12px 16px; vertical-align:middle; text-align:right; border-left:1px dashed ${borderColor}; background-color:${lightBg};">
+                    <div style="font-size:11px; font-weight:bold; color:${accentColor}; text-transform:uppercase;">Financing</div>
+                    <div style="font-size:18px; font-weight:bold; color:${accentColor}; margin-top:2px;">${monthlyFinance} <span style="font-size:11px; font-weight:normal; color:#64748b;">/ mo</span></div>
+                    <div style="font-size:11px; color:#64748b; margin-top:2px;">${financePlan ? financePlan + ' &bull; ' : ''}${financeTerm || ''}</div>
+                </td>` : ''}
+            </tr>
+        </table>`;
+    }
 
-    clone.querySelectorAll(".badge").forEach(bg => {
-        bg.setAttribute("style", `display:inline-block;background-color:${accentColor};color:#ffffff;font-size:11px;font-weight:bold;padding:3px 8px;border-radius:4px;text-transform:uppercase;`);
-    });
-
-    clone.querySelectorAll(".form-label").forEach(fl => {
-        fl.setAttribute("style", `font-size:11px;font-weight:bold;color:${mutedColor};text-transform:uppercase;margin-bottom:2px;letter-spacing:0.3px;`);
-    });
-
-    clone.querySelectorAll("h1, h2, h3, h4, h5").forEach(h => {
-        h.setAttribute("style", `color:${brandColor};font-size:15px;font-weight:bold;margin:14px 0 6px 0;font-family:Arial,Helvetica,sans-serif;`);
-    });
-
-    clone.querySelectorAll(".photo.has img").forEach(pImg => {
-        pImg.setAttribute("style", "display:block;width:100%;max-width:200px;height:auto;border-radius:4px;border:1px solid #e2e8f0;");
-    });
-
-    clone.querySelectorAll(".brand-logo").forEach(bl => {
-        bl.setAttribute("style", "display:block;max-width:160px;height:auto;margin-bottom:6px;border:0;");
-    });
-    clone.querySelectorAll(".brand-name").forEach(bn => {
-        bn.setAttribute("style", "font-size:20px;font-weight:bold;color:#ffffff;letter-spacing:0.3px;line-height:1.2;");
-    });
-    clone.querySelectorAll(".brand-tag").forEach(bt => {
-        bt.setAttribute("style", "font-size:12px;color:#cbd5e1;margin-top:4px;");
-    });
-
-    const bodyContent = clone.innerHTML;
-
-    // 19. Lắp ráp hoàn chỉnh vào Khung Table Email Chuẩn Quốc Tế (Chống vỡ layout 100%)
     return `
-<!-- Email Container (Full width outer, fixed max-width inner table) -->
-<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f1f5f9;margin:0;padding:20px 10px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:${bodyColor};line-height:1.5;">
+<!-- Outer Email Wrapper (600px Responsive Container) -->
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f1f5f9; margin:0; padding:16px 8px; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:${bodyColor}; line-height:1.5;">
     <tr>
         <td align="center" valign="top">
-            <!-- Center Card Table -->
-            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:720px;background-color:#ffffff;border:1px solid #cbd5e1;border-radius:8px;overflow:hidden;box-shadow:0 4px 6px -1px rgba(0,0,0,0.08);border-collapse:collapse;">
-                <!-- Header -->
-                ${headHtml ? `<tr><td>${headHtml}</td></tr>` : ''}
-                <!-- Document Title -->
-                ${docTitleHtml ? `<tr><td>${docTitleHtml}</td></tr>` : ''}
-                <!-- Main Body -->
+            <!-- Main Content Card (Max 600px - Standard Email Fidelity) -->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; background-color:#ffffff; border:1px solid #cbd5e1; border-radius:10px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.06); border-collapse:collapse;">
+                
+                <!-- 1. Header Banner (Single-column stacked, full-width) -->
                 <tr>
-                    <td style="padding:16px 24px 20px 24px;">
-                        ${bodyContent}
+                    <td align="center" style="background-color:${brandColor}; padding:20px 22px; color:#ffffff; text-align:center;">
+                        <div style="font-size:20px; font-weight:bold; color:#ffffff; line-height:1.25; letter-spacing:0.3px;">${companyName}</div>
+                        ${companyTagline ? `<div style="font-size:12px; color:#cbd5e1; margin-top:4px; line-height:1.35;">${companyTagline}</div>` : ''}
+                        <div style="margin-top:10px;">
+                            <span style="display:inline-block; background-color:rgba(255,255,255,0.18); padding:3px 10px; border-radius:4px; font-size:11px; font-weight:bold; color:#ffffff; letter-spacing:0.5px; white-space:nowrap;">
+                                REF: ${docNumber}
+                            </span>
+                            <span style="display:inline-block; font-size:11.5px; color:#cbd5e1; margin-left:8px; white-space:nowrap; vertical-align:middle;">
+                                ${docDate}
+                            </span>
+                        </div>
                     </td>
                 </tr>
-                <!-- Footer -->
-                ${footHtml ? `<tr><td>${footHtml}</td></tr>` : ''}
-            </table>
-            <!-- Email signature disclaimer -->
-            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:720px;margin-top:12px;border-collapse:collapse;">
+
+                <!-- 2. Greeting & Concise Intro Note -->
                 <tr>
-                    <td align="center" style="font-size:11px;color:#94a3b8;padding:8px 0;">
-                        This document was generated automatically by HVAC Form Suite. Please do not reply directly to this automated email.
+                    <td style="padding:18px 22px 8px 22px;">
+                        <div style="font-size:15px; font-weight:bold; color:#0f172a; margin-bottom:5px;">
+                            Dear ${custName},
+                        </div>
+                        <div style="font-size:13px; color:#334155; line-height:1.5;">
+                            Thank you for choosing <b>${companyName}</b>. Below is your proposal summary. Complete technical specifications, warranty terms, and agreement are in the attached PDF document.
+                        </div>
                     </td>
                 </tr>
+
+                <!-- 3. Key Parties & Location Ribbon (Full-Width, Unbroken Phone/Address) -->
+                <tr>
+                    <td style="padding:6px 22px 10px 22px;">
+                        <div style="background-color:${lightBg}; border:1px solid ${borderColor}; border-radius:8px; overflow:hidden;">
+                            <div style="padding:8px 12px; border-bottom:1px solid ${borderColor}; font-size:12.5px; color:#0f172a; line-height:1.45;">
+                                <span style="font-size:11px; font-weight:bold; color:${mutedColor}; text-transform:uppercase; margin-right:6px;">Customer:</span>
+                                <b>${custName}</b>
+                                ${custPhone ? `<span style="color:#475569; margin-left:6px; white-space:nowrap;">&bull; ${custPhone}</span>` : ''}
+                            </div>
+                            ${custAddress ? `
+                            <div style="padding:8px 12px; border-bottom:1px solid ${borderColor}; font-size:12.5px; color:#334155; line-height:1.45;">
+                                <span style="font-size:11px; font-weight:bold; color:${mutedColor}; text-transform:uppercase; margin-right:6px;">Address:</span>
+                                ${custAddress}
+                            </div>` : ''}
+                            <div style="padding:8px 12px; font-size:12.5px; color:#334155; line-height:1.45;">
+                                <span style="font-size:11px; font-weight:bold; color:${mutedColor}; text-transform:uppercase; margin-right:6px;">Specialist:</span>
+                                <b style="color:#0f172a;">${techName || companyName}</b>
+                                ${techPhone ? `<span style="color:#475569; margin-left:6px; white-space:nowrap;">&bull; ${techPhone}</span>` : ''}
+                                <span style="color:${brandColor}; font-weight:600; margin-left:6px; white-space:nowrap;">&bull; ${docTitle}</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- 4. System & Equipment Table (Short & Clean) -->
+                ${itemsTableHtml ? `
+                <tr>
+                    <td style="padding:0 22px;">
+                        ${itemsTableHtml}
+                    </td>
+                </tr>` : ''}
+
+                <!-- 5. Total Investment Highlight Card -->
+                ${totalBlockHtml ? `
+                <tr>
+                    <td style="padding:0 22px;">
+                        ${totalBlockHtml}
+                    </td>
+                </tr>` : ''}
+
+                <!-- 6. Support & Next Steps -->
+                <tr>
+                    <td style="padding:6px 22px 18px 22px; font-size:12.5px; color:#475569; line-height:1.5;">
+                        Questions or ready to schedule? Call us directly at <b>${companyPhone || techPhone || 'our service line'}</b> or reply directly to this email.
+                        <div style="margin-top:10px; font-size:13px; font-weight:bold; color:${brandColor};">
+                            ${companyName} Team
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- 7. Footer Contacts & License -->
+                <tr>
+                    <td style="background-color:${lightBg}; border-top:1px solid ${borderColor}; padding:12px 22px; font-size:11px; color:${mutedColor}; text-align:center; line-height:1.5;">
+                        <div>
+                            ${companyPhone ? `<span>Hotline: <b>${companyPhone}</b></span>` : ''}
+                            ${companyEmail ? `<span style="margin:0 6px;">&bull;</span><span>${companyEmail}</span>` : ''}
+                            ${companyWeb ? `<span style="margin:0 6px;">&bull;</span><span>${companyWeb}</span>` : ''}
+                        </div>
+                        ${companyLicense ? `<div style="margin-top:2px;">${companyLicense}</div>` : ''}
+                        <div style="margin-top:4px; font-size:10px; color:#94a3b8;">
+                            &copy; ${new Date().getFullYear()} ${companyName}. Official estimate notification.
+                        </div>
+                    </td>
+                </tr>
+
             </table>
         </td>
     </tr>
-</table>
-`.trim();
+</table>`.trim();
 }
 
 /**
- * Khởi tạo Modal Xem trước & Gửi mail tự động
+ * Tương thích ngược: gán buildEmailSafeTableHtml trỏ đến buildConciseEmailHtml
+ */
+function buildEmailSafeTableHtml(sheetEl) {
+    return buildConciseEmailHtml(sheetEl);
+}
+
+/**
+ * Tương thích ngược: gán buildEmailSafeTableHtml trỏ đến buildConciseEmailHtml
+ */
+function buildEmailSafeTableHtml(sheetEl) {
+    return buildConciseEmailHtml(sheetEl);
+}
+
+/**
+ * Khởi tạo Modal Gửi mail tóm tắt & Đính kèm PDF
  */
 function openEmailPreviewModal() {
     let modalOverlay = document.getElementById("emailPreviewModalOverlay");
@@ -720,7 +558,7 @@ function openEmailPreviewModal() {
                     transform: translateY(0);
                 }
                 .email-modal-head {
-                    padding: 16px 20px;
+                    padding: 14px 20px;
                     border-bottom: 1px solid #e2e8f0;
                     display: flex;
                     justify-content: space-between;
@@ -772,12 +610,13 @@ function openEmailPreviewModal() {
                     display: flex;
                     align-items: center;
                     font-size: 0.85rem;
-                    padding: 6px 0;
+                    padding: 5px 0;
                 }
                 .gmail-field .lbl {
-                    width: 70px;
+                    width: 95px;
                     color: #64748b;
                     font-weight: 600;
+                    flex-shrink: 0;
                 }
                 .gmail-input {
                     flex: 1;
@@ -796,7 +635,7 @@ function openEmailPreviewModal() {
                 }
                 .email-preview-scroll {
                     background: #334155;
-                    padding: 20px;
+                    padding: 16px;
                     border-radius: 8px;
                     overflow-x: auto;
                     display: flex;
@@ -818,6 +657,7 @@ function openEmailPreviewModal() {
                     display: flex;
                     align-items: center;
                     gap: 6px;
+                    max-width: 50%;
                 }
                 .btn-gmail-primary {
                     background: #2563eb;
@@ -857,16 +697,64 @@ function openEmailPreviewModal() {
                     background: #ffffff;
                     color: #475569;
                     border: 1px solid #cbd5e1;
-                    padding: 8px 12px;
-                    font-size: 0.84rem;
+                    padding: 7px 12px;
+                    font-size: 0.83rem;
                     font-weight: 500;
                     border-radius: 6px;
                     cursor: pointer;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 5px;
                     transition: all 0.15s ease;
                 }
                 .btn-gmail-secondary:hover {
                     background: #f8fafc;
                     color: #0f172a;
+                    border-color: #94a3b8;
+                }
+                @media (max-width: 640px) {
+                    #emailPreviewModalOverlay {
+                        padding: 8px !important;
+                    }
+                    .email-modal-dialog {
+                        max-height: 98vh !important;
+                        border-radius: 8px !important;
+                    }
+                    .email-modal-head {
+                        padding: 10px 14px !important;
+                    }
+                    .email-modal-head h3 {
+                        font-size: 1rem !important;
+                    }
+                    .email-modal-body {
+                        padding: 10px 8px !important;
+                    }
+                    .gmail-field {
+                        flex-direction: column !important;
+                        align-items: stretch !important;
+                        gap: 4px !important;
+                    }
+                    .gmail-field .lbl {
+                        width: 100% !important;
+                    }
+                    #pdfAttachInfo {
+                        padding-left: 0 !important;
+                    }
+                    .email-preview-scroll {
+                        padding: 8px 4px !important;
+                    }
+                    .email-modal-foot {
+                        padding: 10px 14px !important;
+                        flex-direction: column !important;
+                        align-items: stretch !important;
+                    }
+                    .email-modal-foot > div {
+                        width: 100% !important;
+                    }
+                    .email-modal-foot button {
+                        flex: 1 1 100% !important;
+                        justify-content: center !important;
+                    }
                 }
             </style>
             <div class="email-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="emailModalTitle">
@@ -874,9 +762,9 @@ function openEmailPreviewModal() {
                     <div>
                         <h3 id="emailModalTitle">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                            Email Delivery &amp; Gmail Table Preview
+                            Email Delivery &amp; Attached PDF
                         </h3>
-                        <div class="sub">Bản sao chuẩn Table Layout (chống vỡ giao diện 100% trên Gmail / Outlook) &amp; Gửi mail tự động qua Backend</div>
+                        <div class="sub">Executive summary email (100% English) with official PDF proposal attached</div>
                     </div>
                     <button type="button" class="email-modal-close" id="btnCloseEmailModal" aria-label="Close">&times;</button>
                 </div>
@@ -890,9 +778,19 @@ function openEmailPreviewModal() {
                             <span class="lbl">Subject:</span>
                             <input type="text" id="gmailSubjectInput" class="gmail-input" placeholder="Subject...">
                         </div>
+                        <div class="gmail-field" style="align-items:center; background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; padding:10px 12px; margin-top:8px;">
+                            <span class="lbl" style="width:130px; color:#1e293b; display:flex; align-items:center; gap:6px; font-weight:600;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.49-8.49a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                                Attach PDF:
+                            </span>
+                            <div style="flex:1; display:flex; align-items:center; gap:10px;">
+                                <input type="file" id="gmailPdfInput" accept=".pdf" style="font-size:0.88rem; color:#334155; cursor:pointer; flex:1;">
+                            </div>
+                        </div>
+                        <div id="pdfAttachInfo" style="font-size:0.82rem; color:#059669; font-weight:600; margin-top:5px; padding-left:135px; display:none;"></div>
                     </div>
                     <div class="email-preview-scroll" id="emailPreviewContent">
-                        <!-- Email-safe table HTML will be rendered here -->
+                        <!-- Concise Email Preview will be rendered here -->
                     </div>
                 </div>
                 <div class="email-modal-foot">
@@ -905,7 +803,7 @@ function openEmailPreviewModal() {
                         </button>
                         <button type="button" class="btn-gmail-success" id="btnSendEmailBE">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                            Gửi Mail Tự Động (BE)
+                            Send Email Automatically (BE)
                         </button>
                     </div>
                 </div>
@@ -924,7 +822,22 @@ function openEmailPreviewModal() {
             }
         });
 
-        // 1. Nút Gửi Mail Tự Động qua Backend API
+        // Lắng nghe khi người dùng chọn file PDF
+        document.getElementById("gmailPdfInput").addEventListener("change", function (e) {
+            const file = e.target.files && e.target.files[0];
+            const infoDiv = document.getElementById("pdfAttachInfo");
+
+            if (file) {
+                const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+                infoDiv.style.display = "block";
+                infoDiv.innerHTML = `✓ Selected PDF: <b>${file.name}</b> (${sizeMb} MB) &bull; Ready to deliver!`;
+            } else {
+                infoDiv.style.display = "none";
+                infoDiv.innerHTML = "";
+            }
+        });
+
+        // 1. Nút Gửi Mail Tự Động qua Backend API (kèm file PDF tải lên)
         document.getElementById("btnSendEmailBE").addEventListener("click", async function () {
             const sheet = document.querySelector(".sheet") || document.querySelector("main");
             if (!sheet) return;
@@ -933,24 +846,57 @@ function openEmailPreviewModal() {
             const subject = document.getElementById("gmailSubjectInput").value.trim();
             const statusDiv = document.getElementById("emailSendStatus");
             const btn = document.getElementById("btnSendEmailBE");
+            const pdfInput = document.getElementById("gmailPdfInput");
 
             if (!toEmail) {
-                alert("Vui lòng nhập địa chỉ email người nhận (To)!");
+                alert("Please enter the recipient email address (To)!");
                 return;
             }
 
+            if (!pdfInput || !pdfInput.files || !pdfInput.files[0]) {
+                statusDiv.innerHTML = `<span style="color:#dc2626; font-weight:bold;">⚠️ Vui lòng chọn tệp PDF cần đính kèm trước khi gửi!</span>`;
+                alert("Vui lòng chọn tệp PDF cần đính kèm trước khi gửi!");
+                if (pdfInput) pdfInput.focus();
+                return;
+            }
+
+            const file = pdfInput.files[0];
+            const pdfName = file.name;
+
             btn.disabled = true;
-            btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg> Đang gửi mail...`;
-            statusDiv.innerHTML = `<span style="color:#0284c7;">Đang kết nối BE và xử lý gửi mail...</span>`;
+            btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite;"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg> Reading PDF &amp; sending...`;
+            statusDiv.innerHTML = `<span style="color:#0284c7;">Reading attached PDF (${(file.size / 1024).toFixed(0)} KB)...</span>`;
 
-            const emailHtml = buildEmailSafeTableHtml(sheet);
-            const coName = document.querySelector('[data-bind="company.name"]')?.textContent.trim() || "";
-            const docNum = document.querySelector('[data-bind="doc.number"]')?.textContent.trim() || "";
+            const coName = sheet.querySelector('[data-bind="company.name"]')?.textContent.trim() || "HVAC";
+            const docNum = sheet.querySelector('[data-bind="doc.number"]')?.textContent.trim() || "";
 
-            const isBranch = window.location.pathname.includes("/branches/");
-            const apiUrl = isBranch ? "../../api/send-mail.php" : "api/send-mail.php";
+            let pdfBase64 = "";
+            try {
+                pdfBase64 = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+            } catch (readErr) {
+                alert("Could not read selected PDF: " + readErr.message);
+                btn.disabled = false;
+                btn.innerHTML = `Retry`;
+                return;
+            }
+
+            const emailHtml = buildConciseEmailHtml(sheet);
+
+            let apiUrl;
+            if (window.location.protocol === "file:" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+                apiUrl = "http://127.0.0.1:8088/api/send-mail.php";
+            } else {
+                const isBranch = window.location.pathname.includes("/branches/");
+                apiUrl = isBranch ? "../../api/send-mail.php" : "api/send-mail.php";
+            }
 
             try {
+                statusDiv.innerHTML = `<span style="color:#0284c7;">Delivering via SMTP socket...</span>`;
                 const res = await fetch(apiUrl, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -959,34 +905,51 @@ function openEmailPreviewModal() {
                         subject: subject,
                         html_content: emailHtml,
                         company_name: coName,
-                        doc_number: docNum
+                        doc_number: docNum,
+                        pdf_base64: pdfBase64,
+                        pdf_name: pdfName
                     })
                 });
-                const data = await res.json();
+
+                const rawText = await res.text();
+                let data;
+                try {
+                    data = JSON.parse(rawText);
+                } catch (jsonErr) {
+                    if (rawText.includes("<!DOCTYPE") || rawText.includes("<html") || rawText.includes("<!--")) {
+                        throw new Error(`Server returned HTML error (HTTP ${res.status}). Ensure PHP server on port 8088 is active.`);
+                    } else {
+                        throw new Error(`Malformed JSON response: ${rawText.slice(0, 150)}...`);
+                    }
+                }
 
                 if (data.success) {
-                    const previewLink = isBranch ? `../../${data.preview_url}` : data.preview_url;
+                    const previewLink = (data.preview_url.startsWith("http") || window.location.protocol === "file:" || window.location.hostname === "localhost")
+                        ? (data.preview_url.startsWith("http") ? data.preview_url : `http://127.0.0.1:8088/${data.preview_url}`)
+                        : (window.location.pathname.includes("/branches/") ? `../../${data.preview_url}` : data.preview_url);
+
+                    const attachNote = data.has_attachment ? ` (with attached ${pdfName})` : "";
                     statusDiv.innerHTML = `
-                        <span style="color:#16a34a; font-weight:bold;">✓ ${data.message}</span>
-                        <a href="${previewLink}" target="_blank" style="margin-left:8px; color:#2563eb; text-decoration:underline; font-weight:bold;">[Mở xem bản lưu email]</a>
+                        <span style="color:#16a34a; font-weight:bold;">✓ Email delivered successfully${attachNote}!</span>
+                        <a href="${previewLink}" target="_blank" style="margin-left:8px; color:#2563eb; text-decoration:underline; font-weight:bold;">[View archived copy]</a>
                     `;
-                    btn.innerHTML = `✓ Đã gửi thành công!`;
+                    btn.innerHTML = `✓ Delivered!`;
                     btn.style.background = "#15803d";
                     setTimeout(() => {
                         btn.disabled = false;
-                        btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Gửi Mail Tự Động (BE)`;
+                        btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Send Email Automatically (BE)`;
                         btn.style.background = "#16a34a";
                     }, 4000);
                 } else {
-                    statusDiv.innerHTML = `<span style="color:#dc2626; font-weight:bold;">✗ Lỗi: ${data.error || "Gửi thất bại"}</span>`;
+                    statusDiv.innerHTML = `<span style="color:#dc2626; font-weight:bold;">✗ Error: ${data.error || "Delivery failed"}</span>`;
                     btn.disabled = false;
-                    btn.innerHTML = `Thử lại`;
+                    btn.innerHTML = `Retry`;
                     btn.style.background = "#dc2626";
                 }
             } catch (err) {
-                statusDiv.innerHTML = `<span style="color:#dc2626; font-weight:bold;">✗ Lỗi kết nối BE (${err.message}). Đảm bảo Laragon/PHP đang chạy!</span>`;
+                statusDiv.innerHTML = `<span style="color:#dc2626; font-weight:bold;">✗ Connection error (${err.message})</span>`;
                 btn.disabled = false;
-                btn.innerHTML = `Thử lại`;
+                btn.innerHTML = `Retry`;
                 btn.style.background = "#dc2626";
             }
         });
@@ -996,14 +959,14 @@ function openEmailPreviewModal() {
             const sheet = document.querySelector(".sheet") || document.querySelector("main");
             if (!sheet) return;
 
-            const emailHtml = buildEmailSafeTableHtml(sheet);
+            const emailHtml = buildConciseEmailHtml(sheet);
             const plainText = sheet.innerText;
 
             const success = await copyRichHtmlToClipboard(emailHtml, plainText);
             const statusDiv = document.getElementById("emailSendStatus");
             const btn = document.getElementById("btnDoCopyGmail");
             if (success) {
-                statusDiv.innerHTML = `<span style="color:#16a34a;font-weight:bold;">✓ Đã copy Email Table chuẩn! Mở Gmail và nhấn Ctrl+V để dán.</span>`;
+                statusDiv.innerHTML = `<span style="color:#16a34a;font-weight:bold;">✓ Executive email copied! Paste directly into Gmail with Ctrl+V.</span>`;
                 btn.innerHTML = `✓ Copied! Paste into Gmail (Ctrl+V)`;
                 btn.style.background = "#16a34a";
                 setTimeout(function () {
@@ -1017,7 +980,7 @@ function openEmailPreviewModal() {
         document.getElementById("btnCopyRawHtml").addEventListener("click", async function () {
             const sheet = document.querySelector(".sheet") || document.querySelector("main");
             if (!sheet) return;
-            const emailHtml = buildEmailSafeTableHtml(sheet);
+            const emailHtml = buildConciseEmailHtml(sheet);
             await navigator.clipboard.writeText(emailHtml);
             const btn = document.getElementById("btnCopyRawHtml");
             btn.textContent = "✓ Copied HTML";
@@ -1029,27 +992,33 @@ function openEmailPreviewModal() {
     if (!sheet) return;
 
     // Headers & Fields
-    const custEmail = document.querySelector('[data-bind="customer.email"]')?.textContent.trim() || "";
-    const custName = document.querySelector('[data-bind="customer.name"]')?.textContent.trim() || "Customer";
-    const coName = document.querySelector('[data-bind="company.name"]')?.textContent.trim() || "HVAC";
-    const docTitle = document.querySelector('.doc-title')?.textContent.trim() || document.querySelector('.badge')?.textContent.trim() || "Document";
-    const docNum = document.querySelector('[data-bind="doc.number"]')?.textContent.trim() || "";
+    const custEmail = sheet.querySelector('[data-bind="customer.email"]')?.textContent.trim() || "";
+    const custName = sheet.querySelector('[data-bind="customer.name"]')?.textContent.trim() || "Customer";
+    const coName = sheet.querySelector('[data-bind="company.name"]')?.textContent.trim() || "HVAC";
+    const docTitle = sheet.querySelector('.doc-title')?.textContent.trim() || sheet.querySelector('.badge')?.textContent.trim() || "Estimate";
+    const docNum = sheet.querySelector('[data-bind="doc.number"]')?.textContent.trim() || "";
 
-    document.getElementById("gmailToInput").value = custEmail && custEmail !== "N/A"
-        ? custEmail
-        : "";
+    document.getElementById("gmailToInput").value = "treydurden@gmail.com";
     document.getElementById("gmailSubjectInput").value = `${coName} - ${docTitle}${docNum ? ` #${docNum}` : ""}`;
 
-    // Live preview: Render email table layout chuẩn vào khung preview
+    // Live preview: Render email table layout chuẩn vào khung preview (100% English)
     const previewContainer = document.getElementById("emailPreviewContent");
-    const emailHtml = buildEmailSafeTableHtml(sheet);
+    const emailHtml = buildConciseEmailHtml(sheet);
     previewContainer.innerHTML = `
-        <div style="width:100%; max-width:740px; margin:0 auto; box-shadow:0 10px 30px rgba(0,0,0,0.3); border-radius:8px; overflow:hidden;">
+        <div style="width:100%; max-width:620px; margin:0 auto; box-shadow:0 10px 30px rgba(0,0,0,0.3); border-radius:10px; overflow:hidden;">
             ${emailHtml}
         </div>
     `;
 
     document.getElementById("emailSendStatus").innerHTML = "";
+    const pdfInput = document.getElementById("gmailPdfInput");
+    const infoDiv = document.getElementById("pdfAttachInfo");
+    if (pdfInput && (!pdfInput.files || !pdfInput.files[0])) {
+        if (infoDiv) {
+            infoDiv.style.display = "none";
+            infoDiv.innerHTML = "";
+        }
+    }
 
     // Show modal
     modalOverlay.classList.add("show");

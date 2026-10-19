@@ -788,6 +788,608 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
             .table th { border-radius: 0 !important; font-family: 'Oswald', 'Arial Black', sans-serif; letter-spacing: 0.5px; }
             
 
+/* ==========================================================================
+   Comprehensive Responsive & Mobile Architecture (4 Applications: Mobile/Tablet/Desktop/Print)
+   Strictly scoped to SCREEN ONLY (body:not(.view-print)) to ensure 100% Print & PDF fidelity
+   ========================================================================== */
+
+/* --- Tablet Adaptations (769px - 991px, Screen Only) --- */
+@media screen and (max-width: 991px) {
+    body:not(.view-print) .sheet {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: auto !important;
+        margin: 1rem auto 2rem !important;
+        padding: 10mm 12mm !important;
+    }
+    body:not(.view-print) .container {
+        max-width: 100% !important;
+    }
+}
+
+/* --- Mobile Adaptations (<= 768px, Screen Only, Excluding Print Mode) --- */
+@media screen and (max-width: 768px) {
+    /* 1. Page Shell & Sheet Container */
+    body:not(.view-print) {
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+        background: #f1f5f9 !important;
+        -webkit-text-size-adjust: 100% !important;
+    }
+
+    body:not(.view-print) .page-wrapper {
+        padding: 0.5rem !important;
+        margin: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    body:not(.view-print) .sheet {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: auto !important;
+        height: auto !important;
+        margin: 0.25rem 0 1.5rem !important;
+        padding: 14px 12px !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    /* 2. Toolbar & Nav Tabs (Always on screen) */
+    .toolbar {
+        position: sticky !important;
+        top: 0 !important;
+        padding: 0.4rem 0 0 0 !important;
+    }
+    .toolbar-inner {
+        padding: 0 0.75rem !important;
+    }
+    .toolbar-bar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.5rem !important;
+    }
+    .toolbar-left, .toolbar-right {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 0.4rem !important;
+        width: 100% !important;
+    }
+    .toolbar-right .btn {
+        flex: 1 1 auto !important;
+        text-align: center !important;
+        padding: 0.4rem 0.5rem !important;
+        font-size: 0.78rem !important;
+    }
+    .nav-tabs {
+        margin-top: 0.3rem !important;
+        padding-bottom: 4px !important;
+        gap: 0.2rem !important;
+    }
+    .nav-tabs a, .nav-tabs button {
+        padding: 0.45rem 0.75rem !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* 3. Document Headers */
+    body:not(.view-print) [class*="doc-head"],
+    body:not(.view-print) .doc-head {
+        margin: -14px -12px 1rem -12px !important;
+        padding: 14px 12px 12px 12px !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        text-align: center !important;
+        gap: 0.6rem !important;
+        border-radius: 0 !important;
+    }
+
+    body:not(.view-print) [class*="head-left"],
+    body:not(.view-print) [class*="head-right"],
+    body:not(.view-print) .doc-head .text-end {
+        text-align: center !important;
+        margin: 4px 0 0 0 !important;
+        width: 100% !important;
+    }
+
+    body:not(.view-print) .brand-name,
+    body:not(.view-print) .doc-head .brand-name {
+        font-size: 1.35rem !important;
+        line-height: 1.2 !important;
+        text-align: center !important;
+        word-break: break-word !important;
+    }
+
+    body:not(.view-print) .brand-title-wrap {
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 6px !important;
+        margin: 0 auto !important;
+    }
+
+    body:not(.view-print) .brand-logo {
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    body:not(.view-print) .luxury-meta-strip {
+        flex-direction: column !important;
+        gap: 4px !important;
+        font-size: 0.72rem !important;
+        text-align: center !important;
+    }
+
+    body:not(.view-print) .luxury-meta-strip span:nth-child(even) {
+        display: none !important;
+    }
+
+    /* 4. Client Dossier & Customer Cards (Key Left, Value Right to save height) */
+    body:not(.view-print) .card-body .mb-2 {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: baseline !important;
+        gap: 0.5rem !important;
+        padding: 3px 0 !important;
+        border-bottom: 1px dashed #e2e8f0 !important;
+        margin-bottom: 4px !important;
+    }
+    body:not(.view-print) .card-body .mb-2:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+    }
+    body:not(.view-print) .card-body .mb-2 .form-label {
+        margin-bottom: 0 !important;
+        flex-shrink: 0 !important;
+        color: var(--bs-muted) !important;
+        font-size: 0.82rem !important;
+        font-weight: 500 !important;
+    }
+    body:not(.view-print) .card-body .mb-2 .bind,
+    body:not(.view-print) .card-body .mb-2 span {
+        text-align: right !important;
+        font-weight: 600 !important;
+        word-break: break-word !important;
+    }
+
+    body:not(.view-print) .luxury-dossier {
+        padding: 12px 10px !important;
+        margin-bottom: 1rem !important;
+    }
+
+    body:not(.view-print) .luxury-dossier-inner {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        border-bottom: 1px solid #f1e6b8 !important;
+        padding-bottom: 10px !important;
+    }
+
+    body:not(.view-print) .luxury-dossier-col {
+        width: 100% !important;
+        text-align: left !important;
+    }
+
+    body:not(.view-print) .luxury-dossier-seal {
+        display: none !important;
+    }
+
+    body:not(.view-print) .luxury-dossier-val {
+        font-size: 1rem !important;
+        word-break: break-word !important;
+        line-height: 1.3 !important;
+    }
+
+    body:not(.view-print) .luxury-dossier-sub {
+        font-size: 0.82rem !important;
+        word-break: break-word !important;
+        line-height: 1.4 !important;
+    }
+
+    body:not(.view-print) .luxury-dossier-footer {
+        font-size: 0.76rem !important;
+        text-align: left !important;
+        word-break: break-word !important;
+        line-height: 1.45 !important;
+        margin-top: 6px !important;
+    }
+
+    body:not(.view-print) .industrial-dispatch-ticket {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+        padding: 10px !important;
+    }
+    body:not(.view-print) .ticket-col {
+        border-right: none !important;
+        border-bottom: 1px dashed #cbd5e1 !important;
+        padding-bottom: 6px !important;
+        padding-right: 0 !important;
+    }
+
+    body:not(.view-print) .aqua-parties-banner {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        padding: 10px 12px !important;
+    }
+    body:not(.view-print) .aqua-party-block {
+        width: 100% !important;
+    }
+
+    body:not(.view-print) .eco-parties-body {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    body:not(.view-print) .urban-meta-grid,
+    body:not(.view-print) .parties-grid,
+    body:not(.view-print) .parties-banner,
+    body:not(.view-print) .parties-dossier {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    /* 5. Equipment Cards (Image on Top, Full Narrative Width on Bottom) */
+    body:not(.view-print) .luxury-eq-grid,
+    body:not(.view-print) .eqrow,
+    body:not(.view-print) .industrial-eq-body,
+    body:not(.view-print) .aqua-eq-row,
+    body:not(.view-print) .aqua-eq-grid,
+    body:not(.view-print) .eco-eq-main,
+    body:not(.view-print) .urban-eq-content,
+    body:not(.view-print) .urban-eq-grid,
+    body:not(.view-print) .value-eq-row,
+    body:not(.view-print) .value-eq-grid,
+    body:not(.view-print) .eq-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        padding: 10px 12px !important;
+    }
+
+    body:not(.view-print) .luxury-img-frame,
+    body:not(.view-print) .img,
+    body:not(.view-print) .industrial-img,
+    body:not(.view-print) .aqua-img,
+    body:not(.view-print) .eco-img,
+    body:not(.view-print) .urban-img,
+    body:not(.view-print) .value-img,
+    body:not(.view-print) .eq-img {
+        width: 100% !important;
+        max-width: 220px !important;
+        height: 140px !important;
+        min-height: 140px !important;
+        max-height: 140px !important;
+        flex: none !important;
+        margin: 0 auto !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: relative !important;
+    }
+
+    body:not(.view-print) .luxury-img-frame img,
+    body:not(.view-print) .img img,
+    body:not(.view-print) .industrial-img img,
+    body:not(.view-print) .aqua-img img,
+    body:not(.view-print) .eco-img img,
+    body:not(.view-print) .urban-img img,
+    body:not(.view-print) .value-img img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+    }
+
+    body:not(.view-print) .luxury-eq-narrative,
+    body:not(.view-print) .eqbody,
+    body:not(.view-print) .industrial-content,
+    body:not(.view-print) .aqua-content,
+    body:not(.view-print) .eco-info,
+    body:not(.view-print) .urban-body,
+    body:not(.view-print) .urban-content,
+    body:not(.view-print) .value-eq-details,
+    body:not(.view-print) .value-content {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    body:not(.view-print) .luxury-eq-narrative h3,
+    body:not(.view-print) .eqbody h5,
+    body:not(.view-print) .aqua-content h4,
+    body:not(.view-print) .eco-info h4,
+    body:not(.view-print) .value-eq-details h4,
+    body:not(.view-print) .urban-body h4 {
+        font-size: 1.08rem !important;
+        line-height: 1.35 !important;
+        word-break: break-word !important;
+        margin-bottom: 4px !important;
+    }
+
+    body:not(.view-print) .luxury-prose {
+        font-size: 0.82rem !important;
+        line-height: 1.45 !important;
+        margin-bottom: 8px !important;
+    }
+
+    /* 5b. Equipment Key Specs: Key on Left, Value on Right (Saves Height) */
+    body:not(.view-print) .kspecs {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 3px !important;
+        margin: 6px 0 !important;
+        width: 100% !important;
+    }
+    body:not(.view-print) .kspecs > div {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 3px 6px !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        background: #f8fafc !important;
+        border-radius: 4px !important;
+    }
+    body:not(.view-print) .kspecs .form-label {
+        margin: 0 !important;
+        font-size: 0.8rem !important;
+        color: var(--bs-muted) !important;
+        font-weight: 500 !important;
+        flex-shrink: 0 !important;
+    }
+    body:not(.view-print) .kspecs span.bind,
+    body:not(.view-print) .kspecs span {
+        text-align: right !important;
+        font-weight: 600 !important;
+        color: #0f172a !important;
+    }
+
+    body:not(.view-print) .specs {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2px !important;
+        width: 100% !important;
+    }
+    body:not(.view-print) .specs .sp {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: baseline !important;
+        gap: 0.75rem !important;
+        font-size: 0.8rem !important;
+        padding: 3px 4px !important;
+        border-bottom: 1px solid #eef2f6 !important;
+    }
+
+    body:not(.view-print) .luxury-specs-list {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 3px !important;
+        margin-bottom: 8px !important;
+        width: 100% !important;
+    }
+    body:not(.view-print) .luxury-spec-item {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 0.82rem !important;
+        padding: 3px 6px !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    body:not(.view-print) .aqua-specs-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 3px !important;
+        margin-bottom: 8px !important;
+        width: 100% !important;
+    }
+    body:not(.view-print) .aqua-spec-pill {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 3px 8px !important;
+    }
+
+    body:not(.view-print) .value-specs-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 3px !important;
+        margin-bottom: 8px !important;
+        width: 100% !important;
+    }
+    body:not(.view-print) .value-spec-item {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 3px 6px !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+    }
+
+    body:not(.view-print) .urban-specs-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 3px !important;
+        margin-bottom: 8px !important;
+        width: 100% !important;
+    }
+    body:not(.view-print) .urban-spec-box {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 3px 8px !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+    }
+
+    body:not(.view-print) .eco-chips {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 3px !important;
+        margin-bottom: 8px !important;
+        width: 100% !important;
+    }
+    body:not(.view-print) .eco-spec-chip {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 3px 8px !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+    }
+
+    /* 6. Investment Ledger & Totals */
+    body:not(.view-print) .luxury-investment-ledger,
+    body:not(.view-print) .industrial-total-box,
+    body:not(.view-print) .aqua-total-box,
+    body:not(.view-print) .eco-investment-card,
+    body:not(.view-print) .urban-total-monolith,
+    body:not(.view-print) .value-savings-card,
+    body:not(.view-print) .total-card {
+        padding: 12px 14px !important;
+        margin: 0.75rem 0 !important;
+        border-radius: 8px !important;
+    }
+
+    body:not(.view-print) .luxury-ledger-top,
+    body:not(.view-print) .aqua-total-box,
+    body:not(.view-print) .industrial-total-box,
+    body:not(.view-print) .urban-total-monolith,
+    body:not(.view-print) .value-savings-card {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 6px !important;
+    }
+
+    body:not(.view-print) .luxury-ledger-main {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 2px !important;
+        margin: 8px 0 !important;
+    }
+
+    body:not(.view-print) .luxury-ledger-val,
+    body:not(.view-print) .aqua-price-val,
+    body:not(.view-print) .industrial-total-price,
+    body:not(.view-print) .eco-net-total,
+    body:not(.view-print) .urban-monolith-sum,
+    body:not(.view-print) .v-total-amount,
+    body:not(.view-print) .total-card .big {
+        font-size: 1.75rem !important;
+        line-height: 1.15 !important;
+        font-weight: 800 !important;
+        word-break: normal !important;
+        white-space: nowrap !important;
+    }
+
+    body:not(.view-print) .luxury-ledger-split {
+        flex-direction: column !important;
+        gap: 4px !important;
+        align-items: flex-start !important;
+        padding-top: 6px !important;
+        font-size: 0.78rem !important;
+    }
+
+    /* 7. Grid Columns & Form Tables */
+    body:not(.view-print) .row {
+        margin: 0 !important;
+    }
+    body:not(.view-print) .row > * {
+        padding: 0 !important;
+        margin-bottom: 0.6rem !important;
+    }
+    body:not(.view-print) .col,
+    body:not(.view-print) .col-4,
+    body:not(.view-print) .col-6,
+    body:not(.view-print) .col-12 {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+
+    body:not(.view-print) .table {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        font-size: 0.8rem !important;
+    }
+    body:not(.view-print) .table th,
+    body:not(.view-print) .table td {
+        padding: 0.4rem 0.5rem !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+
+    /* 8. Photos, Signatures & Footer */
+    body:not(.view-print) .photo {
+        width: 100% !important;
+        height: 180px !important;
+        min-height: 180px !important;
+    }
+    body:not(.view-print) .sig {
+        width: 100% !important;
+        height: 90px !important;
+    }
+    body:not(.view-print) .sig img {
+        max-width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+    }
+    body:not(.view-print) .sig,
+    body:not(.view-print) .sig-row,
+    body:not(.view-print) .d-flex.justify-between {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    body:not(.view-print) .doc-foot {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 8px !important;
+        font-size: 0.75rem !important;
+    }
+}
+
+/* --- Extra Small Screens (<= 480px, Screen Only, Excluding Print Mode) --- */
+@media screen and (max-width: 480px) {
+    body:not(.view-print) .sheet {
+        padding: 10px 8px !important;
+    }
+    body:not(.view-print) [class*="doc-head"],
+    body:not(.view-print) .doc-head {
+        margin: -10px -8px 0.75rem -8px !important;
+        padding: 12px 8px 10px 8px !important;
+    }
+    body:not(.view-print) .luxury-ledger-val,
+    body:not(.view-print) .aqua-price-val,
+    body:not(.view-print) .industrial-total-price,
+    body:not(.view-print) .urban-monolith-sum,
+    body:not(.view-print) .v-total-amount,
+    body:not(.view-print) .total-card .big {
+        font-size: 1.5rem !important;
+    }
+    body:not(.view-print) .industrial-dispatch-ticket {
+        grid-template-columns: 1fr !important;
+    }
+}
+
 /* ===== Print & Print-View Screen Adaptations ===== */
 body.view-print .doc-head,
 body.view-print .doc-head-industrial,
