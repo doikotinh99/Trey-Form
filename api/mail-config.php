@@ -39,8 +39,17 @@ if (!function_exists('loadEnvFile')) {
                 }
             }
 
+            if (!isset($GLOBALS['__APP_ENV'])) {
+                $GLOBALS['__APP_ENV'] = [];
+            }
+            $GLOBALS['__APP_ENV'][$key] = $val;
             $_ENV[$key] = $val;
-            putenv("{$key}={$val}");
+            $_SERVER[$key] = $val;
+
+            // Chỉ gọi putenv nếu server cho phép (không bị chặn trong disable_functions)
+            if (function_exists('putenv')) {
+                @putenv("{$key}={$val}");
+            }
         }
         return true;
     }
@@ -50,15 +59,23 @@ if (!function_exists('loadEnvFile')) {
 $rootDir = dirname(__DIR__);
 $envLoaded = loadEnvFile($rootDir . '/.env') || loadEnvFile(__DIR__ . '/.env');
 
-// Hàm đọc biến môi trường kèm giá trị mặc định
+// Hàm đọc biến môi trường kèm giá trị mặc định (tương thích 100% mọi hosting)
 if (!function_exists('getEnvVal')) {
     function getEnvVal($key, $default = '') {
+        if (isset($GLOBALS['__APP_ENV'][$key])) {
+            return $GLOBALS['__APP_ENV'][$key];
+        }
         if (isset($_ENV[$key])) {
             return $_ENV[$key];
         }
-        $val = getenv($key);
-        if ($val !== false) {
-            return $val;
+        if (isset($_SERVER[$key])) {
+            return $_SERVER[$key];
+        }
+        if (function_exists('getenv')) {
+            $val = @getenv($key);
+            if ($val !== false && $val !== null) {
+                return $val;
+            }
         }
         return $default;
     }

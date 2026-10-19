@@ -1,7 +1,11 @@
 /**
+ * HVAC Form Suite UI Controller - Version 2.2.0
  * Cấu hình danh sách Chi nhánh (Company Theme)
  * Đặt enabled: false nếu chi nhánh chưa hoàn thiện để ẩn khỏi dropdown ở tất cả các file.
  */
+const FORM_SUITE_VERSION = "2.2.0";
+console.log(`[HVAC Form Suite] Loaded version: ${FORM_SUITE_VERSION}`);
+
 const COMPANIES = [
     { id: "jerrys", name: "Jerrys Heatng and Cooling", enabled: true }, // 1
     { id: "pozitivehvac", name: "Pozitive Heating and Cooling", enabled: true }, // 2
