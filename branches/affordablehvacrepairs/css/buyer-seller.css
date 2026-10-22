@@ -374,7 +374,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
 }
 
 .doc-head .brand-name {
-    font-size: 1.85rem;
+    font-size: 1.45rem;
     font-weight: 800;
     color: #ffffff;
     line-height: 1.1;
@@ -795,7 +795,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
 
     body:not(.view-print) .brand-name,
     body:not(.view-print) .doc-head .brand-name {
-        font-size: 1.35rem !important;
+        font-size: 1.15rem !important;
         line-height: 1.2 !important;
         text-align: center !important;
         word-break: break-word !important;
@@ -811,8 +811,8 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
     }
 
     body:not(.view-print) .brand-logo {
-        width: 44px !important;
-        height: 44px !important;
+        width: 60px !important;
+        height: 60px !important;
     }
 
     body:not(.view-print) .luxury-meta-strip {
@@ -1473,8 +1473,8 @@ body.view-print .v-total-amount {
 }
 
 .brand-logo {
-    width: 46px;
-    height: 46px;
+    width: 68px;
+    height: 68px;
     object-fit: contain;
     flex-shrink: 0;
 }
@@ -1486,6 +1486,6 @@ body.view-print .v-total-amount {
 }
 
 .doc-head-luxury .brand-logo {
-    width: 36px;
-    height: 36px;
+    width: 58px;
+    height: 58px;
 }
