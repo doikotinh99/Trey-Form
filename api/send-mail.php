@@ -1,10 +1,5 @@
 <?php
-/**
- * Automated Email Sender API for HVAC Forms
- * Pure PHP, zero-dependency SMTP & local preview logger.
- */
 
-// Headers CORS & JSON
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
@@ -18,7 +13,6 @@ header("Content-Type: application/json; charset=utf-8");
 
 $config = require __DIR__ . '/mail-config.php';
 
-// Đọc dữ liệu JSON gửi lên
 $rawInput = file_get_contents('php://input');
 $data = json_decode($rawInput, true);
 
@@ -50,13 +44,11 @@ if (empty($htmlContent)) {
     exit;
 }
 
-// Đảm bảo thư mục storage/sent_emails tồn tại
 $storageDir = $config['STORAGE_DIR'] ?? (dirname(__DIR__) . '/storage/sent_emails');
 if (!is_dir($storageDir)) {
     mkdir($storageDir, 0777, true);
 }
 
-// Lưu bản sao email thành file HTML
 $timestamp = date('Y-m-d_His');
 $safeEmail = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $to);
 $fileName = "mail_{$timestamp}_{$safeEmail}.html";
@@ -80,11 +72,9 @@ file_put_contents($filePath, $emailWrapper);
 
 $previewUrl = 'api/view-email.php?file=' . urlencode($fileName);
 
-// Kiểm tra xem cấu hình SMTP đã được điền chưa
 $smtp = $config['SMTP'] ?? [];
 $hasSmtpCreds = !empty($smtp['USERNAME']) && !empty($smtp['PASSWORD']);
 
-// Nếu chưa điền SMTP credentials hoặc đang bật DEV_MODE mà không có thông tin SMTP
 if (!$hasSmtpCreds) {
     echo json_encode([
         'success' => true,
@@ -98,7 +88,6 @@ if (!$hasSmtpCreds) {
     exit;
 }
 
-// Kiểm tra file PDF đính kèm (nếu có)
 $pdfBase64 = $data['pdf_base64'] ?? '';
 $pdfName = trim($data['pdf_name'] ?? 'HVAC_Document.pdf');
 $pdfData = null;
@@ -113,7 +102,6 @@ if (!empty($pdfBase64)) {
     }
 }
 
-// Nếu đã có thông tin SMTP, tiến hành gửi qua SMTP Socket
 try {
     $cleanPassword = str_replace(' ', '', $smtp['PASSWORD']);
     $mailer = new SimpleSMTPClient(
@@ -157,9 +145,6 @@ try {
     ]);
 }
 
-/**
- * Class gửi mail SMTP thuần không phụ thuộc thư viện ngoài
- */
 class SimpleSMTPClient {
     private $host;
     private $port;
@@ -213,7 +198,7 @@ class SimpleSMTPClient {
         }
 
         stream_set_timeout($this->socket, $this->timeout);
-        $this->readResponse(); // Banner 220
+        $this->readResponse();
 
         $this->sendCommand("EHLO " . gethostname(), 250);
 
@@ -226,25 +211,21 @@ class SimpleSMTPClient {
             $this->sendCommand("EHLO " . gethostname(), 250);
         }
 
-        // Đăng nhập AUTH LOGIN
         $this->sendCommand("AUTH LOGIN", 334);
         $this->sendCommand(base64_encode($this->username), 334);
         $this->sendCommand(base64_encode($this->password), 235);
 
-        // MAIL FROM & RCPT TO
-        // Với Gmail SMTP: MAIL FROM bắt buộc phải là email tài khoản xác thực để không bị lỗi 553
         $envelopeSender = !empty($this->username) ? $this->username : $fromEmail;
         $this->sendCommand("MAIL FROM:<{$envelopeSender}>", 250);
         $this->sendCommand("RCPT TO:<{$toEmail}>", 250);
 
-        // DATA
         $this->sendCommand("DATA", 354);
 
         $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
         $encodedFromName = '=?UTF-8?B?' . base64_encode($fromName) . '?=';
 
         if (!empty($attachmentData)) {
-            // Chuẩn MIME multipart/mixed khi có tệp đính kèm PDF
+
             $boundary = "----=_NextPart_" . md5(uniqid(time()));
             $headers = [
                 "Date: " . date('r'),
@@ -276,7 +257,7 @@ class SimpleSMTPClient {
 
             $payload = implode("\r\n", $headers) . "\r\n\r\n" . $body;
         } else {
-            // Định dạng HTML đơn giản khi không có đính kèm
+
             $headers = [
                 "Date: " . date('r'),
                 "From: {$encodedFromName} <{$envelopeSender}>",

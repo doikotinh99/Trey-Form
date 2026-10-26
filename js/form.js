@@ -1,30 +1,22 @@
-/**
- * HVAC Form Suite UI Controller - Version 2.2.0
- * Cấu hình danh sách Chi nhánh (Company Theme)
- * Đặt enabled: false nếu chi nhánh chưa hoàn thiện để ẩn khỏi dropdown ở tất cả các file.
- */
+
 const FORM_SUITE_VERSION = "2.2.0";
 console.log(`[HVAC Form Suite] Loaded version: ${FORM_SUITE_VERSION}`);
 
 const COMPANIES = [
-    { id: "jerrys", name: "Jerrys Heatng and Cooling", enabled: true }, // 1
-    { id: "pozitivehvac", name: "Pozitive Heating and Cooling", enabled: true }, // 2
-    { id: "bestcomforthvac", name: "Best Comfort HVAC of Joliet", enabled: true }, // 3
-    { id: "bestcomforthvacservices", name: "Best Comfort HVAC Chicago", enabled: true }, // 4
-    { id: "bestcomforthvacrepair", name: "Best Comfort HVAC New Lenox", enabled: true }, // 5
-    { id: "repairsboilers", name: "Repair Boilers & Hvac", enabled: true }, // 6
-    { id: "watershotagain", name: "Water Heaters & Boiler Hvac Service", enabled: true }, // 7
-    // { id: "dupagehvacservices", name: "Best Comfort HVAC Naperville", enabled: false },
-    // { id: "treydurden", name: "Trey Durden Heating and Cooling", enabled: false },
-    // { id: "affordablehvacrepairs", name: "Affordable Heating & Cooling of Plainfield", enabled: false },
-    // { id: "blueflameheatingcooling", name: "Blue Flame Heating & Cooling of Joliet", enabled: false },
-    // { id: "completehvacservice", name: "Complete Heating and Cooing of Bolingbrook", enabled: false }
+    { id: "jerrys", name: "Jerrys Heatng and Cooling", enabled: true },
+    { id: "pozitivehvac", name: "Pozitive Heating and Cooling", enabled: true },
+    { id: "bestcomforthvac", name: "Best Comfort HVAC of Joliet", enabled: true },
+    { id: "bestcomforthvacservices", name: "Best Comfort HVAC Chicago", enabled: true },
+    { id: "bestcomforthvacrepair", name: "Best Comfort HVAC New Lenox", enabled: true },
+    { id: "repairsboilers", name: "Repairs Boilers Service & Hvac", enabled: true },
+    { id: "watershotagain", name: "Water Heaters & Boiler Hvac Service", enabled: true },
+    { id: "dupagehvacservices", name: "Best Comfort HVAC Naperville", enabled: true },
+    { id: "treydurden", name: "Trey Durden Heating and Cooling", enabled: true },
+    { id: "affordablehvacrepairs", name: "Affordable Heating & Cooling of Plainfield", enabled: true },
+    { id: "blueflameheatingcooling", name: "Blue Flame Heating & Cooling of Joliet", enabled: true },
+    { id: "completehvacservice", name: "Complete Heating and Cooing of Bolingbrook", enabled: true }
 ];
 
-/**
- * Cấu hình danh sách Biểu mẫu (Form Tabs)
- * Đặt enabled: false nếu file biểu mẫu chưa hoàn thiện để ẩn tab khỏi thanh điều hướng ở tất cả các trang.
- */
 const FORMS = [
     { file: "estimate.html", name: "Estimate Form", enabled: true },
     { file: "install-agreement.html", name: "New Installation Agreement", enabled: true },
@@ -56,7 +48,6 @@ function initCompanyDropdown() {
 
     const currentBranch = getCurrentBranch();
 
-    // Làm sạch options cũ và đổ lại theo cấu hình
     coSelect.innerHTML = "";
 
     COMPANIES.forEach(function (company) {
@@ -71,7 +62,6 @@ function initCompanyDropdown() {
         }
     });
 
-    // Điều hướng khi chọn chi nhánh khác
     coSelect.addEventListener("change", function (e) {
         const targetCo = e.target.value;
         const currentFile = window.location.pathname.split("/").pop() || "estimate.html";
@@ -100,11 +90,10 @@ function filterFormTabs() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    // 0. Khởi tạo dropdown chi nhánh và bộ lọc tab từ JS chung
+
     initCompanyDropdown();
     filterFormTabs();
 
-    // 1. Database field highlight toggle (pure CSS class toggle, no data change)
     const hlCheckbox = document.getElementById("hl");
     if (hlCheckbox) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -120,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 2. View Mode toggle: Link View (Full Color) vs Print / PDF View (Ink-Saving)
     const viewModeCheckbox = document.getElementById("viewMode");
     if (viewModeCheckbox) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -133,7 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 3. Print button handler (unrolls all <details> before printing, restores after)
     let detailsSaved = [];
     function openAllDetails() {
         detailsSaved = [];
@@ -184,7 +171,6 @@ document.addEventListener("DOMContentLoaded", function () {
         restoreDetails();
     });
 
-    // 5. Copy sample JSON button
     const cpBtn = document.getElementById("cp");
     if (cpBtn) {
         cpBtn.addEventListener("click", async function () {
@@ -217,13 +203,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 6. Copy for Gmail with Preview Modal
     initEmailCopyFeature();
 });
 
-/**
- * Khởi tạo tính năng "Copy for Gmail" có Preview (Bản sao 1:1 y hệt bản web)
- */
 function initEmailCopyFeature() {
     const toolbarRight = document.querySelector(".toolbar-right");
     let emailBtn = document.getElementById("btnEmailPreview");
@@ -248,15 +230,9 @@ function initEmailCopyFeature() {
     }
 }
 
-/**
- * Generates an executive summary HTML email (100% Pure English)
- * Standard 600px email table layout, lightweight (~5 KB), 100% responsive across Gmail, Outlook, Apple Mail.
- * Full official document is sent as a real attached PDF file.
- */
 function buildConciseEmailHtml(sheetEl) {
     if (!sheetEl) return "";
 
-    // 1. Brand identity from active theme CSS variables
     const computedSheet = window.getComputedStyle(sheetEl);
     const brandColor = computedSheet.getPropertyValue("--brand").trim() || "#0f2d4a";
     const accentColor = computedSheet.getPropertyValue("--accent").trim() || "#c8102e";
@@ -265,7 +241,6 @@ function buildConciseEmailHtml(sheetEl) {
     const borderColor = "#e2e8f0";
     const lightBg = "#f8fafc";
 
-    // 2. Company Information
     const companyName = sheetEl.querySelector('[data-bind="company.name"]')?.textContent.trim() || "HVAC Heating & Cooling Services";
     const companyTagline = sheetEl.querySelector('[data-bind="company.tagline"]')?.textContent.trim() || "Premium Indoor Comfort & Water Heating Solutions";
     const companyPhone = sheetEl.querySelector('[data-bind="company.phone"]')?.textContent.trim() || "";
@@ -273,12 +248,10 @@ function buildConciseEmailHtml(sheetEl) {
     const companyWeb = sheetEl.querySelector('[data-bind="company.web"]')?.textContent.trim() || "";
     const companyLicense = sheetEl.querySelector('[data-bind="company.license"]')?.textContent.trim() || "";
 
-    // 3. Document Details
     const docTitle = sheetEl.querySelector('.doc-title')?.textContent.trim() || sheetEl.querySelector('.badge')?.textContent.trim() || "HVAC Proposal & Estimate";
     const docNumber = sheetEl.querySelector('[data-bind="doc.number"]')?.textContent.trim() || "REF-2026";
     const docDate = sheetEl.querySelector('[data-bind="doc.date"]')?.textContent.trim() || new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
-    // 4. Customer Information
     const custName = sheetEl.querySelector('[data-bind="customer.name"]')?.textContent.trim() || "Valued Customer";
     const custPhone = sheetEl.querySelector('[data-bind="customer.phone"]')?.textContent.trim() || "";
     const custEmail = sheetEl.querySelector('[data-bind="customer.email"]')?.textContent.trim() || "";
@@ -286,15 +259,13 @@ function buildConciseEmailHtml(sheetEl) {
     const custCityState = sheetEl.querySelector('[data-bind="customer.city_state_zip"]')?.textContent.trim() || "";
     const custAddress = [custStreet, custCityState].filter(Boolean).join(", ");
 
-    // 5. Specialist / Technician
     const techName = sheetEl.querySelector('[data-bind="tech.name"]')?.textContent.trim() || sheetEl.querySelector('[data-bind="lead_tech"]')?.textContent.trim() || sheetEl.querySelector('[data-bind="tech"]')?.textContent.trim() || "";
     const techPhone = sheetEl.querySelector('[data-bind="tech.phone"]')?.textContent.trim() || companyPhone;
 
-    // 6. Proposed Equipment & Line Items (Deduplicated)
     const items = [];
     const seenItems = new Set();
     
-    // Priority 1: Service / equipment table
+
     const tableRows = sheetEl.querySelectorAll("table.table tbody tr");
     if (tableRows.length > 0) {
         tableRows.forEach(row => {
@@ -310,7 +281,6 @@ function buildConciseEmailHtml(sheetEl) {
         });
     }
 
-    // Priority 2: Equipment cards / Aqua cards / EqRows (Direct cards only, avoiding duplicate child rows)
     if (items.length === 0) {
         const eqCards = sheetEl.querySelectorAll(".eqlist > .card, .eqlist > .eq, .eqlist > .aqua-eq-card, .aqua-eq-card, .luxury-eq-card, .value-eq-card, .eco-eq-card, .urban-eq-card, .industrial-eq-card");
         const cardsToProcess = eqCards.length > 0 ? eqCards : sheetEl.querySelectorAll(".eqlist .card, .eqrow");
@@ -326,7 +296,6 @@ function buildConciseEmailHtml(sheetEl) {
         });
     }
 
-    // 7. Investment Totals & Financing
     const grandTotal = sheetEl.querySelector('[data-bind="totals.total"]')?.textContent.trim() 
         || sheetEl.querySelector('[data-bind="totals.grand"]')?.textContent.trim()
         || sheetEl.querySelector('.total-card .amount')?.textContent.trim()
@@ -343,7 +312,6 @@ function buildConciseEmailHtml(sheetEl) {
     const financePlan = sheetEl.querySelector('[data-bind="financing[].plan"]')?.textContent.trim() || "";
     const financeTerm = sheetEl.querySelector('[data-bind="financing[].term"]')?.textContent.trim() || "";
 
-    // 8. Build Equipment Table HTML (Concise 2-Column Responsive Layout)
     let itemsTableHtml = "";
     if (items.length > 0) {
         let rowsHtml = "";
@@ -374,7 +342,6 @@ function buildConciseEmailHtml(sheetEl) {
         </table>`;
     }
 
-    // Investment summary block (100% English)
     let totalBlockHtml = "";
     if (grandTotal) {
         totalBlockHtml = `
@@ -502,23 +469,14 @@ function buildConciseEmailHtml(sheetEl) {
 </table>`.trim();
 }
 
-/**
- * Tương thích ngược: gán buildEmailSafeTableHtml trỏ đến buildConciseEmailHtml
- */
 function buildEmailSafeTableHtml(sheetEl) {
     return buildConciseEmailHtml(sheetEl);
 }
 
-/**
- * Tương thích ngược: gán buildEmailSafeTableHtml trỏ đến buildConciseEmailHtml
- */
 function buildEmailSafeTableHtml(sheetEl) {
     return buildConciseEmailHtml(sheetEl);
 }
 
-/**
- * Khởi tạo Modal Gửi mail tóm tắt & Đính kèm PDF
- */
 function openEmailPreviewModal() {
     let modalOverlay = document.getElementById("emailPreviewModalOverlay");
     if (!modalOverlay) {
@@ -815,7 +773,6 @@ function openEmailPreviewModal() {
         `;
         document.body.appendChild(modalOverlay);
 
-        // Close handlers
         document.getElementById("btnCloseEmailModal").addEventListener("click", closeEmailModal);
         modalOverlay.addEventListener("click", function (e) {
             if (e.target === modalOverlay) closeEmailModal();
@@ -826,7 +783,6 @@ function openEmailPreviewModal() {
             }
         });
 
-        // Lắng nghe khi người dùng chọn file PDF
         document.getElementById("gmailPdfInput").addEventListener("change", function (e) {
             const file = e.target.files && e.target.files[0];
             const infoDiv = document.getElementById("pdfAttachInfo");
@@ -841,7 +797,6 @@ function openEmailPreviewModal() {
             }
         });
 
-        // 1. Nút Gửi Mail Tự Động qua Backend API (kèm file PDF tải lên)
         document.getElementById("btnSendEmailBE").addEventListener("click", async function () {
             const sheet = document.querySelector(".sheet") || document.querySelector("main");
             if (!sheet) return;
@@ -958,7 +913,6 @@ function openEmailPreviewModal() {
             }
         });
 
-        // 2. Nút Copy for Gmail (Ctrl+V)
         document.getElementById("btnDoCopyGmail").addEventListener("click", async function () {
             const sheet = document.querySelector(".sheet") || document.querySelector("main");
             if (!sheet) return;
@@ -980,7 +934,6 @@ function openEmailPreviewModal() {
             }
         });
 
-        // 3. Nút Copy Raw HTML
         document.getElementById("btnCopyRawHtml").addEventListener("click", async function () {
             const sheet = document.querySelector(".sheet") || document.querySelector("main");
             if (!sheet) return;
@@ -995,7 +948,6 @@ function openEmailPreviewModal() {
     const sheet = document.querySelector(".sheet") || document.querySelector("main");
     if (!sheet) return;
 
-    // Headers & Fields
     const custEmail = sheet.querySelector('[data-bind="customer.email"]')?.textContent.trim() || "";
     const custName = sheet.querySelector('[data-bind="customer.name"]')?.textContent.trim() || "Customer";
     const coName = sheet.querySelector('[data-bind="company.name"]')?.textContent.trim() || "HVAC";
@@ -1005,7 +957,6 @@ function openEmailPreviewModal() {
     document.getElementById("gmailToInput").value = "treydurden@gmail.com";
     document.getElementById("gmailSubjectInput").value = `${coName} - ${docTitle}${docNum ? ` #${docNum}` : ""}`;
 
-    // Live preview: Render email table layout chuẩn vào khung preview (100% English)
     const previewContainer = document.getElementById("emailPreviewContent");
     const emailHtml = buildConciseEmailHtml(sheet);
     previewContainer.innerHTML = `
@@ -1024,7 +975,6 @@ function openEmailPreviewModal() {
         }
     }
 
-    // Show modal
     modalOverlay.classList.add("show");
 }
 
@@ -1050,7 +1000,6 @@ async function copyRichHtmlToClipboard(htmlContent, plainText) {
         }
     }
 
-    // Fallback cho mọi trình duyệt
     try {
         const div = document.createElement("div");
         div.contentEditable = "true";

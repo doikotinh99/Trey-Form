@@ -1,8 +1,4 @@
-/**
- * @file bestcomforthvacservices form styling
- * @description Standalone self-contained stylesheet with Best Comfort HVAC Chicago theme variables,
- * grid layout, component styles, Link View & Print/PDF View, and print rules.
- */
+
 
 :root {
     --brand: #18181b;
@@ -49,7 +45,6 @@ h1 { font-size: 1.85rem; }
 h2 { font-size: 1.45rem; }
 h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
 
-/* ===== Grid & Containers ===== */
 .container {
     max-width: 8.5in;
     margin: 0 auto;
@@ -76,7 +71,6 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
     .col-4, .col-6 { width: 100%; }
 }
 
-/* ===== Toolbar Chrome ===== */
 .toolbar {
     position: sticky;
     top: 0;
@@ -151,7 +145,6 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
     box-sizing: border-box;
 }
 
-/* ===== Components ===== */
 .btn {
     display: inline-block;
     padding: .35rem .75rem;
@@ -348,7 +341,6 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
     color: #6c757d;
 }
 
-/* ===== Sheet Document Layout ===== */
 .sheet {
     background: #fff;
     width: 210mm;
@@ -362,7 +354,6 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
     position: relative;
 }
 
-/* Standard Fallback Header Banner */
 .doc-head {
     display: flex;
     justify-content: space-between;
@@ -422,7 +413,6 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
     border-bottom: 2px solid var(--accent);
 }
 
-/* ===== Database Field Highlighting ===== */
 .bind { display: inline; }
 .hl .bind, .hl [data-bind-src], .hl .box {
     background: #fff3cd;
@@ -453,7 +443,6 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
     vertical-align: -1px;
 }
 
-/* ===== Equipment, Media & Signature Styles ===== */
 .img, .photo, .sig { position: relative; }
 
 .photo {
@@ -620,9 +609,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
 .big2 { font-size: 1.35rem; font-weight: 800; color: var(--brand); }
 .big2 small { font-size: .72rem; font-weight: 400; color: var(--bs-muted); }
 
-/* Custom Archetype Specific Style Injections */
-
-            /* ===== Urban Architectural Swiss Archetype ===== */
+            
             body { font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; background: #f4f4f5; }
             h1, h2, h3, h4, h5 { font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; font-weight: 900; letter-spacing: -0.5px; }
             .sheet { border-radius: 0 !important; border: 2px solid #18181b; box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
@@ -645,7 +632,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
             }
             .urban-meta-row { font-size: 0.75rem; color: #d4d4d8; font-family: ui-monospace, monospace; }
             
-            /* Urban Swiss Grid */
+            
             .urban-meta-grid {
                 display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
                 border-top: 2px solid #18181b; border-bottom: 2px solid #18181b;
@@ -657,7 +644,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
             .urban-grid-val { font-size: 0.95rem; font-weight: 800; color: #18181b; }
             .urban-grid-sub { font-size: 0.76rem; color: #71717a; }
             
-            /* Urban Equipment Card */
+            
             .urban-eq-card {
                 border-radius: 0 !important; border: 1.5px solid #18181b !important;
                 background: #fff; margin-bottom: 0.85rem;
@@ -683,7 +670,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
             .urban-val { font-size: 0.8rem; font-weight: 900; color: #18181b; }
             .urban-warranty-note { background: #f4f4f5; padding: 4px 8px; font-size: 0.78rem; font-weight: 700; }
             
-            /* Urban Monolith Total */
+            
             .urban-total-monolith {
                 background: #18181b; color: #fff;
                 padding: 1rem 1.4rem; display: flex; justify-content: space-between; align-items: center;
@@ -696,12 +683,6 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
             .card-header { background: #18181b; color: #fff; border-radius: 0 !important; font-weight: 800; }
             
 
-/* ==========================================================================
-   Comprehensive Responsive & Mobile Architecture (4 Applications: Mobile/Tablet/Desktop/Print)
-   Strictly scoped to SCREEN ONLY (body:not(.view-print)) to ensure 100% Print & PDF fidelity
-   ========================================================================== */
-
-/* --- Tablet Adaptations (769px - 991px, Screen Only) --- */
 @media screen and (max-width: 991px) {
     body:not(.view-print) .sheet {
         width: 100% !important;
@@ -715,9 +696,8 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
     }
 }
 
-/* --- Mobile Adaptations (<= 768px, Screen Only, Excluding Print Mode) --- */
 @media screen and (max-width: 768px) {
-    /* 1. Page Shell & Sheet Container */
+    
     body:not(.view-print) {
         font-size: 14px !important;
         line-height: 1.5 !important;
@@ -745,7 +725,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         overflow: hidden !important;
     }
 
-    /* 2. Toolbar & Nav Tabs (Always on screen) */
+    
     .toolbar {
         position: sticky !important;
         top: 0 !important;
@@ -783,7 +763,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         font-size: 0.8rem !important;
     }
 
-    /* 3. Document Headers */
+    
     body:not(.view-print) [class*="doc-head"],
     body:not(.view-print) .doc-head {
         margin: -14px -12px 1rem -12px !important;
@@ -836,7 +816,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         display: none !important;
     }
 
-    /* 4. Client Dossier & Customer Cards (Key Left, Value Right to save height) */
+    
     body:not(.view-print) .card-body .mb-2 {
         display: flex !important;
         justify-content: space-between !important;
@@ -942,7 +922,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         gap: 10px !important;
     }
 
-    /* 5. Equipment Cards (Image on Top, Full Narrative Width on Bottom) */
+    
     body:not(.view-print) .luxury-eq-grid,
     body:not(.view-print) .eqrow,
     body:not(.view-print) .industrial-eq-body,
@@ -1026,7 +1006,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         margin-bottom: 8px !important;
     }
 
-    /* 5b. Equipment Key Specs: Key on Left, Value on Right (Saves Height) */
+    
     body:not(.view-print) .kspecs {
         display: flex !important;
         flex-direction: column !important;
@@ -1160,7 +1140,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         border-bottom: 1px solid #f1f5f9 !important;
     }
 
-    /* 6. Investment Ledger & Totals */
+    
     body:not(.view-print) .luxury-investment-ledger,
     body:not(.view-print) .industrial-total-box,
     body:not(.view-print) .aqua-total-box,
@@ -1214,7 +1194,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         font-size: 0.78rem !important;
     }
 
-    /* 7. Grid Columns & Form Tables */
+    
     body:not(.view-print) .row {
         margin: 0 !important;
     }
@@ -1244,7 +1224,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         word-break: break-word !important;
     }
 
-    /* 8. Photos, Signatures & Footer */
+    
     body:not(.view-print) .photo {
         width: 100% !important;
         height: 180px !important;
@@ -1275,7 +1255,6 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
     }
 }
 
-/* --- Extra Small Screens (<= 480px, Screen Only, Excluding Print Mode) --- */
 @media screen and (max-width: 480px) {
     body:not(.view-print) .sheet {
         padding: 10px 8px !important;
@@ -1298,7 +1277,6 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
     }
 }
 
-/* ===== Print & Print-View Screen Adaptations ===== */
 body.view-print .doc-head,
 body.view-print .doc-head-industrial,
 body.view-print .doc-head-aqua,
@@ -1475,7 +1453,6 @@ body.view-print .v-total-amount {
     }
 }
 
-/* ===== Brand Logo Styles ===== */
 .brand-title-wrap {
     display: flex;
     align-items: center;

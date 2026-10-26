@@ -1,14 +1,12 @@
 <?php
-/**
- * Email Preview Viewer for HVAC Form Suite
- */
+
 $config = require __DIR__ . '/mail-config.php';
 $storageDir = $config['STORAGE_DIR'] ?? (dirname(__DIR__) . '/storage/sent_emails');
 
 $file = basename($_GET['file'] ?? '');
 
 if (empty($file) || !file_exists($storageDir . '/' . $file)) {
-    // Nếu không chỉ định file, tìm file mới nhất
+
     $files = glob($storageDir . '/*.html');
     if ($files) {
         usort($files, fn($a, $b) => filemtime($b) - filemtime($a));
@@ -23,7 +21,6 @@ $content = file_get_contents($fullPath);
 $fileDate = date("d/m/Y H:i:s", filemtime($fullPath));
 $fileSize = round(filesize($fullPath) / 1024, 1) . " KB";
 
-// Lấy danh sách các email gần đây
 $recentFiles = glob($storageDir . '/*.html');
 usort($recentFiles, fn($a, $b) => filemtime($b) - filemtime($a));
 $recentList = array_slice($recentFiles, 0, 10);
@@ -82,7 +79,7 @@ $recentList = array_slice($recentFiles, 0, 10);
         function toggleWidth(w) {
             document.getElementById('frameWrap').style.maxWidth = w + 'px';
         }
-        // Auto adjust iframe height to content
+
         window.addEventListener('load', function() {
             var ifr = document.getElementById('mailIframe');
             try {

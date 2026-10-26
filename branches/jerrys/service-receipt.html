@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Field Service Receipt - Jerry's Heating & Cooling</title>
-    <!-- Standalone Form Stylesheet (classic layout & theme) -->
+    
     <link rel="stylesheet" href="css/service-receipt.css?v=2.2.0">
-    <!-- Shared Form UI Controller (No JS data population) -->
+    
     <script defer src="../../js/form.js?v=2.2.0"></script>
 </head>
 
 <body>
-    <!-- App Toolbar (Full-width, hidden on print) -->
+    
     <header class="toolbar noprint">
         <div class="toolbar-inner">
             <div class="toolbar-bar">
@@ -48,7 +48,7 @@
         </div>
     </header>
 
-    <!-- Main Sheet Container -->
+    
     <main class="page-wrapper">
         <section class="sheet sheet-classic" id="s-service-receipt">
             
@@ -67,7 +67,7 @@
             </div>
             <h2 class="doc-title">Field Service Receipt</h2>
 
-            <!-- Form Body (Static HTML data, no JS injection) -->
+            
             <div class="row">
                 <div class="col-6">
                     <div class="card"><div class="card-header">Bill to</div><div class="card-body"><div class="mb-2"><div class="form-label">Name</div><span class="bind" data-bind="customer.name">Marc Grasley</span></div><div class="mb-2"><div class="form-label">Phone</div><span class="bind" data-bind="customer.phone">815-483-1448</span></div><div class="mb-2"><div class="form-label">Email</div><span class="bind" data-bind="customer.email">treydurden@gmail.com</span></div></div></div>
@@ -88,7 +88,7 @@
                 <div class="col-4"><div class="mb-2"><div class="form-label">Balance due</div><span class="bind" data-bind="totals.balance">$6,900.00</span></div></div>
             </div>
 
-            <!-- Sheet Footer -->
+            
             <div class="doc-foot">
                 <span><span class="bind" data-bind="company.phone">815-791-7447</span> &middot; <span class="bind" data-bind="company.email">Trey.D@JerrysHeatingCooling.com</span></span>
                 <span><span class="bind" data-bind="company.web">www.jerrysheatingcooling.com</span> &middot; <span class="bind" data-bind="company.license">License # IL-HVAC-1988</span></span>
