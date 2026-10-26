@@ -1,5 +1,5 @@
 
-const FORM_SUITE_VERSION = "2.2.0";
+const FORM_SUITE_VERSION = "2.2.1";
 console.log(`[HVAC Form Suite] Loaded version: ${FORM_SUITE_VERSION}`);
 
 const COMPANIES = [
