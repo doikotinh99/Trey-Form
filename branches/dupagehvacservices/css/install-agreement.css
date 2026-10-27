@@ -26,10 +26,12 @@ body {
 .justify-between { justify-content: space-between; }
 .align-center { align-items: center; }
 .gap-2 { gap: .5rem; }
-.mb-2 { margin-bottom: .35rem; }
-.mb-3 { margin-bottom: 1.15rem; }
-.mt-2 { margin-top: .35rem; }
-.mt-3 { margin-top: 1.15rem; }
+.mb-2 { margin-bottom: .45rem !important; }
+.mb-3 { margin-bottom: .85rem !important; }
+.mb-4 { margin-bottom: 1.35rem !important; }
+.mt-2 { margin-top: .45rem !important; }
+.mt-3 { margin-top: .95rem !important; }
+.mt-4 { margin-top: 1.35rem !important; }
 .text-muted { color: var(--bs-muted); }
 .text-end { text-align: right; }
 .text-success { color: #16a34a; }
@@ -54,7 +56,8 @@ h5 { font-size: 1.15rem; margin-top: 1.35rem; margin-bottom: .65rem; }
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -.4rem;
+    margin-left: -.4rem;
+    margin-right: -.4rem;
 }
 
 .row > * {
@@ -775,6 +778,21 @@ h5 { font-size: 1.15rem; margin-top: 1.35rem; margin-bottom: .65rem; }
 }
 
 @media screen and (max-width: 768px) {
+    body:not(.view-print) .corporate-2rail-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        width: 100% !important;
+        gap: 1rem !important;
+    }
+    body:not(.view-print) .corporate-sidebar,
+    body:not(.view-print) .corporate-sidebar-card,
+    body:not(.view-print) .corporate-sidebar-badge,
+    body:not(.view-print) .corporate-main-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
     
     body:not(.view-print) {
         font-size: 14px !important;
@@ -805,8 +823,7 @@ h5 { font-size: 1.15rem; margin-top: 1.35rem; margin-bottom: .65rem; }
 
     
     .toolbar {
-        position: sticky !important;
-        top: 0 !important;
+        position: static !important;
         padding: 0.4rem 0 0 0 !important;
     }
     .toolbar-inner {
@@ -851,6 +868,35 @@ h5 { font-size: 1.15rem; margin-top: 1.35rem; margin-bottom: .65rem; }
         text-align: center !important;
         gap: 0.6rem !important;
         border-radius: 0 !important;
+    }
+
+    body:not(.view-print) .doc-head-corporate {
+        margin: 0 0 1rem 0 !important;
+        padding: 0 0 0.85rem 0 !important;
+        border-bottom: 2px solid #e2e8f0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    body:not(.view-print) .corporate-field-pair {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: baseline !important;
+        padding: 3px 0 !important;
+        border-bottom: 1px dashed #e2e8f0 !important;
+        gap: 0.5rem !important;
+    }
+    body:not(.view-print) .corporate-field-pair:last-child {
+        border-bottom: none !important;
+    }
+    body:not(.view-print) .corp-field-label {
+        font-size: 0.75rem !important;
+        flex-shrink: 0 !important;
+    }
+    body:not(.view-print) .corp-field-val {
+        text-align: right !important;
+        font-size: 0.82rem !important;
     }
 
     body:not(.view-print) [class*="head-left"],
@@ -1274,7 +1320,8 @@ h5 { font-size: 1.15rem; margin-top: 1.35rem; margin-bottom: .65rem; }
 
     
     body:not(.view-print) .row {
-        margin: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
     body:not(.view-print) .row > * {
         padding: 0 !important;
@@ -1288,18 +1335,105 @@ h5 { font-size: 1.15rem; margin-top: 1.35rem; margin-bottom: .65rem; }
         flex: 1 1 100% !important;
     }
 
-    body:not(.view-print) .table {
+        /* Responsive Table Container */
+    body:not(.view-print) .table-responsive {
         display: block !important;
         width: 100% !important;
+        max-width: 100% !important;
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
-        font-size: 0.8rem !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 6px !important;
+        margin-bottom: 0.85rem !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
     }
+
+    body:not(.view-print) .table {
+        display: table !important;
+        width: 100% !important;
+        min-width: 660px !important;
+        border-collapse: collapse !important;
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    body:not(.view-print) .table > thead {
+        display: table-header-group !important;
+    }
+
+    body:not(.view-print) .table > tbody {
+        display: table-row-group !important;
+    }
+
+    body:not(.view-print) .table tr {
+        display: table-row !important;
+    }
+
     body:not(.view-print) .table th,
     body:not(.view-print) .table td {
-        padding: 0.4rem 0.5rem !important;
+        display: table-cell !important;
+        padding: 8px 10px !important;
+        vertical-align: middle !important;
+    }
+
+    body:not(.view-print) .table th {
+        white-space: nowrap !important;
+        background: var(--brand, #0b2545) !important;
+        color: #ffffff !important;
+        font-size: 0.78rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.3px !important;
+    }
+
+    body:not(.view-print) .table td {
+        font-size: 0.82rem !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        line-height: 1.35 !important;
+    }
+
+    /* Column Width Guarantees */
+    body:not(.view-print) .table th:first-child,
+    body:not(.view-print) .table td:first-child {
+        text-align: center !important;
+        width: 45px !important;
+        min-width: 45px !important;
+        white-space: nowrap !important;
+    }
+
+    body:not(.view-print) .table th:nth-child(2),
+    body:not(.view-print) .table td:nth-child(2) {
+        min-width: 140px !important;
         white-space: normal !important;
-        word-break: break-word !important;
+    }
+
+    body:not(.view-print) .table th:nth-child(3),
+    body:not(.view-print) .table td:nth-child(3) {
+        min-width: 160px !important;
+        white-space: nowrap !important;
+    }
+
+    body:not(.view-print) .table th:nth-child(4),
+    body:not(.view-print) .table td:nth-child(4) {
+        min-width: 80px !important;
+        white-space: nowrap !important;
+    }
+
+    body:not(.view-print) .table th:nth-child(5),
+    body:not(.view-print) .table td:nth-child(5) {
+        min-width: 170px !important;
+        white-space: normal !important;
+    }
+
+    body:not(.view-print) .table th:nth-child(6),
+    body:not(.view-print) .table td:nth-child(6),
+    body:not(.view-print) .table th:nth-child(7),
+    body:not(.view-print) .table td:nth-child(7) {
+        white-space: nowrap !important;
+        text-align: right !important;
+        font-variant-numeric: tabular-nums !important;
+        font-weight: 600 !important;
+        min-width: 95px !important;
     }
 
     
@@ -1355,6 +1489,7 @@ h5 { font-size: 1.15rem; margin-top: 1.35rem; margin-bottom: .65rem; }
     }
 }
 
+body.view-print .table-responsive { display: contents !important; overflow: visible !important; border: none !important; box-shadow: none !important; }
 body.view-print .doc-head,
 body.view-print .doc-head-industrial,
 body.view-print .doc-head-aqua,
@@ -1402,6 +1537,13 @@ body.view-print .v-total-amount {
 }
 
 @media print {
+    .table-responsive {
+        display: contents !important;
+        overflow: visible !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
     @page {
         size: A4 portrait;
         margin: 12mm 14mm;
@@ -1481,18 +1623,19 @@ body.view-print .v-total-amount {
         page-break-after: avoid !important;
     }
 
-    .doc-head, .doc-foot, .eqrow, .total-card, .sig, .table tr, .photo, .alert,
+    .doc-head, .doc-foot, .eqrow, .total-card, .sig, .table tr, .photo, .alert, .card,
     .industrial-dispatch-ticket, .aqua-parties-banner, .eco-parties-card, .luxury-dossier, .urban-meta-grid,
-    .industrial-eq-card, .aqua-eq-card, .eco-eq-card, .luxury-eq-card, .urban-eq-card, .value-eq-card {
-        break-inside: avoid;
-        page-break-inside: avoid;
+    .industrial-eq-card, .aqua-eq-card, .eco-eq-card, .luxury-eq-card, .urban-eq-card, .value-eq-card,
+    .tradesman-eq-card, .corporate-eq-card, .hightech-eq-card, .modular-eq-card,
+    .tradesman-quote-box, .corporate-pricing-panel, .hightech-system-total, .modular-total-panel,
+    .tradesman-customer-row, .corporate-info-grid, .corporate-info-card, .hightech-data-card, .modular-data-block,
+    .tradesman-finance-card, .corporate-pricing-panel, .hightech-finance-card, .modular-finance-card,
+    .industrial-total-box, .aqua-total-box, .eco-investment-card, .luxury-investment-ledger, .urban-total-monolith, .value-savings-card {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
     }
 
-    .eq, .industrial-eq-card, .aqua-eq-card, .eco-eq-card, .luxury-eq-card, .urban-eq-card, .value-eq-card {
-        break-inside: auto !important;
-        page-break-inside: auto !important;
-        margin-bottom: .6rem !important;
-    }
+    
 
     .eq-details {
         border-top: 1px solid #cbd5e1 !important;
@@ -1553,4 +1696,16 @@ body.view-print .v-total-amount {
 .doc-head-luxury .brand-logo {
     width: 58px;
     height: 58px;
+}
+
+
+/* Print Page Break Utility */
+.print-page-break {
+    break-before: page !important;
+    page-break-before: always !important;
+}
+body.view-print .print-page-break {
+    break-before: page !important;
+    page-break-before: always !important;
+    margin-top: 1.5rem !important;
 }

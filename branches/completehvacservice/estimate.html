@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Estimate Form - Complete Heating and Cooling of Bolingbrook</title>
     
-    <link rel="stylesheet" href="css/estimate.css?v=2.2.1">
+    <link rel="stylesheet" href="css/estimate.css?v=2.3.5">
     
-    <script defer src="../../js/form.js?v=2.2.1"></script>
+    <script defer src="../../js/form.js?v=2.3.5"></script>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
                     </label>
                 </div>
                 <div class="toolbar-right">
-                    <button class="btn btn-outline btn-sm" id="btnEmailPreview" title="Preview & Copy formatted email for Gmail">Copy for Gmail</button>
+                    <button class="btn btn-outline btn-sm" id="btnEmailPreview" title="Preview &amp; Copy formatted email for Gmail">Copy for Gmail</button>
                     <button class="btn btn-outline btn-sm" id="cp">Copy sample JSON</button>
                     <button class="btn btn-outline btn-sm" id="pOne" title="Lưu ý khi in: Trong hộp thoại in (Ctrl+P) chọn Scale: 100% (Default)">Print this form</button>
                 </div>
@@ -60,7 +60,7 @@
                         <img src="../../assets/images/logos/completehvacservice.png" alt="Logo" class="brand-logo" data-bind-src="company.logo">
                         <div class="brand-name"><span class="bind" data-bind="company.name">Complete Heating and Cooling of Bolingbrook</span></div>
                     </div>
-                    <div class="brand-tag"><span class="bind" data-bind="company.tagline">Complete Home Comfort Solutions · Bolingbrook & Surrounding</span></div>
+                    <div class="brand-tag"><span class="bind" data-bind="company.tagline">Complete Home Comfort Solutions · Bolingbrook &amp; Surrounding</span></div>
                 </div>
                 <div class="modular-head-right">
                     <span class="badge modular-badge">Estimate Form</span>
@@ -71,57 +71,151 @@
             <h2 class="doc-title">Estimate Form</h2>
 
             
-            <div class="row">
-                <div class="col-6">
-                    <div class="card"><div class="card-header">Prepared for</div><div class="card-body"><div class="mb-2"><div class="form-label">Name</div><span class="bind" data-bind="customer.name">Brandon & Lisa Taylor</span></div><div class="mb-2"><div class="form-label">Phone</div><span class="bind" data-bind="customer.phone">(630) 759-6632</span></div><div class="mb-2"><div class="form-label">Email</div><span class="bind" data-bind="customer.email">treydurden@gmail.com</span></div></div></div>
+            <div class="modular-manifest-ribbon">
+                <div class="modular-manifest-cell">
+                    <div class="modular-cell-title">[01] CLIENT SPEC</div>
+                    <div class="modular-cell-content">
+                        <div class="modular-cell-line">
+                            <span class="modular-cell-label">Client Name</span>
+                            <span class="bind modular-cell-val" data-bind="customer.name">Brandon &amp; Lisa Taylor</span>
+                        </div>
+                        <div class="modular-cell-line">
+                            <span class="modular-cell-label">Phone Link</span>
+                            <span class="bind modular-cell-val" data-bind="customer.phone">(630) 759-6632</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <div class="card"><div class="card-header">Service address</div><div class="card-body"><div class="mb-2"><div class="form-label">Street</div><span class="bind" data-bind="customer.street">612 Falconridge Way</span></div><div class="mb-2"><div class="form-label">City, state, ZIP</div><span class="bind" data-bind="customer.city_state_zip">Bolingbrook, IL 60440</span></div></div></div>
+
+                <div class="modular-manifest-cell">
+                    <div class="modular-cell-title">[02] DEPLOY SITE</div>
+                    <div class="modular-cell-content">
+                        <div class="modular-cell-line">
+                            <span class="modular-cell-label">Street Address</span>
+                            <span class="bind modular-cell-val" data-bind="customer.street">612 Falconridge Way</span>
+                        </div>
+                        <div class="modular-cell-line">
+                            <span class="modular-cell-label">Municipality</span>
+                            <span class="bind modular-cell-val" data-bind="customer.city_state_zip">Bolingbrook, IL 60440</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modular-manifest-cell">
+                    <div class="modular-cell-title">[03] COMMUNICATIONS</div>
+                    <div class="modular-cell-content">
+                        <div class="modular-cell-line">
+                            <span class="modular-cell-label">Email Record</span>
+                            <span class="bind modular-cell-val" data-bind="customer.email">treydurden@gmail.com</span>
+                        </div>
+                        <div class="modular-cell-line">
+                            <span class="modular-cell-label">Field Engineer</span>
+                            <span class="bind modular-cell-val" data-bind="tech.name">Tom Bradley</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modular-manifest-cell">
+                    <div class="modular-cell-title">[04] ARCHITECTURE</div>
+                    <div class="modular-cell-content">
+                        <div class="modular-cell-line">
+                            <span class="modular-cell-label">Spec Number</span>
+                            <span class="bind modular-cell-val" data-bind="doc.number">BB-2026-118</span>
+                        </div>
+                        <div class="modular-cell-line">
+                            <span class="modular-cell-label">Release Date</span>
+                            <span class="bind modular-cell-val" data-bind="doc.date">October 14, 2026</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <h5 class="mt-3">Your new comfort system</h5>
+
+            <h5 class="mt-3 modular-section-title">[MODULE SET] Configured Comfort Equipment</h5>
             <div class="eqlist" data-repeat="equipment">
                 
-                <div class="card eq">
-                    <div class="eqrow">
-                        <div class="img" data-bind-src="image">
+                <div class="modular-eq-card">
+                    <div class="modular-eq-header">
+                        <div class="modular-eq-header-left">
+                            <span class="modular-mod-tag">MODULE 01 &blacktriangleright; HEATING UNIT</span>
+                        </div>
+                        <span class="badge modular-eq-badge">97.0% AFUE TWO-STAGE</span>
+                    </div>
+                    <div class="modular-eq-body">
+                        <div class="modular-eq-img" data-bind-src="image">
                             <img src="../../assets/images/furnace.jpg" alt="Trane S9V2-VS High-Efficiency Gas Furnace">
                         </div>
-                        <div class="eqbody">
-                            <span class="badge" style="float:right; margin-bottom: 4px;">SYSTEM MODULE 01</span>
-                            <h5><span class="bind" data-bind="name">Trane S9V2-VS High-Efficiency Gas Furnace</span></h5>
-                            <div class="small text-muted">Part # <span class="bind" data-bind="part">S9V2B080U3VSAA</span></div>
-                            <div class="kspecs" data-repeat="key_specs">
-                                <div><div class="form-label"><span class="bind" data-bind="label">Efficiency</span></div><span class="bind" data-bind="value">97.0% AFUE Two-Stage</span></div><div><div class="form-label"><span class="bind" data-bind="label">Blower Motor</span></div><span class="bind" data-bind="value">Vortica™ II Variable Speed</span></div><div><div class="form-label"><span class="bind" data-bind="label">Input</span></div><span class="bind" data-bind="value">80,000 BTU/h</span></div><div><div class="form-label"><span class="bind" data-bind="label">Air Filtration</span></div><span class="bind" data-bind="value">CleanEffects™ Compatible</span></div>
+                        <div class="modular-eq-details">
+                            <h4 class="modular-eq-title"><span class="bind" data-bind="name">Trane S9V2-VS High-Efficiency Gas Furnace</span></h4>
+                            <div class="modular-part-code">SPEC-ID: <span class="bind" data-bind="part">S9V2B080U3VSAA</span></div>
+                            <div class="modular-specs-grid" data-repeat="key_specs">
+                                <div class="modular-spec-box">
+                                    <span class="modular-spec-key"><span class="bind" data-bind="label">Efficiency</span></span>
+                                    <span class="modular-spec-val"><span class="bind" data-bind="value">97.0% AFUE Two-Stage</span></span>
+                                </div>
+                                <div class="modular-spec-box">
+                                    <span class="modular-spec-key"><span class="bind" data-bind="label">Blower Motor</span></span>
+                                    <span class="modular-spec-val"><span class="bind" data-bind="value">Vortica™ II Variable Speed</span></span>
+                                </div>
+                                <div class="modular-spec-box">
+                                    <span class="modular-spec-key"><span class="bind" data-bind="label">Input</span></span>
+                                    <span class="modular-spec-val"><span class="bind" data-bind="value">80,000 BTU/h</span></span>
+                                </div>
+                                <div class="modular-spec-box">
+                                    <span class="modular-spec-key"><span class="bind" data-bind="label">Air Filtration</span></span>
+                                    <span class="modular-spec-val"><span class="bind" data-bind="value">CleanEffects™ Compatible</span></span>
+                                </div>
                             </div>
-                            <div class="small"><b class="ok">Warranty</b> <span class="bind" data-bind="warranty">Lifetime heat exchanger, 10-year functional parts</span></div>
+                            <div class="modular-warranty-bar">
+                                <b>Warranty Specification:</b> <span class="bind" data-bind="warranty">Lifetime heat exchanger, 10-year functional parts</span>
+                            </div>
                         </div>
                     </div>
                     <details class="eq-details">
-                        <summary>Full specifications</summary>
+                        <summary>Full modular specifications</summary>
                         <div class="specs" data-repeat="specs">
                             <div class="sp"><span><span class="bind" data-bind="label">Dimensions</span></span><span><span class="bind" data-bind="value">34" H x 17.5" W x 28.75" D</span></span></div><div class="sp"><span><span class="bind" data-bind="label">Exchanger</span></span><span><span class="bind" data-bind="value">Stainless Steel Primary & Secondary</span></span></div>
                         </div>
                     </details>
                 </div>
 
-                <div class="card eq">
-                    <div class="eqrow">
-                        <div class="img" data-bind-src="image">
+                <div class="modular-eq-card">
+                    <div class="modular-eq-header">
+                        <div class="modular-eq-header-left">
+                            <span class="modular-mod-tag">MODULE 02 &blacktriangleright; COOLING UNIT</span>
+                        </div>
+                        <span class="badge modular-eq-badge">14.8 SEER2 ENERGY STAR</span>
+                    </div>
+                    <div class="modular-eq-body">
+                        <div class="modular-eq-img" data-bind-src="image">
                             <img src="../../assets/images/ac-unit.jpg" alt="Trane XR14 High-Efficiency Central Air Conditioner">
                         </div>
-                        <div class="eqbody">
-                            <span class="badge" style="float:right; margin-bottom: 4px;">SYSTEM MODULE 02</span>
-                            <h5><span class="bind" data-bind="name">Trane XR14 High-Efficiency Central Air Conditioner</span></h5>
-                            <div class="small text-muted">Part # <span class="bind" data-bind="part">4TTR4036L1000A</span></div>
-                            <div class="kspecs" data-repeat="key_specs">
-                                <div><div class="form-label"><span class="bind" data-bind="label">Efficiency</span></div><span class="bind" data-bind="value">14.8 SEER2 Energy Star</span></div><div><div class="form-label"><span class="bind" data-bind="label">Capacity</span></div><span class="bind" data-bind="value">3.0 Ton (36,000 BTU)</span></div><div><div class="form-label"><span class="bind" data-bind="label">Coil Type</span></div><span class="bind" data-bind="value">All-Aluminum Spine Fin™</span></div><div><div class="form-label"><span class="bind" data-bind="label">Compressor</span></div><span class="bind" data-bind="value">Climatuff™ Scroll Compressor</span></div>
+                        <div class="modular-eq-details">
+                            <h4 class="modular-eq-title"><span class="bind" data-bind="name">Trane XR14 High-Efficiency Central Air Conditioner</span></h4>
+                            <div class="modular-part-code">SPEC-ID: <span class="bind" data-bind="part">4TTR4036L1000A</span></div>
+                            <div class="modular-specs-grid" data-repeat="key_specs">
+                                <div class="modular-spec-box">
+                                    <span class="modular-spec-key"><span class="bind" data-bind="label">Efficiency</span></span>
+                                    <span class="modular-spec-val"><span class="bind" data-bind="value">14.8 SEER2 Energy Star</span></span>
+                                </div>
+                                <div class="modular-spec-box">
+                                    <span class="modular-spec-key"><span class="bind" data-bind="label">Capacity</span></span>
+                                    <span class="modular-spec-val"><span class="bind" data-bind="value">3.0 Ton (36,000 BTU)</span></span>
+                                </div>
+                                <div class="modular-spec-box">
+                                    <span class="modular-spec-key"><span class="bind" data-bind="label">Coil Type</span></span>
+                                    <span class="modular-spec-val"><span class="bind" data-bind="value">All-Aluminum Spine Fin™</span></span>
+                                </div>
+                                <div class="modular-spec-box">
+                                    <span class="modular-spec-key"><span class="bind" data-bind="label">Compressor</span></span>
+                                    <span class="modular-spec-val"><span class="bind" data-bind="value">Climatuff™ Scroll Compressor</span></span>
+                                </div>
                             </div>
-                            <div class="small"><b class="ok">Warranty</b> <span class="bind" data-bind="warranty">10-year registered compressor and parts</span></div>
+                            <div class="modular-warranty-bar">
+                                <b>Warranty Specification:</b> <span class="bind" data-bind="warranty">10-year registered compressor and parts</span>
+                            </div>
                         </div>
                     </div>
                     <details class="eq-details">
-                        <summary>Full specifications</summary>
+                        <summary>Full modular specifications</summary>
                         <div class="specs" data-repeat="specs">
                             <div class="sp"><span><span class="bind" data-bind="label">Basepan</span></span><span><span class="bind" data-bind="value">DuraTuff™ Rustproof Composite</span></span></div><div class="sp"><span><span class="bind" data-bind="label">Refrigerant</span></span><span><span class="bind" data-bind="value">R-410A Factory Charged</span></span></div>
                         </div>
@@ -129,59 +223,72 @@
                 </div>
             </div>
 
-            <h5 class="mt-3">Your investment</h5>
+            <h5 class="mt-3 modular-section-title print-page-break">[FINANCIAL MODULE] Total System Investment</h5>
             
-            <div class="total-card">
-                <span>Estimate total</span>
-                <span class="big"><span class="bind" data-bind="totals.total">$14,200.00</span></span>
-            </div>
-            <div class="row mt-3">
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-label">Deposit to schedule</div>
-                            <div class="big2"><span class="bind" data-bind="totals.deposit">$7,100.00</span></div>
+            <div class="modular-financial-pipeline">
+                <div class="modular-total-panel">
+                    <div class="modular-total-bar">
+                        <span class="modular-total-tag">[APPROVED PROPOSAL] TURNKEY INSTALLATION PACKAGE</span>
+                        <span class="modular-total-rev">REV-2026-BB</span>
+                    </div>
+                    <div class="modular-total-main">
+                        <div class="modular-total-info">
+                            <div class="modular-total-title">Total Project Valuation</div>
+                            <div class="modular-total-sub">Includes Trane heating &amp; cooling hardware, transition fittings, electrical &amp; complete startup</div>
+                        </div>
+                        <div class="modular-total-sum">
+                            <span class="bind" data-bind="totals.total">$14,200.00</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-label"><span class="bind" data-bind="financing[].plan">Complete 120</span> &middot; <span class="bind" data-bind="financing[].term">120 months</span></div>
-                            <div class="big2"><span class="bind" data-bind="financing[].monthly">$237.75</span><small> / month</small></div>
-                        </div>
+                    <div class="modular-total-deposit mt-2" style="border-top:1px dashed rgba(255,255,255,0.2); padding-top:6px; display:flex; justify-content:space-between; font-size:0.8rem; color:#cbd5e1;">
+                        <span>Required Schedule Deposit (50%): <b style="color:#f97316;"><span class="bind" data-bind="totals.deposit">$7,100.00</span></b></span>
+                        <span>Zero early prepayment penalty</span>
                     </div>
                 </div>
-<div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-label"><span class="bind" data-bind="financing[].plan">Complete 84</span> &middot; <span class="bind" data-bind="financing[].term">84 months</span></div>
-                            <div class="big2"><span class="bind" data-bind="financing[].monthly">$290.10</span><small> / month</small></div>
+
+                <div class="modular-financing-stack">
+                    <div class="modular-finance-card">
+                        <div>
+                            <div class="form-label"><span class="bind" data-bind="financing[].plan">Complete 120</span> &middot; <span class="bind" data-bind="financing[].term">120 mo</span></div>
+                            <small class="text-muted">Extended Comfort Term</small>
+                        </div>
+                        <div class="text-end">
+                            <div class="big2"><span class="bind" data-bind="financing[].monthly">$237.75</span><small> / mo</small></div>
+                        </div>
+                    </div>
+
+                    <div class="modular-finance-card">
+                        <div>
+                            <div class="form-label"><span class="bind" data-bind="financing[].plan">Complete 84</span> &middot; <span class="bind" data-bind="financing[].term">84 mo</span></div>
+                            <small class="text-muted">Accelerated Home Equity</small>
+                        </div>
+                        <div class="text-end">
+                            <div class="big2"><span class="bind" data-bind="financing[].monthly">$290.10</span><small> / mo</small></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="alert small mb-3"><span class="bind" data-bind="company.financing_note">Comprehensive financing plans available 24/7 with zero prepayment penalties and fast approvals.</span></div>
 
-            <h5 class="mt-3">Our warranty</h5>
+            <h5 class="mt-3 modular-section-title">[WARRANTY MODULE] Protection Terms</h5>
             <div class="alert mb-3"><b><span class="bind" data-bind="company.warranty_text">Complete warranty package on heating, cooling, ductwork and whole-home air filtration systems for Bolingbrook homeowners.</span></b></div>
             <div class="alert small mb-3"><b>Must maintain:</b> annual service appointments and records are required for each piece of equipment during the warranty term.<br><b>Not covered by the manufacturer warranty:</b> power surge; direct or indirect physical damage; water damage; negligent service or repairs; and claims after lengthy periods without proper service or maintenance.<br><b>Protect your equipment:</b> keep the area free of airflow blockage, dirt, dust, standing water and high traffic. Where applicable, place 36" of gravel or stone around outdoor units.</div>
-            <h5>Acceptance</h5>
+            
+            <h5 class="modular-section-title">Acceptance &amp; Verification</h5>
             <div class="row mt-3">
-        <div class="col-6">
-            <div class="sig" data-bind-src="signature.customer_image">
-                <img src="../../assets/images/signature.png" alt="Signature">
+                <div class="col-6">
+                    <div class="sig" data-bind-src="signature.customer_image">
+                        <img src="../../assets/images/signature.png" alt="Signature">
+                    </div>
+                    <div class="small text-muted">Customer signature</div>
+                </div>
+                <div class="col-6">
+                    <div class="sig"><span class="bind" data-bind="signature.date">10/14/2026</span></div>
+                    <div class="small text-muted">Date</div>
+                </div>
             </div>
-            <div class="small text-muted">Customer signature</div>
-        </div>
-        <div class="col-6">
-            <div class="sig"><span class="bind" data-bind="signature.date">10/14/2026</span></div>
-            <div class="small text-muted">Date</div>
-        </div>
-    </div>
             <div class="alert mt-3 small">Thank you for the opportunity to be your service provider. Questions? Contact <span class="bind" data-bind="tech.name">Tom Bradley</span> at <span class="bind" data-bind="tech.phone">(630) 555-0155</span>.</div>
 
-            
             <div class="doc-foot">
                 <span><span class="bind" data-bind="company.phone">630-555-0155</span> &middot; <span class="bind" data-bind="company.email">service@completehvacservice.com</span></span>
                 <span><span class="bind" data-bind="company.web">www.completehvacservice.com</span> &middot; <span class="bind" data-bind="company.license">License # IL-BOLING-3390</span></span>

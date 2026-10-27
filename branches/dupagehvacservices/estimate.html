@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Estimate Form - Best Comfort HVAC Naperville</title>
     
-    <link rel="stylesheet" href="css/estimate.css?v=2.2.1">
+    <link rel="stylesheet" href="css/estimate.css?v=2.3.5">
     
-    <script defer src="../../js/form.js?v=2.2.1"></script>
+    <script defer src="../../js/form.js?v=2.3.5"></script>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
                     </label>
                 </div>
                 <div class="toolbar-right">
-                    <button class="btn btn-outline btn-sm" id="btnEmailPreview" title="Preview & Copy formatted email for Gmail">Copy for Gmail</button>
+                    <button class="btn btn-outline btn-sm" id="btnEmailPreview" title="Preview &amp; Copy formatted email for Gmail">Copy for Gmail</button>
                     <button class="btn btn-outline btn-sm" id="cp">Copy sample JSON</button>
                     <button class="btn btn-outline btn-sm" id="pOne" title="Lưu ý khi in: Trong hộp thoại in (Ctrl+P) chọn Scale: 100% (Default)">Print this form</button>
                 </div>
@@ -50,192 +50,233 @@
 
     
     <main class="page-wrapper">
-        <section class="sheet sheet-luxury" id="s-estimate">
+        <section class="sheet sheet-corporate" id="s-estimate">
             
             
-            <div class="doc-head doc-head-luxury">
-                <div class="luxury-crest">⚜ MASTER CRAFTSMAN ATELIER ⚜</div>
-                <div class="brand-title-wrap">
+            <div class="doc-head doc-head-corporate">
+                <div class="corporate-head-left">
+                    <div class="brand-title-wrap">
                         <img src="../../assets/images/logos/dupagehvacservices.png" alt="Logo" class="brand-logo" data-bind-src="company.logo">
-                        <div class="brand-name"><span class="bind" data-bind="company.name">Best Comfort HVAC Naperville</span></div>
+                        <div>
+                            <div class="brand-name"><span class="bind" data-bind="company.name">Best Comfort HVAC Naperville</span></div>
+                            <div class="brand-tag"><span class="bind" data-bind="company.tagline">Premier Heating, Air Conditioning &amp; Indoor Air Quality · Naperville &amp; DuPage County</span></div>
+                        </div>
                     </div>
-                <div class="luxury-divider">✦ <span>HIGH-PERFORMANCE ARCHITECTURAL COMFORT</span> ✦</div>
-                <div class="brand-tag"><span class="bind" data-bind="company.tagline">Premier Heating, Air Conditioning & Indoor Air Quality · Naperville & DuPage County</span></div>
-                <div class="luxury-meta-strip">
-                    <span>COMMISSION NO. <b><span class="bind" data-bind="doc.number">EST-2026-NP01</span></b></span>
-                    <span>&bull;</span>
-                    <span>ISSUED: <b><span class="bind" data-bind="doc.date">October 14, 2026</span></b></span>
-                    <span>&bull;</span>
-                    <span class="luxury-doc-name">Estimate Form</span>
+                </div>
+                <div class="corporate-head-right">
+                    <span class="badge corporate-badge">Estimate Form</span>
+                    <div class="corporate-meta">
+                        <div>No. <b><span class="bind" data-bind="doc.number">EST-2026-NP01</span></b></div>
+                        <div><span class="bind" data-bind="doc.date">October 14, 2026</span></div>
+                    </div>
                 </div>
             </div>
             <h2 class="doc-title">Estimate Form</h2>
 
             
-            
-            
-            <div class="luxury-dossier">
-                <div class="luxury-dossier-inner">
-                    <div class="luxury-dossier-col">
-                        <div class="luxury-dossier-label">CLIENT OF RECORD</div>
-                        <div class="luxury-dossier-val"><span class="bind" data-bind="customer.name">William & Catherine Prescott</span></div>
-                        <div class="luxury-dossier-sub"><span class="bind" data-bind="customer.phone">(630) 416-8920</span> &bull; <span class="bind" data-bind="customer.email">treydurden@gmail.com</span></div>
+            <div class="corporate-2rail-layout">
+                <aside class="corporate-sidebar">
+                    <div class="corporate-sidebar-card">
+                        <div class="corporate-sidebar-heading">
+                            <span>&#128100;</span> Client Specification
+                        </div>
+                        <div class="corporate-sidebar-content">
+                            <div class="corporate-field-pair">
+                                <span class="corp-field-label">Account Name</span>
+                                <span class="bind corp-field-val" data-bind="customer.name">William &amp; Catherine Prescott</span>
+                            </div>
+                            <div class="corporate-field-pair">
+                                <span class="corp-field-label">Direct Contact</span>
+                                <span class="bind corp-field-val" data-bind="customer.phone">(630) 416-8920</span>
+                            </div>
+                            <div class="corporate-field-pair">
+                                <span class="corp-field-label">Official Email</span>
+                                <span class="bind corp-field-val" data-bind="customer.email">treydurden@gmail.com</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="luxury-dossier-seal">
-                        <div class="gold-crest">✦ ⚜ ✦</div>
+
+                    <div class="corporate-sidebar-card">
+                        <div class="corporate-sidebar-heading">
+                            <span>&#128205;</span> Project Location
+                        </div>
+                        <div class="corporate-sidebar-content">
+                            <div class="corporate-field-pair">
+                                <span class="corp-field-label">Service Street</span>
+                                <span class="bind corp-field-val" data-bind="customer.street">840 Westgate Rd</span>
+                            </div>
+                            <div class="corporate-field-pair">
+                                <span class="corp-field-label">Municipality / ZIP</span>
+                                <span class="bind corp-field-val" data-bind="customer.city_state_zip">Naperville, IL 60540</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="luxury-dossier-col">
-                        <div class="luxury-dossier-label">DESIGNATED RESIDENCE</div>
-                        <div class="luxury-dossier-val"><span class="bind" data-bind="customer.street">840 Westgate Rd</span></div>
-                        <div class="luxury-dossier-sub"><span class="bind" data-bind="customer.city_state_zip">Naperville, IL 60540</span></div>
+
+                    <div class="corporate-sidebar-card">
+                        <div class="corporate-sidebar-heading">
+                            <span>&#128188;</span> Designated Advisor
+                        </div>
+                        <div class="corporate-sidebar-content">
+                            <div class="corporate-field-pair">
+                                <span class="corp-field-label">Comfort Engineer</span>
+                                <span class="bind corp-field-val" data-bind="tech.name">David Miller</span>
+                            </div>
+                            <div class="corporate-field-pair">
+                                <span class="corp-field-label">Direct Line</span>
+                                <span class="bind corp-field-val" data-bind="tech.phone">(630) 555-0142</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="luxury-dossier-footer">
-                    Master Comfort Architect: <b><span class="bind" data-bind="tech.name">David Miller</span></b> &bull; Private Line: <span class="bind" data-bind="tech.phone">(630) 555-0142</span> &bull; Direct: <span class="bind" data-bind="tech.email">d.miller@dupagehvacservices.com</span>
-                </div>
+
+                    <div class="corporate-sidebar-badge">
+                        <div class="corp-badge-shield">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+                        <div class="corp-badge-title">DuPage Quality Protocol</div>
+                        <div class="corp-badge-desc">100% Factory Certified &bull; Code Compliant Installation</div>
+                    </div>
+                </aside>
+
+                <main class="corporate-main-content">
+                    <div class="corporate-section-bar">
+                        <h5 class="corporate-section-title">&#9632; PROPOSED COMFORT ARCHITECTURE</h5>
+                        <span class="corporate-section-tag">TRANE&reg; HYBRID SYSTEM</span>
+                    </div>
+
+                    <div class="eqlist" data-repeat="equipment">
+                        <div class="corporate-eq-card">
+                            <div class="corporate-eq-header">
+                                <span class="corporate-sys-label">SYSTEM 01</span>
+                                <span class="badge corporate-eq-badge">20.5 SEER2 HYBRID</span>
+                            </div>
+                            <div class="corporate-eq-body">
+                                <div class="corporate-eq-img" data-bind-src="image">
+                                    <img src="../../assets/images/ac-unit.jpg" alt="Trane XV20i TruComfort™ Variable Speed Heat Pump">
+                                </div>
+                                <div class="corporate-eq-details">
+                                    <h4><span class="bind" data-bind="name">Trane XV20i TruComfort™ Variable Speed Heat Pump</span></h4>
+                                    <div class="corporate-part">Model <span class="bind" data-bind="part">4TWV0036A1000B</span></div>
+                                    <div class="corporate-specs-table" data-repeat="key_specs">
+                                        <div class="corporate-spec-row">
+                                            <span class="corporate-spec-label"><span class="bind" data-bind="label">Efficiency</span></span>
+                                            <span class="corporate-spec-value"><span class="bind" data-bind="value">Up to 20.5 SEER2</span></span>
+                                        </div>
+                                        <div class="corporate-spec-row">
+                                            <span class="corporate-spec-label"><span class="bind" data-bind="label">Capacity</span></span>
+                                            <span class="corporate-spec-value"><span class="bind" data-bind="value">3.0 Ton (36,000 BTU)</span></span>
+                                        </div>
+                                        <div class="corporate-spec-row">
+                                            <span class="corporate-spec-label"><span class="bind" data-bind="label">Compressor</span></span>
+                                            <span class="corporate-spec-value"><span class="bind" data-bind="value">Climatuff™ Variable Speed</span></span>
+                                        </div>
+                                        <div class="corporate-spec-row">
+                                            <span class="corporate-spec-label"><span class="bind" data-bind="label">Sound</span></span>
+                                            <span class="corporate-spec-value"><span class="bind" data-bind="value">54 dBA Ultra-Quiet</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="corporate-warranty">
+                                        <b>Warranty:</b> <span class="bind" data-bind="warranty">10-year registered parts, 12-year compressor warranty</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <details class="eq-details">
+                                <summary>Full specifications</summary>
+                                <div class="specs" data-repeat="specs">
+                                    <div class="sp"><span><span class="bind" data-bind="label">Cooling Efficiency</span></span><span><span class="bind" data-bind="value">20.5 SEER2 / 12.5 EER2</span></span></div><div class="sp"><span><span class="bind" data-bind="label">Heating Efficiency</span></span><span><span class="bind" data-bind="value">10.0 HSPF2</span></span></div><div class="sp"><span><span class="bind" data-bind="label">Communication</span></span><span><span class="bind" data-bind="value">ComfortLink™ II Communicating</span></span></div><div class="sp"><span><span class="bind" data-bind="label">Coil Type</span></span><span><span class="bind" data-bind="value">All-Aluminum Spine Fin™</span></span></div>
+                                </div>
+                            </details>
+                        </div>
+
+                        <div class="corporate-eq-card">
+                            <div class="corporate-eq-header">
+                                <span class="corporate-sys-label">SYSTEM 02</span>
+                                <span class="badge corporate-eq-badge">97% AFUE GAS</span>
+                            </div>
+                            <div class="corporate-eq-body">
+                                <div class="corporate-eq-img" data-bind-src="image">
+                                    <img src="../../assets/images/furnace.jpg" alt="Trane S9V2 Two-Stage Communicating Gas Furnace">
+                                </div>
+                                <div class="corporate-eq-details">
+                                    <h4><span class="bind" data-bind="name">Trane S9V2 Two-Stage Communicating Gas Furnace</span></h4>
+                                    <div class="corporate-part">Model <span class="bind" data-bind="part">S9V2B080U3VSAA</span></div>
+                                    <div class="corporate-specs-table" data-repeat="key_specs">
+                                        <div class="corporate-spec-row">
+                                            <span class="corporate-spec-label"><span class="bind" data-bind="label">Efficiency</span></span>
+                                            <span class="corporate-spec-value"><span class="bind" data-bind="value">97.0% AFUE</span></span>
+                                        </div>
+                                        <div class="corporate-spec-row">
+                                            <span class="corporate-spec-label"><span class="bind" data-bind="label">Input BTU</span></span>
+                                            <span class="corporate-spec-value"><span class="bind" data-bind="value">80,000 BTU/h</span></span>
+                                        </div>
+                                        <div class="corporate-spec-row">
+                                            <span class="corporate-spec-label"><span class="bind" data-bind="label">Blower</span></span>
+                                            <span class="corporate-spec-value"><span class="bind" data-bind="value">Vortica™ II Variable Speed ECM</span></span>
+                                        </div>
+                                        <div class="corporate-spec-row">
+                                            <span class="corporate-spec-label"><span class="bind" data-bind="label">Stages</span></span>
+                                            <span class="corporate-spec-value"><span class="bind" data-bind="value">Two-stage dual-fuel ready</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="corporate-warranty">
+                                        <b>Warranty:</b> <span class="bind" data-bind="warranty">Lifetime heat exchanger, 10-year functional parts warranty</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <details class="eq-details">
+                                <summary>Full specifications</summary>
+                                <div class="specs" data-repeat="specs">
+                                    <div class="sp"><span><span class="bind" data-bind="label">Configuration</span></span><span><span class="bind" data-bind="value">Upflow / Horizontal Left</span></span></div><div class="sp"><span><span class="bind" data-bind="label">Heat Exchanger</span></span><span><span class="bind" data-bind="value">Tubular Stainless Steel Primary</span></span></div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </main>
             </div>
-            <h5 class="mt-3">Your new comfort system</h5>
-            <div class="eqlist" data-repeat="equipment">
-                
-                <div class="card luxury-eq-card">
-                    <div class="luxury-eq-top">
-                        <span class="luxury-spec-num">BESPOKE ARCHITECTURAL SYSTEM // 01</span>
-                        <span class="badge luxury-badge">20.5 SEER2 HYBRID</span>
+
+            <h5 class="mt-3 corporate-section-heading print-page-break">&#9632; EXECUTIVE INVESTMENT &amp; FINANCING MATRIX</h5>
+            
+            <div class="corporate-financial-matrix">
+                <div class="corporate-pricing-panel">
+                    <div class="corporate-pricing-header">
+                        <span>Project Valuation Summary</span>
+                        <span class="corp-pill">TURNKEY</span>
                     </div>
-                    <div class="luxury-eq-grid">
-                        <div class="luxury-img-frame" data-bind-src="image">
-                            <img src="../../assets/images/ac-unit.jpg" alt="Trane XV20i TruComfort™ Variable Speed Heat Pump">
+                    <div class="corporate-pricing-body">
+                        <div class="corporate-pricing-total">
+                            <span>Total Commission</span>
+                            <span class="corporate-total-amount"><span class="bind" data-bind="totals.total">$18,450.00</span></span>
                         </div>
-                        <div class="luxury-eq-narrative">
-                            <h3><span class="bind" data-bind="name">Trane XV20i TruComfort™ Variable Speed Heat Pump</span></h3>
-                            <div class="luxury-part-tag">REGISTRY PART: <span class="bind" data-bind="part">4TWV0036A1000B</span></div>
-                            <p class="luxury-prose">Custom calibrated for whispering tranquility (54 dBA) with continuous variable-speed inverter modulation for unsurpassed thermal stability.</p>
-                            <div class="luxury-specs-list" data-repeat="key_specs">
-                                
-                    <div class="luxury-spec-item">
-                        <span class="diamond">◆</span>
-                        <b><span class="bind" data-bind="label">Efficiency</span>:</b>
-                        <span><span class="bind" data-bind="value">Up to 20.5 SEER2</span></span>
-                    </div>
-                    <div class="luxury-spec-item">
-                        <span class="diamond">◆</span>
-                        <b><span class="bind" data-bind="label">Capacity</span>:</b>
-                        <span><span class="bind" data-bind="value">3.0 Ton (36,000 BTU)</span></span>
-                    </div>
-                    <div class="luxury-spec-item">
-                        <span class="diamond">◆</span>
-                        <b><span class="bind" data-bind="label">Compressor</span>:</b>
-                        <span><span class="bind" data-bind="value">Climatuff™ Variable Speed</span></span>
-                    </div>
-                    <div class="luxury-spec-item">
-                        <span class="diamond">◆</span>
-                        <b><span class="bind" data-bind="label">Sound</span>:</b>
-                        <span><span class="bind" data-bind="value">54 dBA Ultra-Quiet</span></span>
-                    </div>
+                        <div class="corporate-pricing-ledger">
+                            <div class="corporate-pricing-row">
+                                <span>Initial Deposit Required</span>
+                                <span><b><span class="bind" data-bind="totals.deposit">$9,225.00</span></b></span>
                             </div>
-                            <div class="luxury-warranty-strip">
-                                ⚜ <b>Concierge Master Warranty:</b> <span class="bind" data-bind="warranty">10-year registered parts, 12-year compressor warranty</span>
+                            <div class="corporate-pricing-row">
+                                <span>Balance Upon Completion</span>
+                                <span><b><span class="bind" data-bind="totals.balance">$9,225.00</span></b></span>
                             </div>
                         </div>
                     </div>
-                    <details class="eq-details">
-                        <summary>Examine complete architectural engineering specifications</summary>
-                        <div class="specs" data-repeat="specs">
-                            <div class="sp"><span><span class="bind" data-bind="label">Cooling Efficiency</span></span><span><span class="bind" data-bind="value">20.5 SEER2 / 12.5 EER2</span></span></div><div class="sp"><span><span class="bind" data-bind="label">Heating Efficiency</span></span><span><span class="bind" data-bind="value">10.0 HSPF2</span></span></div><div class="sp"><span><span class="bind" data-bind="label">Communication</span></span><span><span class="bind" data-bind="value">ComfortLink™ II Communicating</span></span></div><div class="sp"><span><span class="bind" data-bind="label">Coil Type</span></span><span><span class="bind" data-bind="value">All-Aluminum Spine Fin™</span></span></div>
-                        </div>
-                    </details>
                 </div>
 
-                <div class="card luxury-eq-card">
-                    <div class="luxury-eq-top">
-                        <span class="luxury-spec-num">BESPOKE ARCHITECTURAL SYSTEM // 02</span>
-                        <span class="badge luxury-badge">97% AFUE GAS</span>
-                    </div>
-                    <div class="luxury-eq-grid">
-                        <div class="luxury-img-frame" data-bind-src="image">
-                            <img src="../../assets/images/furnace.jpg" alt="Trane S9V2 Two-Stage Communicating Gas Furnace">
+                <div class="corporate-financing-col">
+                    <div class="corporate-finance-card highlight-card">
+                        <div class="corp-finance-head">
+                            <span class="corp-plan-name"><span class="bind" data-bind="financing[].plan">Plan L1510</span></span>
+                            <span class="corp-plan-term"><span class="bind" data-bind="financing[].term">120 months</span></span>
                         </div>
-                        <div class="luxury-eq-narrative">
-                            <h3><span class="bind" data-bind="name">Trane S9V2 Two-Stage Communicating Gas Furnace</span></h3>
-                            <div class="luxury-part-tag">REGISTRY PART: <span class="bind" data-bind="part">S9V2B080U3VSAA</span></div>
-                            <p class="luxury-prose">Custom calibrated for whispering tranquility (54 dBA) with continuous variable-speed inverter modulation for unsurpassed thermal stability.</p>
-                            <div class="luxury-specs-list" data-repeat="key_specs">
-                                
-                    <div class="luxury-spec-item">
-                        <span class="diamond">◆</span>
-                        <b><span class="bind" data-bind="label">Efficiency</span>:</b>
-                        <span><span class="bind" data-bind="value">97.0% AFUE</span></span>
-                    </div>
-                    <div class="luxury-spec-item">
-                        <span class="diamond">◆</span>
-                        <b><span class="bind" data-bind="label">Input BTU</span>:</b>
-                        <span><span class="bind" data-bind="value">80,000 BTU/h</span></span>
-                    </div>
-                    <div class="luxury-spec-item">
-                        <span class="diamond">◆</span>
-                        <b><span class="bind" data-bind="label">Blower</span>:</b>
-                        <span><span class="bind" data-bind="value">Vortica™ II Variable Speed ECM</span></span>
-                    </div>
-                    <div class="luxury-spec-item">
-                        <span class="diamond">◆</span>
-                        <b><span class="bind" data-bind="label">Stages</span>:</b>
-                        <span><span class="bind" data-bind="value">Two-stage dual-fuel ready</span></span>
-                    </div>
-                            </div>
-                            <div class="luxury-warranty-strip">
-                                ⚜ <b>Concierge Master Warranty:</b> <span class="bind" data-bind="warranty">Lifetime heat exchanger, 10-year functional parts warranty</span>
-                            </div>
+                        <div class="corp-finance-rate">
+                            <div class="corp-rate-val"><span class="bind" data-bind="financing[].monthly">$308.90</span><small> / mo</small></div>
+                            <div class="corp-rate-note">Lowest monthly investment option</div>
                         </div>
                     </div>
-                    <details class="eq-details">
-                        <summary>Examine complete architectural engineering specifications</summary>
-                        <div class="specs" data-repeat="specs">
-                            <div class="sp"><span><span class="bind" data-bind="label">Configuration</span></span><span><span class="bind" data-bind="value">Upflow / Horizontal Left</span></span></div><div class="sp"><span><span class="bind" data-bind="label">Heat Exchanger</span></span><span><span class="bind" data-bind="value">Tubular Stainless Steel Primary</span></span></div>
-                        </div>
-                    </details>
-                </div>
-            </div>
 
-            <h5 class="mt-3">Your investment</h5>
-            
-            
-            <div class="luxury-investment-ledger">
-                <div class="luxury-ledger-top">
-                    <span class="luxury-ledger-tag">BESPOKE ARCHITECTURAL COMMISSION</span>
-                    <span class="luxury-concierge-pill">✦ ALL-INCLUSIVE WHITE-GLOVE SERVICE</span>
-                </div>
-                <div class="luxury-ledger-main">
-                    <div class="luxury-ledger-label">Total Commission Investment</div>
-                    <div class="luxury-ledger-val"><span class="bind" data-bind="totals.total">$18,450.00</span></div>
-                </div>
-                <div class="luxury-ledger-split">
-                    <span>Initial Commission Deposit: <b><span class="bind" data-bind="totals.deposit">$9,225.00</span></b></span>
-                    <span>&bull;</span>
-                    <span>Final Balance upon Flawless Sign-off: <b><span class="bind" data-bind="totals.balance">$9,225.00</span></b></span>
-                </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-label">Deposit to schedule</div>
-                            <div class="big2"><span class="bind" data-bind="totals.deposit">$9,225.00</span></div>
+                    <div class="corporate-finance-card">
+                        <div class="corp-finance-head">
+                            <span class="corp-plan-name"><span class="bind" data-bind="financing[].plan">Plan LR0084</span></span>
+                            <span class="corp-plan-term"><span class="bind" data-bind="financing[].term">84 months</span></span>
                         </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-label"><span class="bind" data-bind="financing[].plan">Plan L1510</span> &middot; <span class="bind" data-bind="financing[].term">120 months</span></div>
-                            <div class="big2"><span class="bind" data-bind="financing[].monthly">$308.90</span><small> / month</small></div>
-                        </div>
-                    </div>
-                </div>
-<div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-label"><span class="bind" data-bind="financing[].plan">Plan LR0084</span> &middot; <span class="bind" data-bind="financing[].term">84 months</span></div>
-                            <div class="big2"><span class="bind" data-bind="financing[].monthly">$376.80</span><small> / month</small></div>
+                        <div class="corp-finance-rate">
+                            <div class="corp-rate-val"><span class="bind" data-bind="financing[].monthly">$376.80</span><small> / mo</small></div>
+                            <div class="corp-rate-note">Accelerated equity term</div>
                         </div>
                     </div>
                 </div>
@@ -243,7 +284,7 @@
             <div class="alert small mb-3"><span class="bind" data-bind="company.financing_note">Apply for 0% APR 24-month promotional financing at FTLFinance.com. No early repayment penalty.</span></div>
 
             <h5 class="mt-3">Our warranty</h5>
-            <div class="alert mb-3"><b><span class="bind" data-bind="company.warranty_text">Best Comfort HVAC residential hybrid installations feature an exclusive 10-year parts & labor warranty with annual maintenance registration.</span></b></div>
+            <div class="alert mb-3"><b><span class="bind" data-bind="company.warranty_text">Best Comfort HVAC residential hybrid installations feature an exclusive 10-year parts &amp; labor warranty with annual maintenance registration.</span></b></div>
             <div class="alert small mb-3"><b>Must maintain:</b> annual service appointments and records are required for each piece of equipment during the warranty term.<br><b>Not covered by the manufacturer warranty:</b> power surge; direct or indirect physical damage; water damage; negligent service or repairs; and claims after lengthy periods without proper service or maintenance.<br><b>Protect your equipment:</b> keep the area free of airflow blockage, dirt, dust, standing water and high traffic. Where applicable, place 36" of gravel or stone around outdoor units.</div>
             <h5>Acceptance</h5>
             <div class="row mt-3">

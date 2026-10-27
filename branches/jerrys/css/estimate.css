@@ -26,10 +26,12 @@ body {
 .justify-between { justify-content: space-between; }
 .align-center { align-items: center; }
 .gap-2 { gap: .5rem; }
-.mb-2 { margin-bottom: .35rem; }
-.mb-3 { margin-bottom: .6rem; }
-.mt-2 { margin-top: .35rem; }
-.mt-3 { margin-top: .6rem; }
+.mb-2 { margin-bottom: .5rem !important; }
+.mb-3 { margin-bottom: 1.15rem !important; }
+.mb-4 { margin-bottom: 1.75rem !important; }
+.mt-2 { margin-top: .5rem !important; }
+.mt-3 { margin-top: 1.15rem !important; }
+.mt-4 { margin-top: 1.75rem !important; }
 .text-muted { color: var(--bs-muted); }
 .text-end { text-align: right; }
 .text-success { color: #16a34a; }
@@ -43,7 +45,7 @@ h1, h2, h3, h4, h5 {
 
 h1 { font-size: 1.85rem; }
 h2 { font-size: 1.45rem; }
-h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
+h5 { font-size: 1.12rem; margin-top: 1.15rem; margin-bottom: .5rem; }
 
 .container {
     max-width: 8.5in;
@@ -54,7 +56,8 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -.4rem;
+    margin-left: -.4rem;
+    margin-right: -.4rem;
 }
 
 .row > * {
@@ -609,14 +612,351 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
 .big2 { font-size: 1.35rem; font-weight: 800; color: var(--brand); }
 .big2 small { font-size: .72rem; font-weight: 400; color: var(--bs-muted); }
 
-            
-            body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #e9ecef; }
-            .sheet { border-radius: 4px; border: 1px solid #cbd5e1; }
-            .doc-head { border-radius: 4px 4px 0 0; background: #0b2545 !important; border-bottom: 3.5px solid #c8102e; }
-            .card { border-radius: 4px; }
-            .eq { border-radius: 4px; }
-            .total-card { border-radius: 4px; background: #0b2545 !important; border-bottom: 3px solid #c8102e; }
-            
+            /* --- TRUSTED TRADESMAN ESTIMATE THEME --- */
+            body { font-family: var(--font-body); background: #f4f6f8; }
+            .sheet-tradesman {
+                border-radius: 8px !important;
+                border: 1px solid #fed7aa;
+                border-top: 5px solid #c8102e !important;
+                box-shadow: 0 12px 36px rgba(199, 16, 46, 0.07);
+                padding: 16mm 18mm;
+                background: #ffffff;
+            }
+            .sheet-tradesman .doc-title {
+                display: none;
+            }
+            .tradesman-section-heading {
+                font-size: 1.05rem;
+                font-weight: 700;
+                color: #0b2545;
+                margin-top: 1.25rem;
+                margin-bottom: 0.65rem;
+            }
+
+            /* Header */
+            .doc-head-tradesman {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                background: #0b2545 !important;
+                border-radius: 6px;
+                padding: 1rem 1.25rem !important;
+                margin-bottom: 1.25rem !important;
+                border-bottom: 3.5px solid #c8102e !important;
+                color: #ffffff;
+            }
+            .tradesman-brand-wrap {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+            .tradesman-brand-wrap .brand-logo {
+                max-height: 54px;
+                object-fit: contain;
+                background: #ffffff;
+                border-radius: 4px;
+                padding: 3px 6px;
+            }
+            .tradesman-title-group .brand-name {
+                font-size: 1.35rem;
+                font-weight: 800;
+                color: #ffffff;
+                line-height: 1.2;
+            }
+            .tradesman-est-badge {
+                font-size: 0.68rem;
+                font-weight: 700;
+                letter-spacing: 1.2px;
+                color: #f59e0b;
+                margin-top: 2px;
+            }
+            .tradesman-title-group .brand-tag {
+                font-size: 0.78rem;
+                color: #cbd5e1;
+                margin-top: 2px;
+            }
+            .tradesman-meta-box {
+                text-align: right;
+                color: #e2e8f0;
+                font-size: 0.82rem;
+            }
+            .tradesman-badge {
+                display: inline-block;
+                background: #c8102e;
+                color: #ffffff;
+                font-size: 0.72rem;
+                font-weight: 800;
+                letter-spacing: 1px;
+                padding: 3px 10px;
+                border-radius: 3px;
+                margin-bottom: 6px;
+            }
+            .tradesman-meta-row {
+                line-height: 1.4;
+            }
+            .tradesman-meta-row b {
+                color: #ffffff;
+            }
+
+            /* Customer Horizontal Bar */
+            .tradesman-customer-row {
+                display: flex;
+                gap: 1.5rem;
+                background: #fffaf5;
+                border: 1px solid #fed7aa;
+                border-left: 4px solid #f97316;
+                border-radius: 8px;
+                padding: 1rem 1.25rem;
+                margin-bottom: 1.25rem;
+            }
+            .tradesman-cust-col {
+                flex: 1;
+            }
+            .tradesman-cust-divider {
+                border-left: 1px solid #ffedd5;
+                padding-left: 1.5rem;
+            }
+            .tradesman-col-title {
+                font-size: 0.72rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 0.8px;
+                color: #ea580c;
+                margin-bottom: 0.35rem;
+            }
+            .tradesman-cust-name {
+                font-size: 1.05rem;
+                font-weight: 700;
+                color: #0b2545;
+                margin-bottom: 0.25rem;
+            }
+            .tradesman-cust-detail {
+                font-size: 0.84rem;
+                color: #475569;
+                margin-bottom: 2px;
+            }
+
+            /* --- SIDE-BY-SIDE EQUIPMENT COMPARISON GRID --- */
+            .tradesman-compare-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.25rem;
+                margin-bottom: 1.25rem;
+                align-items: stretch;
+            }
+
+            .tradesman-compare-grid .tradesman-eq-card {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 0;
+                height: 100%;
+            }
+
+            .tradesman-compare-grid .tradesman-eq-body {
+                display: flex;
+                flex-direction: column;
+                gap: 0.65rem;
+                padding: 1rem;
+                flex: 1;
+            }
+
+            .tradesman-compare-grid .tradesman-eq-img {
+                width: 100%;
+                height: 110px;
+                flex: none;
+                margin: 0 auto;
+                background: #f8fafc;
+                border-radius: 4px;
+            }
+
+            .tradesman-compare-grid .tradesman-eq-details {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+            }
+
+            .tradesman-compare-grid .tradesman-eq-title {
+                font-size: 1.02rem;
+                font-weight: 800;
+                color: #0b2545;
+                margin: 0 0 0.4rem 0;
+                min-height: 2.6rem;
+                line-height: 1.3;
+            }
+
+            .tradesman-compare-grid .tradesman-specs-checklist {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 3px 6px;
+                margin-bottom: 0.5rem;
+                padding: 0.4rem 0.6rem;
+            }
+
+            .tradesman-compare-grid .tradesman-warranty-box {
+                margin-top: auto;
+                font-size: 0.76rem;
+            }
+
+            /* Equipment Cards */
+            .tradesman-eq-card {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-left: 4px solid #c8102e;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+                overflow: hidden;
+                margin-bottom: 1rem;
+            }
+            .tradesman-eq-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: #f8fafc;
+                padding: 0.5rem 1rem;
+                border-bottom: 1px solid #f1f5f9;
+            }
+            .tradesman-eq-badge {
+                background: #c8102e !important;
+                color: #ffffff !important;
+                font-size: 0.72rem;
+                font-weight: 800;
+                padding: 3px 8px;
+                border-radius: 3px;
+            }
+            .tradesman-eq-part {
+                font-size: 0.78rem;
+                color: #64748b;
+                font-weight: 600;
+            }
+            .tradesman-eq-body {
+                display: flex;
+                gap: 1.25rem;
+                padding: 1.15rem;
+            }
+            .tradesman-eq-img {
+                width: 140px;
+                height: 120px;
+                flex: 0 0 140px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f8fafc;
+                border: 1px solid #e2e8f0;
+                border-radius: 6px;
+                padding: 4px;
+            }
+            .tradesman-eq-img img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+            }
+            .tradesman-eq-details {
+                flex: 1;
+                min-width: 0;
+            }
+            .tradesman-eq-title {
+                font-size: 1.15rem;
+                font-weight: 700;
+                color: #0b2545;
+                margin: 0 0 0.5rem 0;
+            }
+            .tradesman-specs-checklist {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 4px 12px;
+                margin-bottom: 0.65rem;
+                background: #fcfcfd;
+                padding: 0.5rem 0.75rem;
+                border-radius: 6px;
+                border: 1px solid #f1f5f9;
+            }
+            .tradesman-spec-check {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 0.82rem;
+            }
+            .tradesman-check-icon {
+                color: #16a34a;
+                font-weight: 900;
+                font-size: 0.88rem;
+            }
+            .tradesman-check-label {
+                color: #64748b;
+            }
+            .tradesman-check-val {
+                font-weight: 600;
+                color: #1e293b;
+            }
+            .tradesman-warranty-box {
+                font-size: 0.82rem;
+                color: #0b2545;
+                background: #eff6ff;
+                border: 1px solid #dbeafe;
+                padding: 4px 8px;
+                border-radius: 4px;
+                display: flex;
+                gap: 8px;
+                align-items: center;
+            }
+            .tradesman-warranty-badge {
+                font-weight: 700;
+                color: #1d4ed8;
+                font-size: 0.75rem;
+            }
+
+            /* Red Stamp Quote Box */
+            .tradesman-quote-box {
+                background: #fef2f2;
+                border: 2px dashed #c8102e;
+                border-radius: 8px;
+                padding: 1.15rem 1.5rem;
+                text-align: center;
+                position: relative;
+                margin-top: 0.75rem;
+                margin-bottom: 1.35rem !important;
+                box-shadow: 0 4px 15px rgba(200, 16, 46, 0.08);
+            }
+            .tradesman-quote-stamp {
+                position: absolute;
+                top: -11px;
+                left: 24px;
+                background: #c8102e;
+                color: #ffffff;
+                font-size: 0.68rem;
+                font-weight: 900;
+                letter-spacing: 1.5px;
+                padding: 2px 10px;
+                border-radius: 3px;
+            }
+            .tradesman-quote-main {
+                display: flex;
+                justify-content: center;
+                align-items: baseline;
+                gap: 12px;
+            }
+            .tradesman-quote-text {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: #0b2545;
+            }
+            .tradesman-quote-price {
+                font-size: 2.3rem;
+                font-weight: 900;
+                color: #c8102e;
+                letter-spacing: -0.5px;
+            }
+            .tradesman-quote-note {
+                font-size: 0.78rem;
+                color: #7f1d1d;
+                margin-top: 4px;
+                font-style: italic;
+            }
+            .tradesman-finance-card {
+                border-radius: 6px;
+                border: 1px solid #e2e8f0;
+                border-top: 3px solid #c8102e;
+            }
 
 @media screen and (max-width: 991px) {
     body:not(.view-print) .sheet {
@@ -638,12 +978,16 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         line-height: 1.5 !important;
         background: #f1f5f9 !important;
         -webkit-text-size-adjust: 100% !important;
+        overflow-x: hidden !important;
+        width: 100% !important;
+        max-width: 100vw !important;
     }
 
     body:not(.view-print) .page-wrapper {
         padding: 0.5rem !important;
         margin: 0 !important;
         width: 100% !important;
+        max-width: 100% !important;
         box-sizing: border-box !important;
     }
 
@@ -660,14 +1004,15 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         overflow: hidden !important;
     }
 
-    
+    /* --- Responsive Toolbar & Tabs --- */
     .toolbar {
-        position: sticky !important;
-        top: 0 !important;
+        position: static !important;
         padding: 0.4rem 0 0 0 !important;
     }
     .toolbar-inner {
         padding: 0 0.75rem !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
     }
     .toolbar-bar {
         flex-direction: column !important;
@@ -683,19 +1028,26 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         width: 100% !important;
     }
     .toolbar-right .btn {
-        flex: 1 1 auto !important;
+        flex: 1 1 30% !important;
+        min-width: 90px !important;
         text-align: center !important;
-        padding: 0.4rem 0.5rem !important;
-        font-size: 0.78rem !important;
+        padding: 0.4rem 0.35rem !important;
+        font-size: 0.74rem !important;
+        white-space: nowrap !important;
     }
     .nav-tabs {
         margin-top: 0.3rem !important;
         padding-bottom: 4px !important;
         gap: 0.2rem !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        flex-wrap: nowrap !important;
+        white-space: nowrap !important;
     }
     .nav-tabs a, .nav-tabs button {
         padding: 0.45rem 0.75rem !important;
         font-size: 0.8rem !important;
+        flex-shrink: 0 !important;
     }
 
     
@@ -708,6 +1060,67 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         text-align: center !important;
         gap: 0.6rem !important;
         border-radius: 0 !important;
+    }
+
+    body:not(.view-print) .doc-head-tradesman {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 0.75rem !important;
+        padding: 12px 10px !important;
+    }
+    body:not(.view-print) .tradesman-brand-wrap {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 0.5rem !important;
+    }
+    body:not(.view-print) .tradesman-title-group {
+        text-align: center !important;
+    }
+    body:not(.view-print) .tradesman-title-group .brand-name {
+        font-size: 1.15rem !important;
+        text-align: center !important;
+    }
+    body:not(.view-print) .tradesman-meta-box {
+        text-align: center !important;
+        width: 100% !important;
+        margin-top: 6px !important;
+        padding-top: 6px !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+
+    /* Customer row mobile single column */
+    body:not(.view-print) .tradesman-customer-row {
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+        padding: 10px 12px !important;
+    }
+    body:not(.view-print) .tradesman-cust-divider {
+        border-left: none !important;
+        border-top: 1px dashed #fed7aa !important;
+        padding-left: 0 !important;
+        padding-top: 0.75rem !important;
+    }
+
+    /* Equipment header and checklist */
+    body:not(.view-print) .tradesman-eq-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+    }
+    body:not(.view-print) .tradesman-compare-grid .tradesman-specs-checklist,
+    body:not(.view-print) .tradesman-specs-checklist {
+        grid-template-columns: 1fr !important;
+        gap: 4px !important;
+    }
+    body:not(.view-print) .tradesman-quote-main {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 4px !important;
+    }
+    body:not(.view-print) .tradesman-quote-price {
+        font-size: 1.85rem !important;
     }
 
     body:not(.view-print) [class*="head-left"],
@@ -1130,8 +1543,12 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
     }
 
     
+    body:not(.view-print) .tradesman-compare-grid {
+        grid-template-columns: 1fr !important;
+    }
     body:not(.view-print) .row {
-        margin: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
     body:not(.view-print) .row > * {
         padding: 0 !important;
@@ -1145,18 +1562,105 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
         flex: 1 1 100% !important;
     }
 
-    body:not(.view-print) .table {
+        /* Responsive Table Container */
+    body:not(.view-print) .table-responsive {
         display: block !important;
         width: 100% !important;
+        max-width: 100% !important;
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
-        font-size: 0.8rem !important;
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 6px !important;
+        margin-bottom: 0.85rem !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
     }
+
+    body:not(.view-print) .table {
+        display: table !important;
+        width: 100% !important;
+        min-width: 660px !important;
+        border-collapse: collapse !important;
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    body:not(.view-print) .table > thead {
+        display: table-header-group !important;
+    }
+
+    body:not(.view-print) .table > tbody {
+        display: table-row-group !important;
+    }
+
+    body:not(.view-print) .table tr {
+        display: table-row !important;
+    }
+
     body:not(.view-print) .table th,
     body:not(.view-print) .table td {
-        padding: 0.4rem 0.5rem !important;
+        display: table-cell !important;
+        padding: 8px 10px !important;
+        vertical-align: middle !important;
+    }
+
+    body:not(.view-print) .table th {
+        white-space: nowrap !important;
+        background: var(--brand, #0b2545) !important;
+        color: #ffffff !important;
+        font-size: 0.78rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.3px !important;
+    }
+
+    body:not(.view-print) .table td {
+        font-size: 0.82rem !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        line-height: 1.35 !important;
+    }
+
+    /* Column Width Guarantees */
+    body:not(.view-print) .table th:first-child,
+    body:not(.view-print) .table td:first-child {
+        text-align: center !important;
+        width: 45px !important;
+        min-width: 45px !important;
+        white-space: nowrap !important;
+    }
+
+    body:not(.view-print) .table th:nth-child(2),
+    body:not(.view-print) .table td:nth-child(2) {
+        min-width: 140px !important;
         white-space: normal !important;
-        word-break: break-word !important;
+    }
+
+    body:not(.view-print) .table th:nth-child(3),
+    body:not(.view-print) .table td:nth-child(3) {
+        min-width: 160px !important;
+        white-space: nowrap !important;
+    }
+
+    body:not(.view-print) .table th:nth-child(4),
+    body:not(.view-print) .table td:nth-child(4) {
+        min-width: 80px !important;
+        white-space: nowrap !important;
+    }
+
+    body:not(.view-print) .table th:nth-child(5),
+    body:not(.view-print) .table td:nth-child(5) {
+        min-width: 170px !important;
+        white-space: normal !important;
+    }
+
+    body:not(.view-print) .table th:nth-child(6),
+    body:not(.view-print) .table td:nth-child(6),
+    body:not(.view-print) .table th:nth-child(7),
+    body:not(.view-print) .table td:nth-child(7) {
+        white-space: nowrap !important;
+        text-align: right !important;
+        font-variant-numeric: tabular-nums !important;
+        font-weight: 600 !important;
+        min-width: 95px !important;
     }
 
     
@@ -1212,6 +1716,7 @@ h5 { font-size: 1.12rem; margin-top: .65rem; margin-bottom: .35rem; }
     }
 }
 
+body.view-print .table-responsive { display: contents !important; overflow: visible !important; border: none !important; box-shadow: none !important; }
 body.view-print .doc-head,
 body.view-print .doc-head-industrial,
 body.view-print .doc-head-aqua,
@@ -1220,7 +1725,9 @@ body.view-print .doc-head-luxury,
 body.view-print .doc-head-urban,
 body.view-print .doc-head-value,
 body.view-print .doc-head-hightech,
-body.view-print .doc-head-modular {
+body.view-print .doc-head-modular,
+body.view-print .doc-head-tradesman,
+body.view-print .doc-head-corporate {
     background: none !important;
     color: var(--bs-body) !important;
     margin: 0 0 .75rem 0 !important;
@@ -1242,7 +1749,11 @@ body.view-print .aqua-total-box,
 body.view-print .eco-investment-card,
 body.view-print .luxury-investment-ledger,
 body.view-print .urban-total-monolith,
-body.view-print .value-savings-card {
+body.view-print .value-savings-card,
+body.view-print .tradesman-quote-box,
+body.view-print .corporate-pricing-panel,
+body.view-print .hightech-system-total,
+body.view-print .modular-total-panel {
     background: none !important;
     color: #000 !important;
     border: 2px solid #000 !important;
@@ -1254,11 +1765,22 @@ body.view-print .aqua-price-val,
 body.view-print .eco-net-total,
 body.view-print .luxury-ledger-val,
 body.view-print .urban-monolith-sum,
-body.view-print .v-total-amount {
+body.view-print .v-total-amount,
+body.view-print .tradesman-quote-price,
+body.view-print .corporate-total-amount,
+body.view-print .hightech-total-amount,
+body.view-print .modular-total-sum {
     color: #000 !important;
 }
 
 @media print {
+    .table-responsive {
+        display: contents !important;
+        overflow: visible !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
     @page {
         size: A4 portrait;
         margin: 12mm 14mm;
@@ -1301,12 +1823,19 @@ body.view-print .v-total-amount {
         overflow: visible !important;
     }
 
+    .print-page-break {
+        break-before: page !important;
+        page-break-before: always !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
     .table thead th, .badge, .totals .grand, .total-card, .box.on::after {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
 
-    .doc-head, .doc-head-industrial, .doc-head-aqua, .doc-head-eco, .doc-head-luxury, .doc-head-urban, .doc-head-value, .doc-head-hightech, .doc-head-modular {
+    .doc-head, .doc-head-industrial, .doc-head-aqua, .doc-head-eco, .doc-head-luxury, .doc-head-urban, .doc-head-value, .doc-head-hightech, .doc-head-modular, .doc-head-tradesman, .doc-head-corporate {
         background: none !important;
         color: #0f172a !important;
         margin: 0 0 .75rem 0 !important;
@@ -1322,14 +1851,16 @@ body.view-print .v-total-amount {
     .brand-tag { color: #64748b !important; }
     .text-end { color: #0f172a !important; }
 
-    .industrial-total-box, .aqua-total-box, .eco-investment-card, .luxury-investment-ledger, .urban-total-monolith, .value-savings-card {
+    .industrial-total-box, .aqua-total-box, .eco-investment-card, .luxury-investment-ledger, .urban-total-monolith, .value-savings-card,
+    .tradesman-quote-box, .corporate-pricing-panel, .hightech-system-total, .modular-total-panel {
         background: none !important;
         color: #000 !important;
         border: 2px solid #000 !important;
         box-shadow: none !important;
     }
 
-    .industrial-total-price, .aqua-price-val, .eco-net-total, .luxury-ledger-val, .urban-monolith-sum, .v-total-amount {
+    .industrial-total-price, .aqua-price-val, .eco-net-total, .luxury-ledger-val, .urban-monolith-sum, .v-total-amount,
+    .tradesman-quote-price, .corporate-total-amount, .hightech-total-amount, .modular-total-sum {
         color: #000 !important;
     }
 
@@ -1340,15 +1871,19 @@ body.view-print .v-total-amount {
 
     .doc-head, .doc-foot, .eqrow, .total-card, .sig, .table tr, .photo, .alert,
     .industrial-dispatch-ticket, .aqua-parties-banner, .eco-parties-card, .luxury-dossier, .urban-meta-grid,
-    .industrial-eq-card, .aqua-eq-card, .eco-eq-card, .luxury-eq-card, .urban-eq-card, .value-eq-card {
-        break-inside: avoid;
-        page-break-inside: avoid;
+    .industrial-eq-card, .aqua-eq-card, .eco-eq-card, .luxury-eq-card, .urban-eq-card, .value-eq-card,
+    .tradesman-eq-card, .corporate-eq-card, .hightech-eq-card, .modular-eq-card,
+    .tradesman-quote-box, .corporate-pricing-panel, .hightech-system-total, .modular-total-panel,
+    .tradesman-customer-row, .corporate-info-grid, .corporate-info-card, .hightech-data-card, .modular-data-block,
+    .tradesman-finance-card, .hightech-finance-card, .modular-finance-card {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
     }
 
-    .eq, .industrial-eq-card, .aqua-eq-card, .eco-eq-card, .luxury-eq-card, .urban-eq-card, .value-eq-card {
-        break-inside: auto !important;
-        page-break-inside: auto !important;
-        margin-bottom: .6rem !important;
+    .tradesman-compare-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
     }
 
     .eq-details {

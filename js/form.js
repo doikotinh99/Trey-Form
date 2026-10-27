@@ -1,5 +1,5 @@
 
-const FORM_SUITE_VERSION = "2.2.1";
+const FORM_SUITE_VERSION = "2.3.5";
 console.log(`[HVAC Form Suite] Loaded version: ${FORM_SUITE_VERSION}`);
 
 const COMPANIES = [
@@ -89,10 +89,22 @@ function filterFormTabs() {
     }
 }
 
+function initResponsiveTables() {
+    document.querySelectorAll("table.table").forEach(function (table) {
+        if (!table.parentElement.classList.contains("table-responsive")) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "table-responsive";
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        }
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 
     initCompanyDropdown();
     filterFormTabs();
+    initResponsiveTables();
 
     const hlCheckbox = document.getElementById("hl");
     if (hlCheckbox) {
